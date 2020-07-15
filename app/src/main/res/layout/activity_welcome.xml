@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/back_image" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/josefin_sans"
+        android:gravity="center_horizontal"
+        android:text="Grocy"
+        android:textColor="#659BF6"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/kalam_bold"
+        android:gravity="center_horizontal"
+        android:text="Sell goods online"
+        android:textColor="#646464"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/josefin_sans"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignupShopkeeper"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/josefin_sans"
+            android:gravity="center"
+            android:text="Signup as Shopkeeper"
+            android:textAllCaps="false"
+            android:textColor="#659BF6"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp"
+            app:strokeColor="#659BF6"
+            app:strokeWidth="3dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignupDelivery"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/josefin_sans"
+            android:gravity="center"
+            android:text="Signup as Delivery Boy"
+            android:textAllCaps="false"
+            android:textColor="#659BF6"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="14dp"
+            app:strokeColor="#659BF6"
+            app:strokeWidth="3dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="start|bottom"
+                android:src="@drawable/leaves" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/textViewSkip"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="Skip for now"-->
+            <!--                android:textSize="26sp"-->
+            <!--                android:gravity="center_horizontal"-->
+            <!--                android:layout_marginTop="30dp"-->
+            <!--                android:layout_marginBottom="24dp"-->
+            <!--                android:layout_marginEnd="50dp"-->
+            <!--                android:textColor="#659BF6"-->
+            <!--                android:fontFamily="@font/josefin_sans"/>-->
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
