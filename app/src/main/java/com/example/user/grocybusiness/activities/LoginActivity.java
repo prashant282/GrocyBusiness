@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showProgress() {
-        Context context;
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.show();
         progressDialog.setContentView(R.layout.process_dialog);

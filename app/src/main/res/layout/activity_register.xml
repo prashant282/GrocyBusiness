@@ -1,8 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/final_back_img"
     tools:context=".activities.RegisterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grocy Business"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#659BF6"
+        android:fontFamily="@font/josefin_sans"
+       android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:paddingEnd="10dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_gst"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="GST No"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/reg_shop_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:drawablePadding="12dp"
+                    android:editable="false"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Shop Category"
+                    android:paddingStart="20dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:paddingEnd="10dp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_timings"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Shop Timings"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Discount Off (%)"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Shop Address"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="City"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="State"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reg_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/round_corner"
+                    android:drawablePadding="12dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="center_vertical"
+                    android:hint="Short Description"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="#659BF6"
+                    android:textColorHint="#9DC0F9"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:checked="false"
+                    android:fontFamily="@font/josefin_sans"
+                    android:text="Accept the Terms and Conditions"
+                    android:textColor="#979797"
+                    android:textSize="16sp" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRegNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="40dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:text="Next"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="#707070"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="start|bottom"
+                        android:src="@drawable/leaves" />
+
+                    <TextView
+                        android:id="@+id/reg_signin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="60dp"
+                        android:fontFamily="@font/josefin_sans"
+                        android:gravity="center_horizontal"
+                        android:text="Sign In"
+                        android:textColor="#659BF6"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

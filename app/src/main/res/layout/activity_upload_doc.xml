@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.UploadDocActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/final_back_img" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="Grocy Business"
+        android:textColor="#659BF6"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/josefin_sans"
+            android:gravity="center"
+            android:text="Upload Your Documents"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="GST Certificate"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="(png, jpeg etc format)"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_gst"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_upload_gst"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/background_adult"
+                android:fontFamily="@font/josefin_sans"
+                android:text="Upload"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textColorHint="#707070"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="Pan Card"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="(png, jpeg etc format)"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_pan"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_upload_pan"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/background_adult"
+                android:fontFamily="@font/josefin_sans"
+                android:text="Upload"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textColorHint="#707070"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="Aadhaar Card"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="(png, jpeg etc format)"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_aadhaar"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_upload_aadhaar"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/background_adult"
+                android:fontFamily="@font/josefin_sans"
+                android:text="Upload"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textColorHint="#707070"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/background_adult"
+            android:fontFamily="@font/josefin_sans"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="start|bottom"
+            android:src="@drawable/leaves" />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

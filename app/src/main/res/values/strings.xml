@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GrocyBusiness</string>
+    <string-array name="shop_category">
+
+        <item color="#9DC0F9">Grocery</item>
+        <item>Pharmacy</item>
+        <item>Hardware</item>
+        <item>Stationary</item>
+        <item>Fruits and Vegetables</item>
+
+    </string-array>
+
 </resources>

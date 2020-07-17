@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.grocybusiness">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -9,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LoginActivity"></activity>
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.UploadDocActivity" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:parentActivityName=".activities.WelcomeActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.OtpActivity" />
         <activity android:name=".activities.WelcomeActivity" />
         <activity android:name=".activities.SplashActivity">
