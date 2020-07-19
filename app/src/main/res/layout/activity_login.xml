@@ -21,10 +21,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="Grocy Business"
-        android:textColor="#659BF6"
+        android:fontFamily="@font/josefin_sans"
+        android:text="Grocy"
+        android:textColor="@color/colorPrimary"
         android:textSize="50sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="70dp"
+        android:text="store partner"
+        android:textColor="@color/colorHeading"
+        android:textSize="24dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,8 +71,8 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:paddingStart="20dp"
-            android:textColor="#659BF6"
-            android:textColorHint="#9DC0F9"
+            android:textColor="#4C56B8"
+            android:textColorHint="#4C56B8"
             android:textSize="22sp"
             android:textStyle="bold" />
 
