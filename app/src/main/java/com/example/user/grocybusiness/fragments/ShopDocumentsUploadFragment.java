@@ -1,19 +1,19 @@
-package com.example.user.grocybusiness.activities.fragments;
+package com.example.user.grocybusiness.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
 
-public class ShopBasicRegisterFragment extends Fragment {
+import androidx.fragment.app.Fragment;
+
+public class ShopDocumentsUploadFragment extends Fragment {
 
 
-    public ShopBasicRegisterFragment() {
+
+    public ShopDocumentsUploadFragment() {
         // Required empty public constructor
     }
 
@@ -28,7 +28,7 @@ public class ShopBasicRegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_shop_basic_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_shop_documents_upload, container, false);
         return view;
     }
 }

@@ -10,7 +10,7 @@
                 android:startColor="#FFFFFF" />
             <stroke
                 android:width="7px"
-                android:color="#7C85DD" />
+                android:color="#CCDCF6" />
         </shape>
     </item>
 
