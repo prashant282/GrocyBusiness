@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.UploadDocActivity" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".activities.AddShopActivity"
             android:parentActivityName=".activities.WelcomeActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.OtpActivity" />

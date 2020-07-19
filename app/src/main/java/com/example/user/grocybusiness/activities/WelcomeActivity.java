@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
         btnSignUpShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, AddShopActivity.class);
                 intent.putExtra("click_info", "Shopkeeper");
                 startActivity(intent);
                 finish();
@@ -50,7 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
         btnSignUpDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, UploadDocActivity.class);
                 intent.putExtra("click_info", "Delivery_Boy");
                 startActivity(intent);
                 finish();

@@ -6,263 +6,235 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.UploadDocActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/final_back_img" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="Grocy Business"
+        android:text="Grocy"
         android:textColor="#659BF6"
         android:textSize="50sp"
         android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="store partner"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#9DC0F9"
+        android:layout_marginStart="70dp"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_gravity="center_horizontal" />
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TableRow
+            android:layout_width="30dp"
+            android:layout_height="7dp"
+            android:background="#9DC0F9"/>
+
+        <TableRow
+            android:layout_width="30dp"
+            android:layout_height="7dp"
+            android:layout_marginStart="4dp"
+            android:background="@color/colorPrimaryDark"/>
+
+
+
+    </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/josefin_sans"
-            android:gravity="center"
-            android:text="Upload Your Documents"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+
+
+
+
+
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="start"
-                    android:text="GST Certificate"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="start"
-                    android:text="(png, jpeg etc format)"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_gst"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_upload_gst"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/background_adult"
-                android:fontFamily="@font/josefin_sans"
-                android:text="Upload"
-                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:textColorHint="#707070"
-                android:textStyle="bold"
-                app:cornerRadius="12dp" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/josefin_sans"
-                    android:gravity="start"
-                    android:text="Pan Card"
-                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="Upload Your Documents"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="start"
-                    android:text="(png, jpeg etc format)"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_pan"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_upload_pan"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/background_adult"
-                android:fontFamily="@font/josefin_sans"
-                android:text="Upload"
-                android:layout_gravity="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:textColorHint="#707070"
-                android:textStyle="bold"
-                app:cornerRadius="12dp" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="start"
                     android:text="Aadhaar Card"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"
                     android:textStyle="bold" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="25dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_aadhaar_front"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/josefin_sans"
+                            android:gravity="center"
+                            android:text="Front"
+                            android:textSize="20sp"
+                            android:layout_marginStart="25dp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_aadhaar_back"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/josefin_sans"
+                            android:gravity="center"
+                            android:text="Back"
+                            android:textSize="20sp"
+                            android:layout_marginStart="25dp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="start"
-                    android:text="(png, jpeg etc format)"
-                    android:textSize="15sp"
+                    android:text="Pan Card"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"
                     android:textStyle="bold" />
 
+                <ImageView
+                    android:id="@+id/img_pan"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/josefin_sans"
+                    android:gravity="start"
+                    android:text="GST Certificate"
+                    android:textSize="20sp"
+                    android:layout_marginStart="25dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/img_gst"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+
+
+
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@drawable/background_adult"
+                    android:fontFamily="@font/josefin_sans"
+                    android:text="Register"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
+
+
+
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_aadhaar"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_upload_aadhaar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/background_adult"
-                android:fontFamily="@font/josefin_sans"
-                android:text="Upload"
-                android:layout_gravity="center"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:textColorHint="#707070"
-                android:textStyle="bold"
-                app:cornerRadius="12dp" />
 
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/background_adult"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Next"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="12dp" />
+
+
+    </ScrollView>
 
 
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <ImageView
-
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="start|bottom"
-            android:src="@drawable/leaves" />
-
-    </LinearLayout>
 
 
 
