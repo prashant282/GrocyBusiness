@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/final_back_img"
-    tools:context=".activities.RegisterActivity">
+    tools:context=".activities.AddShopActivity">
 
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Grocy Business"
+        android:text="Grocy"
         android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="#659BF6"
@@ -21,10 +20,44 @@
        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="store partner"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#9DC0F9"
+        android:layout_marginStart="70dp"
+        android:fontFamily="@font/josefin_sans"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TableRow
+            android:layout_width="30dp"
+            android:layout_height="7dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TableRow
+            android:layout_width="30dp"
+            android:layout_height="7dp"
+            android:layout_marginStart="4dp"
+            android:background="#9DC0F9"/>
+
+
+
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -32,7 +65,8 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            tools:ignore="ScrollViewCount,UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +84,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="Name"
+                    android:hint="Shop Name*"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -60,22 +94,21 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_email"
+                <AutoCompleteTextView
+                    android:id="@+id/reg_shop_category"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                     android:drawablePadding="12dp"
-                    android:paddingEnd="10dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
+                    android:hint="Shop Category*"
                     android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
                     android:textColor="#659BF6"
                     android:textColorHint="#9DC0F9"
                     android:textSize="22sp"
@@ -93,7 +126,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="GST No"
+                    android:hint="GSTIn No*"
                     android:inputType="number"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -103,68 +136,11 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/reg_shop_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/round_corner"
-                    android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
-                    android:drawablePadding="12dp"
-                    android:editable="false"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="center_vertical"
-                    android:hint="Shop Category"
-                    android:paddingStart="20dp"
-                    android:textColor="#659BF6"
-                    android:textColorHint="#9DC0F9"
-                    android:textSize="22sp"
-                    android:paddingEnd="10dp"
-                    android:textStyle="bold" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_timings"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/round_corner"
-                    android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="center_vertical"
-                    android:hint="Shop Timings"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingStart="20dp"
-                    android:textColor="#659BF6"
-                    android:textColorHint="#9DC0F9"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_discount"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/round_corner"
-                    android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
-                    android:gravity="center_vertical"
-                    android:hint="Discount Off (%)"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="10dp"
-                    android:textColor="#659BF6"
-                    android:textColorHint="#9DC0F9"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reg_address"
@@ -177,7 +153,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="Shop Address"
+                    android:hint="Shop Address*"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -198,7 +174,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="City"
+                    android:hint="City*"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -219,7 +195,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="State"
+                    android:hint="State*"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -229,9 +205,8 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/reg_description"
+                    android:id="@+id/reg_pin"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:layout_marginStart="30dp"
@@ -241,7 +216,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
-                    android:hint="Short Description"
+                    android:hint="Pin Code*"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingStart="20dp"
@@ -252,17 +227,20 @@
                     android:textStyle="bold" />
 
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_marginTop="5dp"
-                    android:checked="false"
-                    android:fontFamily="@font/josefin_sans"
-                    android:text="Accept the Terms and Conditions"
-                    android:textColor="#979797"
-                    android:textSize="16sp" />
+
+
+<!--                <com.google.android.material.checkbox.MaterialCheckBox-->
+<!--                    android:id="@+id/checkBox"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:checked="false"-->
+<!--                    android:fontFamily="@font/josefin_sans"-->
+<!--                    android:text="Accept the Terms and Conditions"-->
+<!--                    android:textColor="#979797"-->
+<!--                    android:textSize="16sp" />-->
+
 
 
                 <com.google.android.material.button.MaterialButton
@@ -280,11 +258,11 @@
                     android:textStyle="bold"
                     app:cornerRadius="12dp" />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="80dp"
@@ -292,18 +270,12 @@
                         android:layout_gravity="start|bottom"
                         android:src="@drawable/leaves" />
 
-                    <TextView
-                        android:id="@+id/reg_signin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="60dp"
-                        android:fontFamily="@font/josefin_sans"
-                        android:gravity="center_horizontal"
-                        android:text="Sign In"
-                        android:textColor="#659BF6"
-                        android:textSize="20sp" />
+
+
+
                 </LinearLayout>
+
+
 
 
             </LinearLayout>

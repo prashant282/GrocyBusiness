@@ -14,35 +14,32 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.user.grocybusiness.R;
 
-public class RegisterActivity extends AppCompatActivity {
+public class AddShopActivity extends AppCompatActivity {
 
     AutoCompleteTextView shopCategory;
-    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopEmail, shopTimings, shopDiscount, signIn, shopDescription;
+    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopTimings, shopDiscount, shopDescription;
     Button btnNext;
     Bundle bundle;
-    String sName, sAddress, sDiscount, sCity, sEmail, sGst, sState, sTimings, sCategory, sDiscription;
+    String sName, sAddress, sCity, sGst, sState, sTimings, sCategory, sDiscription;
     ScrollView scrollView;
     CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_add_shop);
 
         shopCategory=findViewById(R.id.reg_shop_category);
         shopName=findViewById(R.id.reg_name);
         shopAddress=findViewById(R.id.reg_address);
         shopCity=findViewById(R.id.reg_city);
-        shopDiscount=findViewById(R.id.reg_discount);
-        shopEmail=findViewById(R.id.reg_email);
         shopGst=findViewById(R.id.reg_gst);
-        shopTimings=findViewById(R.id.reg_timings);
+
         shopState=findViewById(R.id.reg_state);
-        shopDescription=findViewById(R.id.reg_description);
-        signIn=findViewById(R.id.reg_signin);
+
+
         btnNext=findViewById(R.id.btnRegNext);
-        scrollView=(ScrollView)findViewById(R.id.scroll_view);
-        checkBox=findViewById(R.id.checkBox);
+        scrollView= findViewById(R.id.scroll_view);
 
         bundle=new Bundle();
 
@@ -61,14 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(RegisterActivity.this,WelcomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
                 sName=shopName.getText().toString();
                 sAddress=shopAddress.getText().toString();
                 sGst=shopGst.getText().toString();
-                sEmail=shopEmail.getText().toString();
                 sTimings=shopTimings.getText().toString();
                 sCity=shopCity.getText().toString();
                 sCategory=shopCategory.getText().toString();
                 sState=shopState.getText().toString();
-                sDiscount=shopDiscount.getText().toString()+" %";
                 sDiscription=shopDescription.getText().toString();
 
 
@@ -90,10 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                     shopName.setError("Shop Name is Mandatory");
                     scrollView.pageScroll(View.FOCUS_UP);
                 }
-                else if(sEmail.isEmpty()){
-                    shopEmail.setError("Email is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
+
                 else if(sGst.isEmpty()){
                     shopGst.setError("GST No is Mandatory");
                     scrollView.pageScroll(View.FOCUS_UP);
@@ -135,15 +120,13 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else if(!checkBox.isChecked()){
                     checkBox.setError("Accept terms and conditions to register");
-                    Toast.makeText(RegisterActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddShopActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent intent =new Intent(RegisterActivity.this, UploadDocActivity.class);
+                    Intent intent =new Intent(AddShopActivity.this, UploadDocActivity.class);
                     bundle.putString("sName",sName);
                     bundle.putString("sAddress",sAddress);
-                    bundle.putString("sDiscount",sDiscount);
                     bundle.putString("sState",sState);
-                    bundle.putString("sEmail",sEmail);
                     bundle.putString("sGst",sGst);
                     bundle.putString("sTimings",sTimings);
                     bundle.putString("sCity",sCity);
@@ -163,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(RegisterActivity.this,WelcomeActivity.class);
+        Intent intent=new Intent(AddShopActivity.this,WelcomeActivity.class);
         startActivity(intent);
         finish();
     }
