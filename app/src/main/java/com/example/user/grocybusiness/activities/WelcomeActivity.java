@@ -22,8 +22,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         btnLogin = findViewById(R.id.btnLogin);
-        btnSignUpShop = findViewById(R.id.btnSignupShopkeeper);
-        btnSignUpDelivery = findViewById(R.id.btnSignupDelivery);
 
         mAuth = FirebaseAuth.getInstance();
 

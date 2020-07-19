@@ -46,6 +46,7 @@ public class OtpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private String mVerificationId;
+    private TextView textViewNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +63,13 @@ public class OtpActivity extends AppCompatActivity {
         editTexts = new EditText[]{et1, et2, et3, et4, et5, et6};
         btnOtpLogin = findViewById(R.id.otp_login_btn);
         tvResend = findViewById(R.id.textViewResend);
+        textViewNumber = findViewById(R.id.textViewNumber);
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
         phone_number = getIntent().getStringExtra("phone_number");
-
+        textViewNumber.setText(phone_number);
         PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {

@@ -20,20 +20,28 @@
         android:fontFamily="@font/josefin_sans"
         android:gravity="center_horizontal"
         android:text="Grocy"
-        android:textColor="#659BF6"
+        android:textColor="@color/colorPrimary"
         android:textSize="50sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="70dp"
+        android:text="store partner"
+        android:textColor="@color/colorHeading"
+        android:textSize="24dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/kalam_bold"
         android:gravity="center_horizontal"
         android:text="Sell goods online"
         android:textColor="#646464"
         android:textSize="32sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/concertone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,33 +73,13 @@
             android:layout_marginEnd="40dp"
             android:fontFamily="@font/josefin_sans"
             android:gravity="center"
-            android:text="Signup as Shopkeeper"
+            android:text="Signup"
             android:textAllCaps="false"
-            android:textColor="#659BF6"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
             app:cornerRadius="14dp"
-            app:strokeColor="#659BF6"
-            app:strokeWidth="3dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignupDelivery"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/josefin_sans"
-            android:gravity="center"
-            android:text="Signup as Delivery Boy"
-            android:textAllCaps="false"
-            android:textColor="#659BF6"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="14dp"
-            app:strokeColor="#659BF6"
+            app:strokeColor="@color/colorPrimary"
             app:strokeWidth="3dp" />
 
         <LinearLayout
