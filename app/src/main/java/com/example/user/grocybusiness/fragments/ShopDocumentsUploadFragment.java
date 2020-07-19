@@ -1,4 +1,4 @@
-package com.example.user.grocybusiness.activities.fragments;
+package com.example.user.grocybusiness.fragments;
 
 import android.os.Bundle;
 
