@@ -64,7 +64,7 @@
             app:cornerRadius="14dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignupShopkeeper"
+            android:id="@+id/btnSignup"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -74,6 +74,7 @@
             android:fontFamily="@font/josefin_sans"
             android:gravity="center"
             android:text="Signup"
+            android:background="@drawable/round_corner"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"

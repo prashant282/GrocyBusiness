@@ -16,13 +16,13 @@ import com.example.user.grocybusiness.R;
 
 public class AddShopActivity extends AppCompatActivity {
 
-    AutoCompleteTextView shopCategory;
-    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopTimings, shopDiscount, shopDescription;
+
+    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopCategory;
     Button btnNext;
     Bundle bundle;
-    String sName, sAddress, sCity, sGst, sState, sTimings, sCategory, sDiscription;
+    String sName, sAddress, sCity, sGst, sState, sCategory;
     ScrollView scrollView;
-    CheckBox checkBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +30,33 @@ public class AddShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_shop);
 
         shopCategory=findViewById(R.id.reg_shop_category);
-        shopName=findViewById(R.id.reg_name);
-        shopAddress=findViewById(R.id.reg_address);
-        shopCity=findViewById(R.id.reg_city);
-        shopGst=findViewById(R.id.reg_gst);
+        shopName=findViewById(R.id.reg_shopName);
+        shopAddress=findViewById(R.id.reg_shop_address);
+        shopCity=findViewById(R.id.reg_city_name);
+        shopGst=findViewById(R.id.reg_gst_number);
 
         shopState=findViewById(R.id.reg_state);
 
 
-        btnNext=findViewById(R.id.btnRegNext);
+        btnNext=findViewById(R.id.btn_reg_next);
         scrollView= findViewById(R.id.scroll_view);
 
-        bundle=new Bundle();
+        bundle=getIntent().getExtras();
 
 
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.shop_category,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        shopCategory.setAdapter(adapter);
-
-
-
-        shopCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shopCategory.showDropDown();
-
-            }
-        });
+//        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.shop_category,android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        shopCategory.setAdapter(adapter);
+//
+//
+//
+//        shopCategory.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                shopCategory.showDropDown();
+//
+//            }
+//        });
 
 
 
@@ -67,11 +67,11 @@ public class AddShopActivity extends AppCompatActivity {
                 sName=shopName.getText().toString();
                 sAddress=shopAddress.getText().toString();
                 sGst=shopGst.getText().toString();
-                sTimings=shopTimings.getText().toString();
+//                sTimings=shopTimings.getText().toString();
                 sCity=shopCity.getText().toString();
                 sCategory=shopCategory.getText().toString();
                 sState=shopState.getText().toString();
-                sDiscription=shopDescription.getText().toString();
+//                sDiscription=shopDescription.getText().toString();
 
 
                 if(sName.isEmpty()){
@@ -79,25 +79,27 @@ public class AddShopActivity extends AppCompatActivity {
                     scrollView.pageScroll(View.FOCUS_UP);
                 }
 
-                else if(sGst.isEmpty()){
-                    shopGst.setError("GST No is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
                 else if (sCategory.isEmpty()){
 
                     shopCategory.setError("Shop Category is Mandatory");
                     scrollView.pageScroll(View.FOCUS_UP);
                 }
-                else if (sTimings.isEmpty()){
 
-                    shopTimings.setError("Shop Timings is Mandatory");
+                else if(sGst.isEmpty()){
+                    shopGst.setError("GST No is Mandatory");
                     scrollView.pageScroll(View.FOCUS_UP);
                 }
-                else if (shopDiscount.getText().toString().isEmpty()){
 
-                    shopDiscount.setError("Discount Off is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
+//                else if (sTimings.isEmpty()){
+//
+//                    shopTimings.setError("Shop Timings is Mandatory");
+//                    scrollView.pageScroll(View.FOCUS_UP);
+//                }
+//                else if (shopDiscount.getText().toString().isEmpty()){
+//
+//                    shopDiscount.setError("Discount Off is Mandatory");
+//                    scrollView.pageScroll(View.FOCUS_UP);
+//                }
                 else if (sAddress.isEmpty()){
 
                     shopAddress.setError("Shop Address is Mandatory");
@@ -113,24 +115,25 @@ public class AddShopActivity extends AppCompatActivity {
                     shopState.setError("State is Mandatory");
                     scrollView.pageScroll(View.FOCUS_UP);
                 }
-                else if (sDiscription.isEmpty()){
-
-                    shopDescription.setError("Short description is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-                else if(!checkBox.isChecked()){
-                    checkBox.setError("Accept terms and conditions to register");
-                    Toast.makeText(AddShopActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
-                }
+//                else if (sDiscription.isEmpty()){
+//
+//                    shopDescription.setError("Short description is Mandatory");
+//                    scrollView.pageScroll(View.FOCUS_UP);
+//                }
+//                else if(!checkBox.isChecked()){
+//                    checkBox.setError("Accept terms and conditions to register");
+//                    Toast.makeText(AddShopActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+//                }
                 else {
                     Intent intent =new Intent(AddShopActivity.this, UploadDocActivity.class);
                     bundle.putString("sName",sName);
                     bundle.putString("sAddress",sAddress);
                     bundle.putString("sState",sState);
                     bundle.putString("sGst",sGst);
-                    bundle.putString("sTimings",sTimings);
+                    bundle.putString("sCategory",sCategory);
+//                    bundle.putString("sTimings",sTimings);
                     bundle.putString("sCity",sCity);
-                    bundle.putString("sDescription",sDiscription);
+//                    bundle.putString("sDescription",sDiscription);
                     intent.putExtras(bundle);
                     startActivity(intent);
 

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    Button btnLogin, btnSignUpShop, btnSignUpDelivery;
+    Button btnLogin, btnSignUp;
     private FirebaseAuth mAuth;
 
     @Override
@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         btnLogin = findViewById(R.id.btnLogin);
-
+        btnSignUp = findViewById(R.id.btnSignup);
         mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -35,25 +35,15 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        btnSignUpShop.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, AddShopActivity.class);
-                intent.putExtra("click_info", "Shopkeeper");
+                Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
-        btnSignUpDelivery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, UploadDocActivity.class);
-                intent.putExtra("click_info", "Delivery_Boy");
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
     }
