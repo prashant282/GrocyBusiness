@@ -2,25 +2,24 @@ package com.example.user.grocybusiness.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.user.grocybusiness.R;
 
 public class AddShopActivity extends AppCompatActivity {
 
 
-    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopCategory;
+    TextView shopName, shopGst, shopAddress, shopCity, shopState, shopCategory, shopPinCode;
     Button btnNext;
     Bundle bundle;
-    String sName, sAddress, sCity, sGst, sState, sCategory;
+    String sName, sAddress, sCity, sGst, sState, sCategory, sPinCode;
     ScrollView scrollView;
 
 
@@ -34,7 +33,7 @@ public class AddShopActivity extends AppCompatActivity {
         shopAddress=findViewById(R.id.reg_shop_address);
         shopCity=findViewById(R.id.reg_city_name);
         shopGst=findViewById(R.id.reg_gst_number);
-
+        shopPinCode=findViewById(R.id.reg_pin_code);
         shopState=findViewById(R.id.reg_state);
 
 
@@ -43,6 +42,246 @@ public class AddShopActivity extends AppCompatActivity {
 
         bundle=getIntent().getExtras();
 
+        sName=shopName.getText().toString();
+        sAddress=shopAddress.getText().toString();
+        sGst=shopGst.getText().toString();
+//                sTimings=shopTimings.getText().toString();
+        sCity=shopCity.getText().toString();
+        sCategory=shopCategory.getText().toString();
+        sState=shopState.getText().toString();
+        sPinCode=shopPinCode.getText().toString();
+
+
+        shopName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+
+        shopPinCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+        shopAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+        shopCategory.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+        shopCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+        shopGst.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+        shopState.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+
+                    btnNext.setEnabled(true);
+                }
+                else {
+
+                    btnNext.setEnabled(false);
+                }
+            }
+        });
+
+
+//                sDiscription=shopDescription.getText().toString();
+
+
+//        if(sName.isEmpty()){
+////                    shopName.setError("Shop Name is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+//
+//        else if (sCategory.isEmpty()){
+//
+////                    shopCategory.setError("Shop Category is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+//
+//        else if(sGst.isEmpty()){
+////                    shopGst.setError("GST No is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+//
+////                else if (sTimings.isEmpty()){
+////
+////                    shopTimings.setError("Shop Timings is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+////                }
+////                else if (shopDiscount.getText().toString().isEmpty()){
+////
+////                    shopDiscount.setError("Discount Off is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+////                }
+//        else if (sAddress.isEmpty()){
+//
+////                    shopAddress.setError("Shop Address is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+//        else if (sCity.isEmpty()){
+//
+////                    shopCity.setError("City is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+//        else if (sState.isEmpty()){
+//
+////                    shopState.setError("State is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+//        }
+////                else if (sDiscription.isEmpty()){
+////
+////                    shopDescription.setError("Short description is Mandatory");
+////                    scrollView.pageScroll(View.FOCUS_UP);
+////                }
+////                else if(!checkBox.isChecked()){
+////                    checkBox.setError("Accept terms and conditions to register");
+////                    Toast.makeText(AddShopActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
+////                }
+//        else {
+//
+//            btnNext.setEnabled(true);
+//
+//        }
+//
 
 //        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.shop_category,android.R.layout.simple_spinner_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,67 +303,6 @@ public class AddShopActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                sName=shopName.getText().toString();
-                sAddress=shopAddress.getText().toString();
-                sGst=shopGst.getText().toString();
-//                sTimings=shopTimings.getText().toString();
-                sCity=shopCity.getText().toString();
-                sCategory=shopCategory.getText().toString();
-                sState=shopState.getText().toString();
-//                sDiscription=shopDescription.getText().toString();
-
-
-                if(sName.isEmpty()){
-                    shopName.setError("Shop Name is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-
-                else if (sCategory.isEmpty()){
-
-                    shopCategory.setError("Shop Category is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-
-                else if(sGst.isEmpty()){
-                    shopGst.setError("GST No is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-
-//                else if (sTimings.isEmpty()){
-//
-//                    shopTimings.setError("Shop Timings is Mandatory");
-//                    scrollView.pageScroll(View.FOCUS_UP);
-//                }
-//                else if (shopDiscount.getText().toString().isEmpty()){
-//
-//                    shopDiscount.setError("Discount Off is Mandatory");
-//                    scrollView.pageScroll(View.FOCUS_UP);
-//                }
-                else if (sAddress.isEmpty()){
-
-                    shopAddress.setError("Shop Address is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-                else if (sCity.isEmpty()){
-
-                    shopCity.setError("City is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-                else if (sState.isEmpty()){
-
-                    shopState.setError("State is Mandatory");
-                    scrollView.pageScroll(View.FOCUS_UP);
-                }
-//                else if (sDiscription.isEmpty()){
-//
-//                    shopDescription.setError("Short description is Mandatory");
-//                    scrollView.pageScroll(View.FOCUS_UP);
-//                }
-//                else if(!checkBox.isChecked()){
-//                    checkBox.setError("Accept terms and conditions to register");
-//                    Toast.makeText(AddShopActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_SHORT).show();
-//                }
-                else {
                     Intent intent =new Intent(AddShopActivity.this, UploadDocActivity.class);
                     bundle.putString("sName",sName);
                     bundle.putString("sAddress",sAddress);
@@ -137,8 +315,6 @@ public class AddShopActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
 
-
-                }
 
 
             }
