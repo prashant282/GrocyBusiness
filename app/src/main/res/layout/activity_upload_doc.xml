@@ -34,18 +34,16 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
-        <TableRow
-            android:layout_width="30dp"
-            android:layout_height="7dp"
-            android:background="#9DC0F9"/>
+        <View
+            android:layout_width="25dp"
+            android:layout_height="10dp"
+            android:background="@drawable/custom_tab_layout"/>
 
-        <TableRow
-            android:layout_width="30dp"
-            android:layout_height="7dp"
-            android:layout_marginStart="4dp"
-            android:background="@color/colorPrimaryDark"/>
-
-
+        <View
+            android:layout_width="25dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_tab_layout1" />
 
     </LinearLayout>
 
