@@ -15,9 +15,8 @@
         android:text="Grocy"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="#659BF6"
-        android:fontFamily="@font/josefin_sans"
-       android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"/>
 
     <TextView
@@ -26,9 +25,14 @@
         android:text="store partner"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#9DC0F9"
+        android:textColor="@color/colorHeading"
         android:layout_marginStart="70dp"
-        android:fontFamily="@font/josefin_sans"
+        android:layout_gravity="center_horizontal" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/add_shop_tabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
@@ -82,7 +86,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="Shop Name*"
                     android:inputType="textPersonName"
@@ -104,7 +107,6 @@
                     android:background="@drawable/round_corner"
                     android:drawableEnd="@drawable/ic_baseline_arrow_drop_down_24"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="Shop Category*"
                     android:paddingStart="20dp"
@@ -124,7 +126,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="GSTIn No*"
                     android:inputType="number"
@@ -151,7 +152,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="Shop Address*"
                     android:inputType="text"
@@ -172,7 +172,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="City*"
                     android:inputType="text"
@@ -193,7 +192,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="State*"
                     android:inputType="text"
@@ -214,7 +212,6 @@
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/round_corner"
                     android:drawablePadding="12dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:gravity="center_vertical"
                     android:hint="Pin Code*"
                     android:inputType="text"
@@ -250,7 +247,6 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="40dp"
-                    android:fontFamily="@font/josefin_sans"
                     android:text="Next"
                     android:textColor="@android:color/white"
                     android:textColorHint="#707070"

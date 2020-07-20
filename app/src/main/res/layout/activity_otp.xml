@@ -19,7 +19,6 @@
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="Grocy"
-        android:fontFamily="@font/josefin_sans"
         android:textColor="@color/colorPrimary"
         android:textSize="50sp"
         android:textStyle="bold" />
@@ -44,7 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/josefin_sans"
             android:gravity="center"
             android:text="OTP Verification!"
             android:textSize="24sp"
@@ -179,7 +177,6 @@
             android:layout_marginEnd="40dp"
             android:background="@drawable/background_adult"
             android:enabled="false"
-            android:fontFamily="@font/josefin_sans"
             android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

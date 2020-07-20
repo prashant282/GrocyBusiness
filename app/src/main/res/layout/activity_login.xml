@@ -21,11 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:fontFamily="@font/josefin_sans"
         android:text="Grocy"
         android:textColor="@color/colorPrimary"
         android:textSize="50sp"
         android:textStyle="bold" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,7 +35,6 @@
         android:text="store partner"
         android:textColor="@color/colorHeading"
         android:textSize="24dp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/josefin_sans"
             android:gravity="center"
             android:text="Your Phone Number!"
             android:textSize="24sp"
@@ -65,14 +63,13 @@
             android:background="@drawable/round_corner"
             android:drawableStart="@drawable/icon_phone_new"
             android:drawablePadding="14dp"
-            android:fontFamily="@font/josefin_sans"
             android:gravity="center_vertical"
             android:hint="Phone Number"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:paddingStart="20dp"
-            android:textColor="#4C56B8"
-            android:textColorHint="#4C56B8"
+            android:textColor="#659BF6"
+            android:textColorHint="#9DC0F9"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -82,28 +79,43 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:fontFamily="@font/josefin_sans"
             android:text="A six digit OTP will be sent via SMS to verify your phone number!"
             android:textAlignment="textStart"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSendOtp"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/background_adult"
-            android:fontFamily="@font/josefin_sans"
-            android:text="Send OTP"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="12dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSendOtp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/background_adult"
+                android:text="Send OTP"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/btnSendOtp"
+                android:layout_alignEnd="@+id/btnSendOtp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="10dp"
+                android:theme="@style/ProgressBarTheme"
+                android:translationZ="2dp"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

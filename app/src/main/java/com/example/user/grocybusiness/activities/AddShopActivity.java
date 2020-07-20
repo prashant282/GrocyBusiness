@@ -11,8 +11,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.user.grocybusiness.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddShopActivity extends AppCompatActivity {
 
@@ -29,22 +30,31 @@ public class AddShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shop);
 
-        shopCategory=findViewById(R.id.reg_shop_category);
-        shopName=findViewById(R.id.reg_name);
-        shopAddress=findViewById(R.id.reg_address);
-        shopCity=findViewById(R.id.reg_city);
-        shopGst=findViewById(R.id.reg_gst);
+        shopCategory = findViewById(R.id.reg_shop_category);
+        shopName = findViewById(R.id.reg_name);
+        shopAddress = findViewById(R.id.reg_address);
+        shopCity = findViewById(R.id.reg_city);
+        shopGst = findViewById(R.id.reg_gst);
 
-        shopState=findViewById(R.id.reg_state);
+        shopState = findViewById(R.id.reg_state);
+//        String string= "Shop Name ";
+//        String string1= "*";
+//        SpannableStringBuilder spannableStringBuilder=new SpannableStringBuilder();
+//        spannableStringBuilder.append(string);
+//        int n= spannableStringBuilder.length();
+//        spannableStringBuilder.append(string1);
+//        int n1= spannableStringBuilder.length();
+//        spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.lightRed)),n,n1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        shopName.setHint(spannableStringBuilder);
 
 
-        btnNext=findViewById(R.id.btnRegNext);
-        scrollView= findViewById(R.id.scroll_view);
+        btnNext = findViewById(R.id.btnRegNext);
+        scrollView = findViewById(R.id.scroll_view);
 
-        bundle=new Bundle();
+        bundle = new Bundle();
 
 
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.shop_category,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.shop_category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         shopCategory.setAdapter(adapter);
 
@@ -72,7 +82,6 @@ public class AddShopActivity extends AppCompatActivity {
                 sCategory=shopCategory.getText().toString();
                 sState=shopState.getText().toString();
                 sDiscription=shopDescription.getText().toString();
-
 
                 if(sName.isEmpty()){
                     shopName.setError("Shop Name is Mandatory");

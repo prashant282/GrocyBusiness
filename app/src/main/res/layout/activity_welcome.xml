@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/josefin_sans"
         android:gravity="center_horizontal"
         android:text="Grocy"
         android:textColor="@color/colorPrimary"
@@ -40,8 +39,7 @@
         android:gravity="center_horizontal"
         android:text="Sell goods online"
         android:textColor="#646464"
-        android:textSize="32sp"
-        android:fontFamily="@font/concertone" />
+        android:textSize="32sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +53,6 @@
             android:layout_height="70dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:fontFamily="@font/josefin_sans"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
@@ -64,14 +61,13 @@
             app:cornerRadius="14dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignupShopkeeper"
+            android:id="@+id/btnSignup"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
-            android:fontFamily="@font/josefin_sans"
             android:gravity="center"
             android:text="Signup"
             android:textAllCaps="false"
