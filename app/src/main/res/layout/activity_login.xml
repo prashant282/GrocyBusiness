@@ -101,6 +101,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:enabled="false"
                 app:cornerRadius="12dp" />
 
             <ProgressBar

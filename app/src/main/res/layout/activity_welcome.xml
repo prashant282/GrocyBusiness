@@ -70,7 +70,6 @@
             android:layout_marginEnd="40dp"
             android:gravity="center"
             android:text="Signup"
-            android:background="@drawable/round_corner"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
@@ -78,6 +77,7 @@
             app:cornerRadius="14dp"
             app:strokeColor="@color/colorPrimary"
             app:strokeWidth="3dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

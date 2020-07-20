@@ -14,7 +14,6 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="#659BF6"
-        android:fontFamily="@font/josefin_sans"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"/>
 
@@ -26,7 +25,6 @@
         android:textStyle="bold"
         android:textColor="#9DC0F9"
         android:layout_marginStart="70dp"
-        android:fontFamily="@font/josefin_sans"
         android:layout_gravity="center_horizontal" />
 
 
@@ -55,7 +53,6 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_user_new"
                 android:drawablePadding="14dp"
-                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="Owner Name*"
                 android:inputType="textEmailAddress"
@@ -77,7 +74,6 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_email"
                 android:drawablePadding="14dp"
-                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="Owner Email"
                 android:inputType="textEmailAddress"
@@ -99,7 +95,6 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_phone_new"
                 android:drawablePadding="14dp"
-                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="Owner Mobile Number"
                 android:inputType="number"
@@ -121,7 +116,6 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_city"
                 android:drawablePadding="14dp"
-                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="City"
                 android:inputType="text"
@@ -140,7 +134,6 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_marginTop="5dp"
                 android:checked="false"
-                android:fontFamily="@font/josefin_sans"
                 android:textSize="16sp"
                 android:textColor="#979797"
                 android:text="Accept the Terms and Conditions" />
@@ -175,7 +168,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#9DC0F9"
-                    android:fontFamily="@font/josefin_sans"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
@@ -186,7 +178,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#659BF6"
-                    android:fontFamily="@font/josefin_sans"
                     android:layout_gravity="center_horizontal" />
 
 

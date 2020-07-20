@@ -75,7 +75,6 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_shop"
                 android:drawablePadding="14dp"
-                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="Shop name"
                 android:inputType="textEmailAddress"
