@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    Button btnLogin, btnSignup;
+    Button btnLogin, btnSignUp;
     private FirebaseAuth mAuth;
 
     @Override
@@ -36,11 +36,10 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, AddShopActivity.class);
-                intent.putExtra("click_info", "Shopkeeper");
+                Intent intent = new Intent(WelcomeActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.AddShopActivity">
-
-
+    tools:context=".activities.RegisterActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,7 +13,8 @@
         android:text="Grocy"
         android:textSize="50sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#659BF6"
+        android:fontFamily="@font/josefin_sans"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"/>
 
@@ -25,30 +24,11 @@
         android:text="store partner"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/colorHeading"
+        android:textColor="#9DC0F9"
         android:layout_marginStart="70dp"
+        android:fontFamily="@font/josefin_sans"
         android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="25dp"
-            android:layout_height="10dp"
-            android:background="@drawable/custom_tab_layout1"/>
-
-        <View
-            android:layout_width="25dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/custom_tab_layout" />
-
-    </LinearLayout>
 
 
 
@@ -66,39 +46,18 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_shopName"
+                android:id="@+id/reg_owner_name"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_shop"
+                android:drawableStart="@drawable/icon_user_new"
                 android:drawablePadding="14dp"
                 android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
-                android:hint="Shop name"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-
-                android:textStyle="bold" />
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_shop_category"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_category"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="Shop Category"
+                android:hint="Owner Name*"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingStart="20dp"
@@ -109,17 +68,18 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_gst_number"
+                android:id="@+id/reg_owner_email"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_document"
+                android:drawableStart="@drawable/icon_email"
                 android:drawablePadding="14dp"
+                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
-                android:hint="GSTIN Number"
+                android:hint="Owner Email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingStart="20dp"
@@ -128,21 +88,21 @@
                 android:textColorHint="#9DC0F9"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_shop_address"
+                android:id="@+id/reg_owner_number"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_address"
+                android:drawableStart="@drawable/icon_phone_new"
                 android:drawablePadding="14dp"
+                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
-                android:hint="Shop Address"
-                android:inputType="textEmailAddress"
+                android:hint="Owner Mobile Number"
+                android:inputType="number"
                 android:maxLines="1"
                 android:paddingStart="20dp"
                 android:paddingEnd="10dp"
@@ -150,7 +110,6 @@
                 android:textColorHint="#9DC0F9"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_city_name"
@@ -162,9 +121,10 @@
                 android:background="@drawable/round_corner"
                 android:drawableStart="@drawable/icon_city"
                 android:drawablePadding="14dp"
+                android:fontFamily="@font/josefin_sans"
                 android:gravity="center_vertical"
                 android:hint="City"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="20dp"
                 android:paddingEnd="10dp"
@@ -173,46 +133,18 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_state"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_state"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="State"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_pin_code"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_pin_code"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="Pin code"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:fontFamily="@font/josefin_sans"
+                android:textSize="16sp"
+                android:textColor="#979797"
+                android:text="Accept the Terms and Conditions" />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reg_next"
@@ -228,11 +160,45 @@
                 android:layout_marginEnd="24dp"
                 android:textColor="@color/white"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account? "
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#9DC0F9"
+                    android:fontFamily="@font/josefin_sans"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/sign_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOGIN"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#659BF6"
+                    android:fontFamily="@font/josefin_sans"
+                    android:layout_gravity="center_horizontal" />
+
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
 
     </ScrollView>
+
 
 
 </LinearLayout>

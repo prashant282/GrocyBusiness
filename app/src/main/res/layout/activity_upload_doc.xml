@@ -30,20 +30,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
-        <TableRow
-            android:layout_width="30dp"
-            android:layout_height="7dp"
-            android:background="#9DC0F9"/>
+        <View
+            android:layout_width="25dp"
+            android:layout_height="10dp"
+            android:background="@drawable/custom_tab_layout"/>
 
-        <TableRow
-            android:layout_width="30dp"
-            android:layout_height="7dp"
-            android:layout_marginStart="4dp"
-            android:background="@color/colorPrimaryDark"/>
-
-
+        <View
+            android:layout_width="25dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_tab_layout1" />
 
     </LinearLayout>
 
@@ -63,173 +62,156 @@
 
 
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:text="Upload Documents"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="12dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aadhar card"
+                android:layout_marginStart="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="Upload Your Documents"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="start"
-                    android:text="Aadhaar Card"
-                    android:textSize="20sp"
-                    android:layout_marginStart="25dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
+                <androidx.constraintlayout.widget.Guideline
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="25dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/img_aadhaar_front"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Front"
-                            android:textSize="20sp"
-                            android:layout_marginStart="25dp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/img_aadhaar_back"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="Back"
-                            android:textSize="20sp"
-                            android:layout_marginStart="25dp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:text="Pan Card"
-                    android:textSize="20sp"
-                    android:layout_marginStart="25dp"
-                    android:textStyle="bold" />
+                    android:id="@+id/guideline"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"/>
 
                 <ImageView
-                    android:id="@+id/img_pan"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_baseline_add_a_photo_24"/>
+                    android:id="@+id/img_aadhaar_front"
+                    android:layout_width="0dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/upload_new"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="start"
-                    android:text="GST Certificate"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center_horizontal"
+                    android:text="Front"
                     android:textSize="20sp"
-                    android:layout_marginStart="25dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/img_gst"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="start"
-                    android:layout_marginStart="25dp"
-                    android:src="@drawable/ic_baseline_add_a_photo_24"/>
-
-
-
-
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="40dp"
-                    android:background="@drawable/background_adult"
-                    android:text="Register"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
                     android:textStyle="bold"
-                    app:cornerRadius="12dp" />
+                    app:layout_constraintBottom_toBottomOf="@+id/imageOne"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageOne" />
 
 
+                <ImageView
+                    android:id="@+id/img_aadhaar_back"
+                    android:layout_width="0dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/upload_new"
+                    android:scaleType="centerInside"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_horizontal"
+                    android:text="Back"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageTwo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/imageTwo" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pan card"
+                android:layout_marginStart="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <ImageView
+                android:id="@+id/img_pan"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                 android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/upload_new" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GST certificate"
+                android:layout_marginStart="12dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"/>
+
+            <ImageView
+                android:id="@+id/img_gst"
+                android:layout_width="wrap_content"
+                android:layout_height="170dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/upload_new" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+                android:textSize="16sp"
+                android:textColor="#979797"
+                android:text="Accept the Terms and Conditions" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reg"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Register"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="15dp"
+                app:cornerRadius="8dp"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
-
-
-
-
-
-
 
 </LinearLayout>
