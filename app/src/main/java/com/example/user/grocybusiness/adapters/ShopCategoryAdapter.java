@@ -8,13 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class ShopCategoryAdapter extends ArrayAdapter<ShopCategoryModel> {
@@ -50,6 +50,11 @@ public class ShopCategoryAdapter extends ArrayAdapter<ShopCategoryModel> {
             imageViewFlag.setImageResource(currentItem.getShopImage());
             textViewName.setText(currentItem.getShopCategory());
         }
+
+        if (position == 0) {
+            textViewName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
+        }
+
         return convertView;
 
     }
