@@ -95,6 +95,8 @@ public class AddShopActivity extends AppCompatActivity {
 //                sTimings=shopTimings.getText().toString();
         sCity=shopCity.getText().toString();
 //        sCategory=shopCategory.getText().toString();
+        sCity = shopCity.getText().toString();
+//        sCategory = shopCategory.getText().toString();
         sState=shopState.getText().toString();
         sPinCode=shopPinCode.getText().toString();
 
