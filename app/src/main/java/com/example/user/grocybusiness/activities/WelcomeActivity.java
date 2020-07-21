@@ -56,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            Intent mainIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+            Intent mainIntent = new Intent(WelcomeActivity.this, AddShopActivity.class);
             startActivity(mainIntent);
             finish();
         }

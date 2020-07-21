@@ -9,9 +9,9 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.user.grocybusiness.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddShopActivity extends AppCompatActivity {
 
@@ -48,17 +48,25 @@ public class AddShopActivity extends AppCompatActivity {
 //        shopName.setHint(spannableStringBuilder);
 
 
-        btnNext=findViewById(R.id.btn_reg_next);
-        scrollView= findViewById(R.id.scroll_view);
+        btnNext = findViewById(R.id.btn_reg_next);
+        scrollView = findViewById(R.id.scroll_view);
 
-        bundle=getIntent().getExtras();
+//        ArrayAdapter<CharSequence> adapter= ArrayAdapter.createFromResource(this,R.array.shop_category,
+//                android.R.layout.simple_spinner_item);
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//
+//        shopCategorySpinner.setAdapter(adapter);
 
-        sName=shopName.getText().toString();
-        sAddress=shopAddress.getText().toString();
-        sGst=shopGst.getText().toString();
+
+        bundle = getIntent().getExtras();
+
+        sName = shopName.getText().toString();
+        sAddress = shopAddress.getText().toString();
+        sGst = shopGst.getText().toString();
 //                sTimings=shopTimings.getText().toString();
-        sCity=shopCity.getText().toString();
-        sCategory=shopCategory.getText().toString();
+        sCity = shopCity.getText().toString();
+        sCategory = shopCategory.getText().toString();
         sState=shopState.getText().toString();
         sPinCode=shopPinCode.getText().toString();
 

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
@@ -26,7 +28,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +52,7 @@ public class OtpActivity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private String mVerificationId;
     private TextView textViewNumber;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class OtpActivity extends AppCompatActivity {
         btnOtpLogin = findViewById(R.id.otp_login_btn);
         tvResend = findViewById(R.id.textViewResend);
         textViewNumber = findViewById(R.id.textViewNumber);
+        db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -133,6 +140,8 @@ public class OtpActivity extends AppCompatActivity {
                 et5.setOnKeyListener(new PinOnKeyListener(0));
                 et6.setOnKeyListener(new PinOnKeyListener(1));
 
+                Toast.makeText(OtpActivity.this, "Code is sent to: " + phone_number, Toast.LENGTH_LONG).show();
+
 
             }
         };
@@ -168,11 +177,35 @@ public class OtpActivity extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
 
                             mCurrentUser = Objects.requireNonNull(task.getResult()).getUser();
+                            final Bundle bundle = getIntent().getExtras();
+                            if (bundle.size() > 1) {
+                                HashMap<String, Object> hm = new HashMap<>();
+                                hm.put("ownerName", bundle.getString("oName"));
+                                hm.put("ownerCity", bundle.getString("oCity"));
+                                hm.put("ownerEmail", bundle.getString("oEmail"));
+                                hm.put("pNumber", phone_number);
 
-                            Intent intent = new Intent(OtpActivity.this, MainActivity.class);
-                            OtpActivity.this.startActivity(intent);
-                            OtpActivity.this.finish();
-                            // ...
+                                db.collection("Shopkeeper").add(hm).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Intent signUp_intent = new Intent(OtpActivity.this, AddShopActivity.class);
+                                        signUp_intent.putExtras(bundle);
+                                        startActivity(signUp_intent);
+                                        OtpActivity.this.finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(OtpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                Intent intent = new Intent(OtpActivity.this, MainActivity.class);
+                                intent.putExtras(bundle);
+                                OtpActivity.this.startActivity(intent);
+                                OtpActivity.this.finish();
+                                // ...
+                            }
                         } else {
                             // Sign in failed, display a message and update the UI
                             System.out.println("Sign in  failed");
