@@ -210,12 +210,12 @@ public class RegisterActivity extends AppCompatActivity {
                 oEmail = ownerEmail.getText().toString();
                 oNumber = ownerNumber.getText().toString();
                 oCity = ownerCity.getText().toString();
-                 if (!ownerCity.getText().toString().trim().equalsIgnoreCase("Delhi")){
+                if (!ownerCity.getText().toString().trim().equalsIgnoreCase("Delhi")) {
 
 
-                final String phone_number = "+91" + oNumber.substring(oNumber.length() - 10);
+                    final String phone_number = "+91" + oNumber.substring(oNumber.length() - 10);
 
-                Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", phone_number);
+                    Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", phone_number);
 
 //                if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi")){
 //
@@ -224,41 +224,41 @@ public class RegisterActivity extends AppCompatActivity {
 //                    finish();
 //                }
 
-                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            if (task.getResult().getDocuments().size() > 0) {
-                                Intent signIn_intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                Toast.makeText(RegisterActivity.this, "You are already Registered !", Toast.LENGTH_LONG).show();
-                                startActivity(signIn_intent);
-                                finish();
+                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                if (task.getResult().getDocuments().size() > 0) {
+                                    Intent signIn_intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Toast.makeText(RegisterActivity.this, "You are already Registered !", Toast.LENGTH_LONG).show();
+                                    startActivity(signIn_intent);
+                                    finish();
+                                } else {
+                                    Intent otp_intent = new Intent(RegisterActivity.this, OtpActivity.class);
+
+                                    bundle.putString("oNumber", phone_number);
+                                    bundle.putString("oCity", oCity);
+                                    bundle.putString("oName", oName);
+                                    bundle.putString("oEmail", oEmail);
+                                    otp_intent.putExtras(bundle);
+                                    otp_intent.putExtra("phone_number", phone_number);
+                                    startActivity(otp_intent);
+                                    finish();
+                                    Toast.makeText(RegisterActivity.this, "Otp will be sent to:- " + phone_number, Toast.LENGTH_LONG).show();
+                                }
                             } else {
-                                Intent otp_intent = new Intent(RegisterActivity.this, OtpActivity.class);
-
-                                bundle.putString("oNumber", phone_number);
-                                bundle.putString("oCity", oCity);
-                                bundle.putString("oName", oName);
-                                bundle.putString("oEmail", oEmail);
-                                otp_intent.putExtras(bundle);
-                                otp_intent.putExtra("phone_number", phone_number);
-                                startActivity(otp_intent);
-                                finish();
-                                Toast.makeText(RegisterActivity.this, "Otp will be sent to:- " + phone_number, Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
+                                btnNext.setEnabled(true);
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
-                        } else {
-                            Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
-                            btnNext.setEnabled(true);
-                            progressBar.setVisibility(View.INVISIBLE);
                         }
-                    }
-                });
-
+                    });
 
 
                 }
-
+            }
         });
+
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,5 +272,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-    }
+
+}
+
 }

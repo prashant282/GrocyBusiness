@@ -96,7 +96,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="6dp"
                     android:src="@drawable/upload_new"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="12dp"
                     android:src="@drawable/upload_new"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline"
@@ -155,13 +155,13 @@
 
             <ImageView
                 android:id="@+id/img_pan"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="170dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginTop="16dp"
                  android:layout_gravity="center"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 android:src="@drawable/upload_new" />
 
             <TextView
@@ -175,13 +175,13 @@
 
             <ImageView
                 android:id="@+id/img_gst"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="170dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 android:src="@drawable/upload_new" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
