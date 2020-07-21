@@ -40,10 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
         signIn=findViewById(R.id.sign_in);
         bundle=new Bundle();
 
-        oName=ownerName.getText().toString();
-        oEmail=ownerName.getText().toString();
-        oNumber=ownerName.getText().toString();
-        oCity=ownerName.getText().toString();
+        oName=ownerName.getText().toString().trim();
+        oEmail=ownerEmail.getText().toString().trim();
+        oNumber=ownerNumber.getText().toString().trim();
+        oCity=ownerCity.getText().toString().trim();
 
         ownerName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -194,7 +194,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                 if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi")){
+                 if (!ownerCity.getText().toString().trim().equalsIgnoreCase("Delhi")){
 
                     Intent intent=new Intent(RegisterActivity.this,CityNotAvailableActivity.class);
                     startActivity(intent);
