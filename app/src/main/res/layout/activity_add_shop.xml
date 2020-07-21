@@ -86,7 +86,28 @@
                 android:textSize="22sp"
 
                 android:textStyle="bold" />
-            <com.google.android.material.textfield.TextInputEditText
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/reg_shop_category"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:background="@drawable/round_corner"-->
+<!--                android:drawableStart="@drawable/icon_category"-->
+<!--                android:drawablePadding="14dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:hint="Shop Category"-->
+<!--                android:inputType="textEmailAddress"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingStart="20dp"-->
+<!--                android:paddingEnd="10dp"-->
+<!--                android:textColor="#659BF6"-->
+<!--                android:textColorHint="#9DC0F9"-->
+<!--                android:textSize="22sp"-->
+<!--                android:textStyle="bold" />-->
+
+            <Spinner
                 android:id="@+id/reg_shop_category"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -94,19 +115,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_category"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="Shop Category"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
+                />
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reg_gst_number"
                 android:layout_width="match_parent"
@@ -129,110 +138,110 @@
                 android:textStyle="bold" />
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_shop_address"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_address"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="Shop Address"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/reg_shop_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/round_corner"
+                            android:drawableStart="@drawable/icon_address"
+                            android:drawablePadding="14dp"
+                            android:gravity="center_vertical"
+                            android:hint="Shop Address"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="#659BF6"
+                            android:textColorHint="#9DC0F9"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_city_name"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_city"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="City"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/reg_city_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/round_corner"
+                            android:drawableStart="@drawable/icon_city"
+                            android:drawablePadding="14dp"
+                            android:gravity="center_vertical"
+                            android:hint="City"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="#659BF6"
+                            android:textColorHint="#9DC0F9"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_state"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_state"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="State"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_pin_code"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/round_corner"
-                android:drawableStart="@drawable/icon_pin_code"
-                android:drawablePadding="14dp"
-                android:gravity="center_vertical"
-                android:hint="Pin code"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:textColor="#659BF6"
-                android:textColorHint="#9DC0F9"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/reg_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/round_corner"
+                            android:drawableStart="@drawable/icon_state"
+                            android:drawablePadding="14dp"
+                            android:gravity="center_vertical"
+                            android:hint="State"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="#659BF6"
+                            android:textColorHint="#9DC0F9"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/reg_pin_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/round_corner"
+                            android:drawableStart="@drawable/icon_pin_code"
+                            android:drawablePadding="14dp"
+                            android:gravity="center_vertical"
+                            android:hint="Pin code"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="#659BF6"
+                            android:textColorHint="#9DC0F9"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_reg_next"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="Next"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:enabled="false"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="12dp"
-                app:cornerRadius="8dp"
-                android:layout_marginEnd="24dp"
-                android:textColor="@color/white"/>
-
-
-        </LinearLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_reg_next"
+                            android:layout_width="match_parent"
+                            android:layout_height="64dp"
+                            android:text="Next"
+                            android:textSize="18sp"
+                            android:textAllCaps="false"
+                            android:enabled="false"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginBottom="12dp"
+                            app:cornerRadius="8dp"
+                            android:layout_marginEnd="24dp"
+                            android:textColor="@color/white"/>
 
 
-    </ScrollView>
+                    </LinearLayout>
 
 
-</LinearLayout>
+                </ScrollView>
+
+
+            </LinearLayout>
