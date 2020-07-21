@@ -11,13 +11,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.adapters.ShopCategoryAdapter;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddShopActivity extends AppCompatActivity {
 
@@ -212,11 +212,10 @@ public class AddShopActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(!shopAddress.getText().toString().isEmpty() && !shopCategory.getText().toString().isEmpty() && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()){
+                if (!shopAddress.getText().toString().isEmpty() && !clickedItemShopCategory.equalsIgnoreCase("Shop Category") && !shopCity.getText().toString().isEmpty() && !shopGst.getText().toString().isEmpty() && !shopState.getText().toString().isEmpty() && !shopName.getText().toString().isEmpty() && !shopPinCode.getText().toString().isEmpty()) {
 
                     btnNext.setEnabled(true);
-                }
-                else {
+                } else {
 
                     btnNext.setEnabled(false);
                 }
