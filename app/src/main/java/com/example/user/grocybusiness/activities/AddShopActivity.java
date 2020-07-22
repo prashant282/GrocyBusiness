@@ -11,8 +11,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.adapters.ShopCategoryAdapter;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
@@ -362,9 +360,8 @@ public class AddShopActivity extends AppCompatActivity {
 //                    bundle.putString("sTimings",sTimings);
                     bundle.putString("sCity",sCity);
 //                    bundle.putString("sDescription",sDiscription);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-
+                intent.putExtras(bundle);
+                startActivity(intent);
 
 
             }
@@ -372,13 +369,13 @@ public class AddShopActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(AddShopActivity.this,WelcomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent intent=new Intent(AddShopActivity.this,WelcomeActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     private void initList() {
         mcategoryList = new ArrayList<>();
