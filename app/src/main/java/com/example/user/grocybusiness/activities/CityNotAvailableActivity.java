@@ -22,7 +22,7 @@ public class CityNotAvailableActivity extends AppCompatActivity {
         stayTuned.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(CityNotAvailableActivity.this,RegisterActivity.class);
+                Intent intent=new Intent(CityNotAvailableActivity.this,AddShopActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -33,7 +33,7 @@ public class CityNotAvailableActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(CityNotAvailableActivity.this,RegisterActivity.class);
+        Intent intent=new Intent(CityNotAvailableActivity.this,AddShopActivity.class);
         startActivity(intent);
         finish();
     }

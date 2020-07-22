@@ -32,6 +32,7 @@ public class AddShopActivity extends AppCompatActivity {
     Bundle bundle;
     String sName, sAddress, sCity, sGst, sState, sCategory, sPinCode, clickedItemShopCategory;
     ScrollView scrollView;
+    Spinner shopCategory;
 
 
     @Override
@@ -40,9 +41,9 @@ public class AddShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_shop);
 
         initList();
-        Spinner spinnerCountries = findViewById(R.id.reg_shop_category);
+        shopCategory = findViewById(R.id.reg_shop_category);
         mAdapter = new ShopCategoryAdapter(this, mcategoryList);
-        spinnerCountries.setAdapter(mAdapter);
+        shopCategory.setAdapter(mAdapter);
 
 //        shopCategory=findViewById(R.id.reg_shop_category);
         shopName=findViewById(R.id.reg_shopName);
@@ -54,7 +55,7 @@ public class AddShopActivity extends AppCompatActivity {
 
         shopState = findViewById(R.id.reg_state);
 
-        spinnerCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        shopCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ShopCategoryModel clickedItem = (ShopCategoryModel) parent.getItemAtPosition(position);
@@ -89,7 +90,7 @@ public class AddShopActivity extends AppCompatActivity {
         btnNext=findViewById(R.id.btn_reg_next);
         scrollView= findViewById(R.id.scroll_view);
 
-        bundle=getIntent().getExtras();
+        bundle=new Bundle();
 
         sName=shopName.getText().toString();
         sAddress=shopAddress.getText().toString();
@@ -353,6 +354,14 @@ public class AddShopActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (!shopCity.getText().toString().equalsIgnoreCase("Delhi") && !shopCity.getText().toString().equalsIgnoreCase("New Delhi")) {
+
+                    Intent intent = new Intent(AddShopActivity.this, CityNotAvailableActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                else {
                     Intent intent =new Intent(AddShopActivity.this, UploadDocActivity.class);
                     bundle.putString("sName",sName);
                     bundle.putString("sAddress",sAddress);
@@ -365,6 +374,7 @@ public class AddShopActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
 
+                }
 
 
             }
