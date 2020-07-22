@@ -230,7 +230,8 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if (task.getResult().getDocuments().size() > 0) {
                                 Intent signIn_intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                Toast.makeText(RegisterActivity.this, "You are already Registered !", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "You are already Registered, please sign In !", Toast.LENGTH_LONG).show();
+                                signIn_intent.putExtra("phone_number", phone_number);
                                 startActivity(signIn_intent);
                                 finish();
                             } else {

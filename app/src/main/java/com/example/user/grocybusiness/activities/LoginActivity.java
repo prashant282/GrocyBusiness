@@ -36,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
         editTextNumber = findViewById(R.id.reg_NumText);
         progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
+        String number_from_register = getIntent().getStringExtra("phone_number");
+        if (number_from_register != null) {
+            editTextNumber.setText(number_from_register.substring(number_from_register.length() - 10));
+            buttonSendOTP.setEnabled(true);
+        }
         editTextNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
