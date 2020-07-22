@@ -1,5 +1,6 @@
 package com.example.user.grocybusiness.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class ShopCategoryAdapter extends ArrayAdapter<ShopCategoryModel> {
         return initView(position, convertView, parent);
     }
 
+    @SuppressLint("ResourceAsColor")
     private View initView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
@@ -53,6 +55,7 @@ public class ShopCategoryAdapter extends ArrayAdapter<ShopCategoryModel> {
 
         if (position == 0) {
             textViewName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_arrow_drop_down_24, 0);
+            textViewName.setTextColor(R.color.hintColor);
         }
 
         return convertView;

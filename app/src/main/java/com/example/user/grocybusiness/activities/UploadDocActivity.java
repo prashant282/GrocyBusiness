@@ -167,9 +167,11 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                         Intent intent=new Intent(UploadDocActivity.this,MainActivity.class);
                                                                                                         intent.putExtras(bundle);
                                                                                                         startActivity(intent);
+                                                                                                        finish();
                                                                                                     }
                                                                                                     else{
                                                                                                         Toast.makeText(UploadDocActivity.this, "Select all the documents", Toast.LENGTH_SHORT).show();
+                                                                                                        progressDialog.dismiss();
                                                                                                     }
 
                                                                                                 }
