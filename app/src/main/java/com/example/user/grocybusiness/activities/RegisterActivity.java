@@ -59,6 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
         oNumber=ownerNumber.getText().toString().trim();
         oCity=ownerCity.getText().toString().trim();
 
+
+
         ownerName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -218,11 +220,12 @@ public class RegisterActivity extends AppCompatActivity {
 
 //                if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi") && !ownerCity.getText().toString().equalsIgnoreCase("New Delhi")) {
 //
-//                    Intent intent = new Intent(RegisterActivity.this, CityNotAvailableActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                    return;
+////                    Intent intent = new Intent(RegisterActivity.this, CityNotAvailableActivity.class);
+////                    startActivity(intent);
+////                    finish();
+//
 //                }
+//                else {
 
                 query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
