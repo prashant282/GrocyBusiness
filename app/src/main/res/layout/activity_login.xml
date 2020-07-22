@@ -65,12 +65,13 @@
             android:drawablePadding="14dp"
             android:gravity="center_vertical"
             android:hint="Phone Number"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:maxLines="1"
             android:paddingStart="20dp"
             android:textColor="#659BF6"
             android:textColorHint="#9DC0F9"
             android:textSize="22sp"
+            android:maxLength="10"
             android:textStyle="bold" />
 
         <TextView

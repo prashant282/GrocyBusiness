@@ -59,8 +59,6 @@ public class RegisterActivity extends AppCompatActivity {
         oNumber=ownerNumber.getText().toString().trim();
         oCity=ownerCity.getText().toString().trim();
 
-
-
         ownerName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -227,38 +225,36 @@ public class RegisterActivity extends AppCompatActivity {
 //                }
 //                else {
 
-                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                if (task.getResult().getDocuments().size() > 0) {
-                                    Intent signIn_intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    Toast.makeText(RegisterActivity.this, "You are already Registered ! Please Sign In", Toast.LENGTH_LONG).show();
-                                    startActivity(signIn_intent);
-                                    finish();
-                                } else {
-                                    Intent otp_intent = new Intent(RegisterActivity.this, OtpActivity.class);
-
-                                    bundle.putString("oNumber", phone_number);
-                                    bundle.putString("oCity", oCity);
-                                    bundle.putString("oName", oName);
-                                    bundle.putString("oEmail", oEmail);
-                                    otp_intent.putExtras(bundle);
-                                    otp_intent.putExtra("phone_number", phone_number);
-                                    startActivity(otp_intent);
-                                    finish();
-                                    Toast.makeText(RegisterActivity.this, "Otp will be sent to:- " + phone_number, Toast.LENGTH_LONG).show();
-                                }
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().getDocuments().size() > 0) {
+                                Intent signIn_intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                Toast.makeText(RegisterActivity.this, "You are already Registered, please sign In !", Toast.LENGTH_LONG).show();
+                                signIn_intent.putExtra("phone_number", phone_number);
+                                startActivity(signIn_intent);
+                                finish();
                             } else {
-                                Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
-                                btnNext.setEnabled(true);
-                                progressBar.setVisibility(View.INVISIBLE);
+                                Intent otp_intent = new Intent(RegisterActivity.this, OtpActivity.class);
+
+                                bundle.putString("oNumber", phone_number);
+                                bundle.putString("oCity", oCity);
+                                bundle.putString("oName", oName);
+                                bundle.putString("oEmail", oEmail);
+                                otp_intent.putExtras(bundle);
+                                otp_intent.putExtra("phone_number", phone_number);
+                                startActivity(otp_intent);
+                                finish();
+                                Toast.makeText(RegisterActivity.this, "Otp will be sent to:- " + phone_number, Toast.LENGTH_LONG).show();
                             }
-
+                        } else {
+                            Toast.makeText(RegisterActivity.this, task.getException().toString(), Toast.LENGTH_LONG).show();
+                            btnNext.setEnabled(true);
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
-                    });
-
-//                }
+                    }
+                });
 
 
 

@@ -184,6 +184,7 @@ public class OtpActivity extends AppCompatActivity {
                                 hm.put("ownerCity", bundle.getString("oCity"));
                                 hm.put("ownerEmail", bundle.getString("oEmail"));
                                 hm.put("pNumber", phone_number);
+                                hm.put("no_of_shops", 0);
 
                                 db.collection("Shopkeeper").add(hm).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override

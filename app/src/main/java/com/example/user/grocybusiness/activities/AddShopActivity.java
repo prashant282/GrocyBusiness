@@ -382,13 +382,13 @@ public class AddShopActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(AddShopActivity.this,WelcomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent intent=new Intent(AddShopActivity.this,WelcomeActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
     private void initList() {
         mcategoryList = new ArrayList<>();
