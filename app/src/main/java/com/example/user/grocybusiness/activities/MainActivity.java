@@ -1,9 +1,12 @@
 package com.example.user.grocybusiness.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout mainLayout;
     ShimmerFrameLayout shimmerAnimation;
     private FirebaseAuth mAuth;
+    RelativeLayout noInternetLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.main_linear_layout);
         shimmerAnimation = findViewById(R.id.shimmerAnimation);
+        noInternetLayout = findViewById(R.id.no_internet_layout);
 
+        if (!isNetworkConnected()) {
+            shimmerAnimation.stopShimmer();
+            shimmerAnimation.setVisibility(View.GONE);
+            noInternetLayout.setVisibility(View.VISIBLE);
+            return;
+        }
 
         Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", currentUser.getPhoneNumber());
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -73,5 +84,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

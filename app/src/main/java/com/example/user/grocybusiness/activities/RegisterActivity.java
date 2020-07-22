@@ -216,12 +216,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", phone_number);
 
-                if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi") && !ownerCity.getText().toString().equalsIgnoreCase("New Delhi")) {
-
-                    Intent intent = new Intent(RegisterActivity.this, CityNotAvailableActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+//                if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi") && !ownerCity.getText().toString().equalsIgnoreCase("New Delhi")) {
+//
+//                    Intent intent = new Intent(RegisterActivity.this, CityNotAvailableActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                    return;
+//                }
 
                 query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

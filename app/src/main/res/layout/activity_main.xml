@@ -16,6 +16,15 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+    <RelativeLayout
+        android:id="@+id/no_internet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/internet_not_available"></include>
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/main_linear_layout"
         android:layout_width="match_parent"
