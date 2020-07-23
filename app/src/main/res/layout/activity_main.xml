@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/main_shimmer_layout" />
+        <include layout="@layout/layout_shimmer_main" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <include layout="@layout/internet_not_available"></include>
+        <include layout="@layout/layout_internet_not_available"></include>
     </RelativeLayout>
 
     <LinearLayout
