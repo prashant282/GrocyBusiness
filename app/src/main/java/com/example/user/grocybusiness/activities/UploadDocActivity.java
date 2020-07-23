@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,13 +18,22 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.user.grocybusiness.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -33,11 +43,15 @@ public class UploadDocActivity extends AppCompatActivity {
     Button btnReg;
     ImageView imgGst, imgPan, imgAadhaarFront, getImgAadhaarBack;
     Uri filePathGst, filePathPan, filePathAadhaarFront, filePathAadhaarBack;
-    long c=0;
+    long c=0, noOfShops;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     ProgressDialog progressDialog;
     CheckBox checkBox;
+    String sName, sAddress, sState, sGst, sCategory, sCity, sPinCode;
+    DocumentReference documentReference;
+    FirebaseFirestore firebaseFirestore;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +68,26 @@ public class UploadDocActivity extends AppCompatActivity {
 
         firebaseStorage=FirebaseStorage.getInstance();
         storageReference=firebaseStorage.getReference();
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseAuth=FirebaseAuth.getInstance();
+
+        sName=bundle.getString("sName");
+        sAddress=bundle.getString("sAddress");
+        sState=bundle.getString("sState");
+        sGst=bundle.getString("sGst");
+        sCategory=bundle.getString("sCategory");
+        sCity=bundle.getString("sCity");
+        sPinCode=bundle.getString("sPinCode");
+
+        final Map<String,Object> shop=new HashMap<>();
+        shop.put("shopName", sName);
+        shop.put("shopAddress",sAddress );
+        shop.put("shopCategory", sCategory);
+        shop.put("shopCity",sCity);
+        shop.put("shopState", sState);
+        shop.put("shopPinCode", sPinCode);
+        shop.put("shopGst", sGst);
+
 
         imgGst.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,17 +143,30 @@ public class UploadDocActivity extends AppCompatActivity {
 //            }
 //        });
 
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (checkBox.isChecked()) {
+
+                    btnReg.setEnabled(true);
+
+                } else {
+
+                    btnReg.setEnabled(false);
+
+                }
+
+            }
+        });
+
+
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(!checkBox.isChecked()){
-                    checkBox.setError("Accept the terms and conditions");
-                }
-                else {
 
-                    if (filePathGst!=null){
+                if (filePathGst!=null){
 
                         progressDialog= new ProgressDialog(UploadDocActivity.this);
                         progressDialog.setTitle("Uploading...");
@@ -163,11 +210,75 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                     c++;
 
                                                                                                     if (c==4){
-                                                                                                        Toast.makeText(UploadDocActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                                                                                        Intent intent=new Intent(UploadDocActivity.this,MainActivity.class);
-                                                                                                        intent.putExtras(bundle);
-                                                                                                        startActivity(intent);
-                                                                                                        finish();
+                                                                                                        firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid())
+                                                                                                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                                                            @Override
+                                                                                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                                                if (task.isSuccessful()){
+
+                                                                                                                    DocumentSnapshot documentSnapshot=task.getResult();
+                                                                                                                    noOfShops=documentSnapshot.getLong("no_of_shops");
+                                                                                                                    noOfShops++;
+                                                                                                                    final Map<String, Object> count=new HashMap<>();
+                                                                                                                    count.put("no_of_shops", noOfShops);
+
+                                                                                                                    firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid())
+                                                                                                                            .update(count).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                        @Override
+                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                            if (task.isSuccessful()){
+
+                                                                                                                                documentReference =firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(firebaseAuth.getUid()));
+                                                                                                        documentReference.collection("MyShop")
+                                                                                                                .add(shop).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                                                            @Override
+                                                                                                            public void onSuccess(DocumentReference documentReference) {
+                                                                                                                Toast.makeText(UploadDocActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                                                                                Intent intent=new Intent(UploadDocActivity.this,MainActivity.class);
+                                                                                                                intent.putExtras(bundle);
+                                                                                                                startActivity(intent);
+                                                                                                                finish();
+
+                                                                                                            }
+                                                                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                                                                            @Override
+                                                                                                            public void onFailure(@NonNull Exception e) {
+
+                                                                                                            }
+                                                                                                        });
+
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+
+
+                                                                                                                }
+                                                                                                            }
+                                                                                                        });
+
+
+
+//                                                                                                        documentReference =firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(firebaseAuth.getUid()));
+//                                                                                                        documentReference.collection("MyShop")
+//                                                                                                                .add(shop).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                                                                                            @Override
+//                                                                                                            public void onSuccess(DocumentReference documentReference) {
+//                                                                                                                Toast.makeText(UploadDocActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+//                                                                                                                Intent intent=new Intent(UploadDocActivity.this,MainActivity.class);
+//                                                                                                                intent.putExtras(bundle);
+//                                                                                                                startActivity(intent);
+//                                                                                                                finish();
+//
+//                                                                                                            }
+//                                                                                                        }).addOnFailureListener(new OnFailureListener() {
+//                                                                                                            @Override
+//                                                                                                            public void onFailure(@NonNull Exception e) {
+//
+//                                                                                                            }
+//                                                                                                        });
+//
+
+
                                                                                                     }
                                                                                                     else{
                                                                                                         Toast.makeText(UploadDocActivity.this, "Select all the documents", Toast.LENGTH_SHORT).show();
@@ -205,10 +316,6 @@ public class UploadDocActivity extends AppCompatActivity {
 
 
                     }
-
-
-                }
-
 
 
 //                    uploadGst();
@@ -267,7 +374,6 @@ public class UploadDocActivity extends AppCompatActivity {
         if (requestCode==1 && resultCode== RESULT_OK && data!=null && data.getData()!=null){
             filePathGst = data.getData();
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePathGst);
-
             imgGst.setImageBitmap(bitmap);
         }
         if (requestCode==2 && resultCode== RESULT_OK && data!=null && data.getData()!=null){
@@ -290,124 +396,124 @@ public class UploadDocActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadGst() {
+//    private void uploadGst() {
+//
+//        if (filePathGst!=null){
+////            progressDialog= new ProgressDialog(this);
+////            progressDialog.setTitle("Uploading...");
+////            progressDialog.setContentView(R.layout.process_dialog);
+////            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
+////                    android.R.color.transparent);
+////            progressDialog.show();
+//
+//            StorageReference reference=storageReference.child("GST Certificate/"+ UUID.randomUUID().toString());
+//            reference.putFile(filePathGst)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            c++;
+////                            progressDialog.dismiss();
+////                            Toast.makeText(UploadDocActivity.this, "GST Certificate Uploaded", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+////                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+////                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
+//
+//                }
+//            });
+//        }
+//    }
 
-        if (filePathGst!=null){
-//            progressDialog= new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading...");
-//            progressDialog.setContentView(R.layout.process_dialog);
-//            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
-//                    android.R.color.transparent);
-//            progressDialog.show();
-
-            StorageReference reference=storageReference.child("GST Certificate/"+ UUID.randomUUID().toString());
-            reference.putFile(filePathGst)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            c++;
+//    private void uploadPan() {
+//
+//        if (filePathPan!=null){
+////            progressDialog= new ProgressDialog(this);
+////            progressDialog.setTitle("Uploading...");
+////            progressDialog.setContentView(R.layout.process_dialog);
+////            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
+////                    android.R.color.background_light);
+////            progressDialog.show();
+//
+//            StorageReference reference=storageReference.child("Pan Card/"+ UUID.randomUUID().toString());
+//            reference.putFile(filePathPan)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            c++;
 //                            progressDialog.dismiss();
-//                            Toast.makeText(UploadDocActivity.this, "GST Certificate Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-//                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-//                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
+////                            Toast.makeText(UploadDocActivity.this, "Pan Card Uploaded", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+////                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+////                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
+//
+//                }
+//            });
+//        }
+//    }
 
-                }
-            });
-        }
-    }
+//    private void uploadAadhaarFront() {
+//
+//        if (filePathAadhaarFront!=null){
+////            progressDialog= new ProgressDialog(this);
+////            progressDialog.setTitle("Uploading...");
+////            progressDialog.setContentView(R.layout.process_dialog);
+////            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
+////                    android.R.color.background_light);
+////            progressDialog.show();
+//
+//            StorageReference reference=storageReference.child("Aadhaar Card Front/"+ UUID.randomUUID().toString());
+//            reference.putFile(filePathAadhaarFront)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            c++;
+//                            progressDialog.dismiss();
+////                            Toast.makeText(UploadDocActivity.this, "Aadhaar Card Uploaded", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+////                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+////                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
+//
+//                }
+//            });
+//        }
+//    }
 
-    private void uploadPan() {
-
-        if (filePathPan!=null){
-//            progressDialog= new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading...");
-//            progressDialog.setContentView(R.layout.process_dialog);
-//            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
-//                    android.R.color.background_light);
-//            progressDialog.show();
-
-            StorageReference reference=storageReference.child("Pan Card/"+ UUID.randomUUID().toString());
-            reference.putFile(filePathPan)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            c++;
-                            progressDialog.dismiss();
-//                            Toast.makeText(UploadDocActivity.this, "Pan Card Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-//                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-//                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
-
-                }
-            });
-        }
-    }
-
-    private void uploadAadhaarFront() {
-
-        if (filePathAadhaarFront!=null){
-//            progressDialog= new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading...");
-//            progressDialog.setContentView(R.layout.process_dialog);
-//            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
-//                    android.R.color.background_light);
-//            progressDialog.show();
-
-            StorageReference reference=storageReference.child("Aadhaar Card Front/"+ UUID.randomUUID().toString());
-            reference.putFile(filePathAadhaarFront)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            c++;
-                            progressDialog.dismiss();
-//                            Toast.makeText(UploadDocActivity.this, "Aadhaar Card Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-//                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-//                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
-
-                }
-            });
-        }
-    }
-
-    private void uploadAadhaarBack() {
-
-        if (filePathAadhaarBack!=null){
-//            progressDialog= new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading...");
-//            progressDialog.setContentView(R.layout.process_dialog);
-//            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
-//                    android.R.color.background_light);
-//            progressDialog.show();
-
-            StorageReference reference=storageReference.child("Aadhaar Card Back/"+ UUID.randomUUID().toString());
-            reference.putFile(filePathAadhaarBack)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            c++;
-                            progressDialog.dismiss();
-//                            Toast.makeText(UploadDocActivity.this, "Aadhaar Card Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-//                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-//                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
-
-                }
-            });
-        }
-    }
+//    private void uploadAadhaarBack() {
+//
+//        if (filePathAadhaarBack!=null){
+////            progressDialog= new ProgressDialog(this);
+////            progressDialog.setTitle("Uploading...");
+////            progressDialog.setContentView(R.layout.process_dialog);
+////            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
+////                    android.R.color.background_light);
+////            progressDialog.show();
+//
+//            StorageReference reference=storageReference.child("Aadhaar Card Back/"+ UUID.randomUUID().toString());
+//            reference.putFile(filePathAadhaarBack)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            c++;
+//                            progressDialog.dismiss();
+////                            Toast.makeText(UploadDocActivity.this, "Aadhaar Card Uploaded", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+////                    double progress= (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+////                    progressDialog.setMessage("Uploaded "+ (int)progress+"%");
+//
+//                }
+//            });
+//        }
+//    }
 
 }

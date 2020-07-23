@@ -202,6 +202,7 @@
                 android:layout_height="64dp"
                 android:text="Register"
                 android:textSize="18sp"
+                android:enabled="false"
                 android:textAllCaps="false"
                 android:layout_marginTop="12dp"
                 android:layout_marginStart="24dp"

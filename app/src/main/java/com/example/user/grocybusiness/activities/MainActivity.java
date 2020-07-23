@@ -30,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     LinearLayout mainLayout;
     ShimmerFrameLayout shimmerAnimation;
-    private FirebaseAuth mAuth;
     RelativeLayout noInternetLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
 
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 HashMap<String, Object> document = (HashMap<String, Object>) queryDocumentSnapshots.getDocuments().get(0).getData();
+                assert document != null;
                 if (Integer.parseInt("" + document.get("no_of_shops")) == 0) {
                     Bundle bundle = new Bundle();
                     bundle.putString("oNumber", (String) document.get("pNumber"));
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        assert cm != null;
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }
