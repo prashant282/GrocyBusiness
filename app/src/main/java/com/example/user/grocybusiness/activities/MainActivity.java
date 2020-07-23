@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", currentUser.getPhoneNumber());
+        Query query = db.collection("ShopKeeper").whereEqualTo("pNumber", currentUser.getPhoneNumber());
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

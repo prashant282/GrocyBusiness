@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -186,9 +185,9 @@ public class OtpActivity extends AppCompatActivity {
                                 hm.put("pNumber", phone_number);
                                 hm.put("no_of_shops", 0);
 
-                                db.collection("Shopkeeper").add(hm).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                db.collection("ShopKeeper").document(mCurrentUser.getUid()).set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(DocumentReference documentReference) {
+                                    public void onSuccess(Void aVoid) {
                                         Intent signUp_intent = new Intent(OtpActivity.this, AddShopActivity.class);
                                         signUp_intent.putExtras(bundle);
                                         startActivity(signUp_intent);
@@ -200,6 +199,7 @@ public class OtpActivity extends AppCompatActivity {
                                         Toast.makeText(OtpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                 });
+
                             } else {
                                 Intent intent = new Intent(OtpActivity.this, MainActivity.class);
                                 intent.putExtras(bundle);
