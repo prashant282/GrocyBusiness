@@ -214,7 +214,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 final String phone_number = "+91" + oNumber.substring(oNumber.length() - 10);
 
-                Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", phone_number);
+                Query query = db.collection("ShopKeeper").whereEqualTo("pNumber", phone_number);
 
 //                if (!ownerCity.getText().toString().equalsIgnoreCase("Delhi") && !ownerCity.getText().toString().equalsIgnoreCase("New Delhi")) {
 //

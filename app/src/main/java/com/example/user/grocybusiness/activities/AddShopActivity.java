@@ -19,12 +19,9 @@ import com.example.user.grocybusiness.models.ShopCategoryModel;
 
 import java.util.ArrayList;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class AddShopActivity extends AppCompatActivity {
 
     private ArrayList<ShopCategoryModel> mcategoryList;
-    private ShopCategoryAdapter mAdapter;
 
 
     TextView shopName, shopGst, shopAddress, shopCity, shopState, shopPinCode;
@@ -42,7 +39,7 @@ public class AddShopActivity extends AppCompatActivity {
 
         initList();
         shopCategory = findViewById(R.id.reg_shop_category);
-        mAdapter = new ShopCategoryAdapter(this, mcategoryList);
+        ShopCategoryAdapter mAdapter = new ShopCategoryAdapter(this, mcategoryList);
         shopCategory.setAdapter(mAdapter);
 
 //        shopCategory=findViewById(R.id.reg_shop_category);
@@ -92,14 +89,14 @@ public class AddShopActivity extends AppCompatActivity {
 
         bundle=new Bundle();
 
-        sName=shopName.getText().toString();
-        sAddress=shopAddress.getText().toString();
-        sGst=shopGst.getText().toString();
-//                sTimings=shopTimings.getText().toString();
-        sCity=shopCity.getText().toString();
-//        sCategory=shopCategory.getText().toString();
-        sState=shopState.getText().toString();
-        sPinCode=shopPinCode.getText().toString();
+//        sName=shopName.getText().toString();
+//        sAddress=shopAddress.getText().toString();
+//        sGst=shopGst.getText().toString();
+////                sTimings=shopTimings.getText().toString();
+//        sCity=shopCity.getText().toString();
+////        sCategory=shopCategory.getText().toString();
+//        sState=shopState.getText().toString();
+//        sPinCode=shopPinCode.getText().toString();
 
 
         shopName.addTextChangedListener(new TextWatcher() {
@@ -363,13 +360,14 @@ public class AddShopActivity extends AppCompatActivity {
                 }
                 else {
                     Intent intent =new Intent(AddShopActivity.this, UploadDocActivity.class);
-                    bundle.putString("sName",sName);
-                    bundle.putString("sAddress",sAddress);
-                    bundle.putString("sState",sState);
-                    bundle.putString("sGst",sGst);
-                    bundle.putString("sCategory",sCategory);
+                    bundle.putString("sName",shopName.getText().toString().trim());
+                    bundle.putString("sAddress",shopAddress.getText().toString().trim());
+                    bundle.putString("sState",shopState.getText().toString().trim());
+                    bundle.putString("sGst",shopGst.getText().toString().trim());
+                    bundle.putString("sCategory",clickedItemShopCategory);
 //                    bundle.putString("sTimings",sTimings);
-                    bundle.putString("sCity",sCity);
+                    bundle.putString("sCity",shopCity.getText().toString().trim());
+                    bundle.putString("sPinCode",shopPinCode.getText().toString().trim());
 //                    bundle.putString("sDescription",sDiscription);
                     intent.putExtras(bundle);
                     startActivity(intent);
