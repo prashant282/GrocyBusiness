@@ -28,7 +28,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -200,6 +199,7 @@ public class OtpActivity extends AppCompatActivity {
                                         Toast.makeText(OtpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                 });
+
                             } else {
                                 Intent intent = new Intent(OtpActivity.this, MainActivity.class);
                                 intent.putExtras(bundle);

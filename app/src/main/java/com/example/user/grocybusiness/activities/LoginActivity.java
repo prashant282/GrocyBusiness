@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 buttonSendOTP.setEnabled(false);
                 String uphone = editTextNumber.getText().toString();
                 final String phone_number = "+91" + uphone.substring(uphone.length() - 10);
-                Query query = db.collection("Shopkeeper").whereEqualTo("pNumber", phone_number);
+                Query query = db.collection("ShopKeeper").whereEqualTo("pNumber", phone_number);
 
                 query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
