@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_item"
+        android:icon="@drawable/ic_outline_assignment_24"
+        android:title="Items" />
+    <item
+        android:id="@+id/nav_noti"
+        android:icon="@drawable/ic_outline_notifications_24"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/nav_order"
+        android:icon="@drawable/ic_outline_note_add_24"
+
+        android:title="Orders" />
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_outline_settings_24"
+        android:title="Support" />
+    <item
+        android:id="@+id/nav_acc"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Account" />
+</menu>
