@@ -182,6 +182,14 @@ public class UploadDocActivity extends AppCompatActivity {
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         c++;
 
+                                        Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                                        task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                shop.put("imageGst",uri.toString());
+                                            }
+                                        });
+
                                         if(filePathPan!=null){
 
                                             StorageReference reference=storageReference.child("Pan Card/"+ UUID.randomUUID().toString());
@@ -190,6 +198,14 @@ public class UploadDocActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             c++;
+
+                                                            Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                                                            task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                @Override
+                                                                public void onSuccess(Uri uri) {
+                                                                    shop.put("imagePan",uri.toString());
+                                                                }
+                                                            });
 
                                                             if(filePathAadhaarFront!=null){
 
@@ -200,6 +216,14 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                                                 c++;
 
+                                                                                Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                                                                                task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(Uri uri) {
+                                                                                        shop.put("imageAadhaarFront",uri.toString());
+                                                                                    }
+                                                                                });
+
                                                                                 if (filePathAadhaarBack!=null){
 
                                                                                     StorageReference reference=storageReference.child("Aadhaar Card Back/"+ UUID.randomUUID().toString());
@@ -208,6 +232,13 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                 @Override
                                                                                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                                                                     c++;
+                                                                                                    Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                                                                                                    task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                        @Override
+                                                                                                        public void onSuccess(Uri uri) {
+                                                                                                            shop.put("imageAadhaarBack",uri.toString());
+                                                                                                        }
+                                                                                                    });
 
                                                                                                     if (c==4){
                                                                                                         firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid())
@@ -227,6 +258,8 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                                         @Override
                                                                                                                         public void onComplete(@NonNull Task<Void> task) {
                                                                                                                             if (task.isSuccessful()){
+
+
 
                                                                                                                                 documentReference =firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(firebaseAuth.getUid()));
                                                                                                         documentReference.collection("MyShop")
@@ -330,6 +363,8 @@ public class UploadDocActivity extends AppCompatActivity {
 
 
     }
+
+
 
     private void chooseGst() {
 
