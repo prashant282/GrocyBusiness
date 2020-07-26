@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AccountFragment">
 
     <LinearLayout
@@ -47,20 +48,37 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/custom_tab_layout1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Accepting Orders"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="Accepting Orders"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:thumb="@drawable/switch_layer_list"
+                app:thumbTint="@android:color/transparent"
+                app:thumbTintMode="add"
+                app:track="@drawable/switch_track"
+                app:trackTint="@android:color/transparent"
+                app:trackTintMode="add" />
+
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="15dp"
             android:background="@drawable/custom_tab_layout1" />
 
         <TextView

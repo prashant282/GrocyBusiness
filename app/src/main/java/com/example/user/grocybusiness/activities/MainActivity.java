@@ -142,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setFragment(itemsFragment);
+        setFragment(ordersFragment);
+        bottomNavigationView.setSelectedItemId(R.id.nav_order);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

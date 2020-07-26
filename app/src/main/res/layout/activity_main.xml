@@ -85,6 +85,10 @@
                 android:paddingBottom="5dp"
                 app:itemIconTint="@color/nav_items_color"
                 app:itemTextColor="@color/nav_items_color"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bottom_navigation_background"
+                android:paddingTop="5dp"
                 app:menu="@menu/menu_nav_items">
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>
