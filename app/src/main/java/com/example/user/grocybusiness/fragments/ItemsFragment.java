@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.adapters.ItemViewPagerAdapter;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +28,11 @@ public class ItemsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private AllItemFragment allItemFragment;
+    private OutOfStockItemFragment outOfStockItemFragment;
 
     public ItemsFragment() {
         // Required empty public constructor
@@ -50,9 +59,13 @@ public class ItemsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+
         }
     }
 
@@ -60,6 +73,31 @@ public class ItemsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_items, container, false);
+        View view;
+        view=inflater.inflate(R.layout.fragment_items, container, false);
+        viewPager= view.findViewById(R.id.view_pager);
+        tabLayout= view.findViewById(R.id.tab_layout);
+
+        allItemFragment=new AllItemFragment();
+        outOfStockItemFragment=new OutOfStockItemFragment();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        ItemViewPagerAdapter itemViewPagerAdapter=new ItemViewPagerAdapter(getChildFragmentManager(),0);
+        itemViewPagerAdapter.addFragment(allItemFragment,"All Items");
+        itemViewPagerAdapter.addFragment(outOfStockItemFragment,"Out Of Stock");
+        viewPager.setAdapter(itemViewPagerAdapter);
+
+
+
+        BadgeDrawable badgeDrawable1=tabLayout.getTabAt(0).getOrCreateBadge();
+        badgeDrawable1.setVisible(true);
+        badgeDrawable1.setNumber(21);
+
+        BadgeDrawable badgeDrawable=tabLayout.getTabAt(1).getOrCreateBadge();
+        badgeDrawable.setVisible(true);
+        badgeDrawable.setNumber(11);
+        return view;
     }
+
 }

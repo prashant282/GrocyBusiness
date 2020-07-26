@@ -1,10 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/side_about"
-        android:title="About" />
-    <item
-        android:id="@+id/side_feed"
-        android:title="feedback" />
+    <group
+        android:id="@+id/main"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/icon_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/notification"
+            android:icon="@drawable/icons_notification"
+            android:title="Notifications" />
+    </group>
+
+
+    <group
+        android:id="@+id/help"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/icon_feedback"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/icon_about"
+            android:title="About" />
+    </group>
+
+    <group
+        android:id="@+id/log"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/setting"
+            android:icon="@drawable/icon_settings"
+            android:title="Settings" />
+
+    </group>
+
+    <group
+        android:id="@+id/rateus"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/rate_us"
+            android:title="Rate us on play store" />
+    </group>
 </menu>
