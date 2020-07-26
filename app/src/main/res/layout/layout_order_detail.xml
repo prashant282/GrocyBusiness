@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    app:cardCornerRadius="20dp"
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth=".5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="ID : "
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/tv_id"
+                android:text="123456789"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="6:25 PM" />
+
+        </RelativeLayout>
+
+        <!--        <View-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@drawable/custom_tab_layout1"/>-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <!--            <com.google.android.material.button.MaterialButton-->
+            <!--                android:id="@+id/order_status"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:maxWidth="145dp"-->
+            <!--                android:text="Under Packaging"-->
+            <!--                android:layout_alignParentStart="true"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:textSize="10sp"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:textAllCaps="false"/>-->
+            <TextView
+                android:id="@id/order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/order_card_textview"
+                android:padding="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Under Packaging"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/user_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/order_status"
+                android:text="Tapan's 1st Order"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/delivery_remaining_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:text="24:59"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/order_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="@string/order_details"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_row_order_card" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_rs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="Total bill : Rs." />
+
+            <TextView
+                android:id="@+id/order_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/tv_rs"
+                android:text="625.30" />
+
+            <!--            <com.google.android.material.button.MaterialButton-->
+            <!--                android:layout_width="40dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:text="Paid"-->
+            <!--                android:padding="0dp"-->
+            <!--                android:textSize="8sp"-->
+            <!--                android:layout_toEndOf="@id/order_price"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:layout_centerVertical="true"/>-->
+            <TextView
+                android:id="@+id/order_payment_status"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:alpha="0.6"
+                android:background="@drawable/order_card_textview"
+                android:padding="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="Paid"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/table_row_order_card" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Delivery boy"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/delivery_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/user_profile" />
+
+                <TextView
+                    android:id="@+id/delivery_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/delivery_image"
+                    android:text="Nikhil"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_deliverymsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/delivery_name"
+                    android:text=" is arriving in "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_delivery_boy_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/tv_deliverymsg"
+                    android:text="8 mins"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/delivery_name"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@id/delivery_image"
+                    android:text="OTP: "
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/delivery_otp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_deliverymsg"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@id/tv_otp"
+                    android:text="123456"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/icon_phone_new" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_order_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="5dp"
+            android:text="Mark order Ready"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

@@ -215,4 +215,5 @@ public class MainActivity extends AppCompatActivity {
         assert cm != null;
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
+
 }
