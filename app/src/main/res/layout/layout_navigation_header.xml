@@ -6,7 +6,6 @@
     android:gravity="center_horizontal"
     android:paddingStart="15dp">
 
-
     <TextView
         android:id="@+id/menu_slogan"
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="4dp"
         android:gravity="center_horizontal"
-        android:text="Tapan Yadav"
+        android:text="Utkarsh Gupta"
         android:textSize="24sp" />
 
     <TextView
@@ -28,7 +27,6 @@
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="18sp" />
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"

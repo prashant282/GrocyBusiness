@@ -3,12 +3,19 @@ package com.example.user.grocybusiness.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
@@ -29,17 +36,20 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseFirestore db;
     FirebaseUser currentUser;
@@ -70,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         noInternetLayout = findViewById(R.id.no_internet_layout);
 
         bottomNavigationView = findViewById(R.id.main_bottom_nav);
+        navigationView=findViewById(R.id.nav_view);
         frameLayout = findViewById(R.id.main_frame_layout);
         coordinatorLayout = findViewById(R.id.coordinator);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -90,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-//        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
         navigationView.setItemIconTintList(null);
         navigationView.getMenu().getItem(0).setChecked(true);
@@ -145,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
         setFragment(ordersFragment);
         bottomNavigationView.setSelectedItemId(R.id.nav_order);
 
+
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -178,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
     private void animateNavigationDrawer() {
 
@@ -216,5 +231,147 @@ public class MainActivity extends AppCompatActivity {
         assert cm != null;
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.home:
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                return true;
+
+            case R.id.notification:
+                Intent intentNoti = new Intent(this, NotificationActivity.class);
+                startActivity(intentNoti);
+                return true;
+
+            case R.id.feedback:
+//                showFeedbackDialog();
+                return true;
+            case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.setting:
+                Toast.makeText(this, "Settings for this app shown here!", Toast.LENGTH_SHORT).show();
+                Intent intentSetting = new Intent(this, SettingsActivity.class);
+                startActivity(intentSetting);
+                return true;
+
+            case R.id.rate_us:
+//                showRatingDialog();
+                return true;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+
+        }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+//    private void showFeedbackDialog() {
+//
+//        ViewGroup viewGroup = findViewById(android.R.id.content);
+//
+//        View dialogView = LayoutInflater.from(this).inflate(R.layout.feedback_dialog, viewGroup, false);
+//
+//
+//        //Now we need an AlertDialog.Builder object
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//        //setting the view of the builder to our custom view that we already inflated
+//        builder.setView(dialogView);
+//
+//        //finally creating the alert dialog and displaying it
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//        Objects.requireNonNull(alertDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//        Button buttonLove = alertDialog.findViewById(R.id.btnLove);
+//        Button buttonImprove = alertDialog.findViewById(R.id.btnImprove);
+//
+//        assert buttonImprove != null;
+//        buttonImprove.setOnClickListener(v -> {
+//            alertDialog.dismiss();
+//            showExpDialog();
+//        });
+//
+//        assert buttonLove != null;
+//        buttonLove.setOnClickListener(v -> {
+//            alertDialog.dismiss();
+//            showRatingDialog();
+//        });
+//    }
+//
+//    private void showRatingDialog() {
+//        ViewGroup viewGroup = findViewById(android.R.id.content);
+//
+//        View dialogView = LayoutInflater.from(this).inflate(R.layout.rating_dialog, viewGroup, false);
+//
+//
+//        //Now we need an AlertDialog.Builder object
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//        //setting the view of the builder to our custom view that we already inflated
+//        builder.setView(dialogView);
+//
+//        //finally creating the alert dialog and displaying it
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//        Objects.requireNonNull(alertDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//        Button buttonRate = alertDialog.findViewById(R.id.btnRatingPlay);
+//        TextView textViewNo = alertDialog.findViewById(R.id.textNoThanks);
+//        assert buttonRate != null;
+//        buttonRate.setOnClickListener(v -> {
+//            Toast.makeText(this, "Opening Play store!", Toast.LENGTH_SHORT).show();
+//            alertDialog.dismiss();
+//        });
+//
+//        assert textViewNo != null;
+//        textViewNo.setOnClickListener(v -> {
+//            alertDialog.dismiss();
+//        });
+//    }
+//
+//    private void showExpDialog() {
+//        ViewGroup viewGroup = findViewById(android.R.id.content);
+//
+//        View dialogView = LayoutInflater.from(this).inflate(R.layout.experience_dialog, viewGroup, false);
+//
+//
+//        //Now we need an AlertDialog.Builder object
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//        //setting the view of the builder to our custom view that we already inflated
+//        builder.setView(dialogView);
+//
+//        //finally creating the alert dialog and displaying it
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//        Objects.requireNonNull(alertDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        alertDialog.setCanceledOnTouchOutside(false);
+//
+//        Button buttonFeedback = alertDialog.findViewById(R.id.btnFeed);
+//        ImageView imageViewClose = alertDialog.findViewById(R.id.imageClose);
+//        assert buttonFeedback != null;
+//        buttonFeedback.setOnClickListener(v -> {
+//            Toast.makeText(this, "Feedback sent!!", Toast.LENGTH_SHORT).show();
+//            alertDialog.dismiss();
+//        });
+//
+//        assert imageViewClose != null;
+//        imageViewClose.setOnClickListener(v -> {
+//            alertDialog.dismiss();
+//        });
+//    }
 
 }
