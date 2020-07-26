@@ -153,10 +153,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        setFragment(itemsFragment);
-
-
-
+        setFragment(ordersFragment);
+        bottomNavigationView.setSelectedItemId(R.id.nav_order);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -372,5 +370,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            alertDialog.dismiss();
 //        });
 //    }
+
 
 }

@@ -17,4 +17,10 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
+    <style name="tabs" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
 </resources>
