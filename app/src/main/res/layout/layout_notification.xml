@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="20dp"
+    app:strokeColor="@color/colorPrimaryDark"
+    app:strokeWidth="0.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New Order"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="50dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/order_time"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="06:25"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="10dp" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="8dp"
+                app:strokeColor="@color/colorPrimaryDark"
+                android:layout_marginStart="10dp"
+                app:strokeWidth="0.2dp"
+                >
+
+                <ImageView
+                    android:id="@+id/user_img"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/utkarsh"
+                    android:scaleType="fitCenter"
+                   />
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/user_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Address"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/order_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:text="@string/order_details"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_accept_order"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Accept Order"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:drawablePadding="5dp"
+                app:cornerRadius="14dp"
+                app:icon="@drawable/ic_baseline_check_24"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reject_order"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/lightRed"
+                android:text="Reject Order"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:drawablePadding="5dp"
+                app:cornerRadius="14dp"
+                app:icon="@drawable/ic_baseline_cancel_24"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:text="New Order"-->
+        <!--                android:textColor="@color/colorPrimary"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:textStyle="bold" />-->
+
+
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
