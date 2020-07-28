@@ -6,8 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.adapters.NotificationAdapter;
+import com.example.user.grocybusiness.adapters.OutOfStockItemAdapter;
+import com.example.user.grocybusiness.models.NotificationModel;
+import com.example.user.grocybusiness.models.NotificationModel;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +25,9 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
+
+    NotificationAdapter notificationAdapter;
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,9 +70,41 @@ public class NotificationFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        notificationAdapter.stopListening();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        notificationAdapter.startListening();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        View view=inflater.inflate(R.layout.fragment_notification, container, false);
+        recyclerView=view.findViewById(R.id.notification_recycler);
+
+
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+
+
+
+        DocumentReference documentReference = firebaseFirestore.collection("ShopKeeper").document("NGZcrGwBQ2WuZaOdqg3hSyNfJ7G3");
+//        documentReference.collection("Items").whereEqualTo("inStock",false);
+        Query query = documentReference.collection("Notifications");
+        FirestoreRecyclerOptions<NotificationModel> options= new FirestoreRecyclerOptions.Builder<NotificationModel>()
+                .setQuery(query, NotificationModel.class).build();
+        notificationAdapter=new NotificationAdapter(options);
+        notificationAdapter.notifyDataSetChanged();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(notificationAdapter);
+
+
+        return view;
     }
 }

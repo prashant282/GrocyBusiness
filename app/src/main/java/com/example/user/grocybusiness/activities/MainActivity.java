@@ -172,9 +172,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setFragment(ordersFragment);
         bottomNavigationView.setSelectedItemId(R.id.nav_order);
 
-
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -389,5 +386,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            alertDialog.dismiss();
 //        });
 //    }
+
 
 }
