@@ -13,10 +13,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.user.grocybusiness.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +32,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class UploadDocActivity extends AppCompatActivity {
 
@@ -266,17 +266,46 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                                 .add(shop).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                                                                             @Override
                                                                                                             public void onSuccess(DocumentReference documentReference) {
-                                                                                                                Toast.makeText(UploadDocActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                                                                                                Intent intent=new Intent(UploadDocActivity.this,MainActivity.class);
-                                                                                                                intent.putExtras(bundle);
-                                                                                                                startActivity(intent);
-                                                                                                                finish();
+                                                                                                                String documentId = documentReference.getId();
+                                                                                                                DocumentReference docRef = firebaseFirestore.collection("ShopsMain").document(documentId);
+                                                                                                                HashMap<String, Object> hm = new HashMap();
+                                                                                                                hm.put("shopName", sName);
+                                                                                                                hm.put("shopCategory", sCategory);
+                                                                                                                hm.put("shopAddress", sAddress + ", " + sCity + ", " + sState);
+                                                                                                                hm.put("shopArrange", "z");
+                                                                                                                hm.put("shopFeatured", false);
+                                                                                                                hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fgrocery3.jpg?alt=media&token=d1220711-4749-435b-adfa-cafd24339d65");
+                                                                                                                hm.put("shopLimits", "200 per Order | 30 mins");
+                                                                                                                hm.put("shopOff", "40% off");
+                                                                                                                hm.put("shopRating", 5);
+                                                                                                                hm.put("shopStatus", "Open");
+                                                                                                                hm.put("shopStatusBackground", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/gradient_new%2FSunrise.jpg?alt=media&token=53ef45c2-8f41-4b8f-bba0-9e7787f6be22");
+                                                                                                                hm.put("shopType", "Daily need Items");
+                                                                                                                hm.put("shopKeeperId", firebaseAuth.getCurrentUser().getUid());
+                                                                                                                docRef.set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                                                    @Override
+                                                                                                                    public void onSuccess(Void aVoid) {
+
+                                                                                                                        Toast.makeText(UploadDocActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                                                                                        Intent intent = new Intent(UploadDocActivity.this, MainActivity.class);
+                                                                                                                        intent.putExtras(bundle);
+                                                                                                                        startActivity(intent);
+                                                                                                                        finish();
+
+                                                                                                                    }
+                                                                                                                }).addOnFailureListener(new OnFailureListener() {
+                                                                                                                    @Override
+                                                                                                                    public void onFailure(@NonNull Exception e) {
+                                                                                                                        Toast.makeText(UploadDocActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                                                                                                    }
+                                                                                                                });
+
 
                                                                                                             }
                                                                                                         }).addOnFailureListener(new OnFailureListener() {
                                                                                                             @Override
                                                                                                             public void onFailure(@NonNull Exception e) {
-
+                                                                                                                Toast.makeText(UploadDocActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                                                                                             }
                                                                                                         });
 

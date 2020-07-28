@@ -3,19 +3,13 @@ package com.example.user.grocybusiness.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
@@ -31,16 +25,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -67,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private OrdersFragment ordersFragment;
     private SettingFragment settingFragment;
     private AccountFragment accountFragment;
+
+    public static ArrayList<String> shopIds = new ArrayList<>();
+    public static String selectedShop = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,9 +135,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(add_shop_intent);
                     finish();
                 } else {
-                    shimmerAnimation.stopShimmer();
-                    shimmerAnimation.setVisibility(View.GONE);
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                    DocumentReference documentReference = db.collection("ShopKeeper").document(queryDocumentSnapshots.getDocuments().get(0).getId());
+                    documentReference.collection("MyShop").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                shopIds.add(documentSnapshot.getId());
+                            }
+                            selectedShop = shopIds.get(0);
+                            shimmerAnimation.stopShimmer();
+                            shimmerAnimation.setVisibility(View.GONE);
+                            coordinatorLayout.setVisibility(View.VISIBLE);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            shimmerAnimation.stopShimmer();
+                            shimmerAnimation.setVisibility(View.GONE);
+                            coordinatorLayout.setVisibility(View.VISIBLE);
+                        }
+                    });
                 }
 
             }
