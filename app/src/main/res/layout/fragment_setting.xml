@@ -98,6 +98,13 @@
             app:strokeColor="@color/hintColor"
             app:strokeWidth="1dp" />
 
+        <!--        <ProgressBar-->
+        <!--            android:layout_width="50dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:indeterminateDrawable="@drawable/icon_phone_new"-->
+        <!--            android:indeterminateDuration="1000" />-->
+
     </LinearLayout>
+
 
 </ScrollView>

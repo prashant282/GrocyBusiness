@@ -1,23 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+
+<!--    <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/progressbar1"></item>-->
+<!--    <item android:width="5dp" android:height="5dp">-->
+<!--        <rotate android:id="@android:id/progress" android:drawable="@drawable/progressbar"-->
+<!--            android:fromDegrees="90"-->
+<!--            android:pivotX="50%"-->
+<!--            android:pivotY="50%">-->
+
+<!--        </rotate>-->
+<!--    </item>-->
+
+<!--</layer-list>-->
+
+<!--<rotate-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:toDegrees="360">-->
+<!--    <shape android:shape="oval">-->
+<!--        <size-->
+<!--            android:height="48dp"-->
+<!--            android:width="48dp" />-->
+<!--        <gradient-->
+<!--            android:type="sweep"-->
+<!--            android:startColor="#00000000"-->
+<!--            android:centerColor="#e97575"-->
+<!--            android:endColor="#c70505" />-->
+<!--    </shape>-->
+<!--</rotate>-->
+
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <item
-        android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/progressbar1"></item>
-    <item
-        android:width="5dp"
-        android:height="5dp">
-        <rotate
-            android:id="@android:id/progress"
-            android:drawable="@drawable/progressbar"
-            android:fromDegrees="90"
-            android:pivotX="50%"
-            android:pivotY="50%">
-
+    <item android:id="@android:id/background">
+        <shape
+            android:innerRadius="30dp"
+            android:shape="ring"
+            android:thickness="20dp"
+            android:useLevel="false">
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <rotate android:toDegrees="360">
+            <shape
+                android:innerRadius="35dp"
+                android:shape="ring"
+                android:thickness="10dp"
+                android:useLevel="false">
+                <gradient
+                    android:endColor="#fffb03"
+                    android:startColor="#00000000"
+                    android:type="sweep" />
+            </shape>
         </rotate>
     </item>
-
 </layer-list>
+
+    <!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--    <item android:id="@android:id/progress">-->
+    <!--        <rotate android:toDegrees="360">-->
+    <!--            <shape-->
+    <!--                android:shape="ring"-->
+    <!--                android:innerRadius="35dp"-->
+    <!--                android:thickness="10dp">-->
+    <!--                <gradient-->
+    <!--                    android:type="radial"-->
+    <!--                    android:gradientRadius="100"-->
+    <!--                    android:startColor="#dcdc0b"-->
+    <!--                    android:endColor="#00d4ff" />-->
+    <!--            </shape>-->
+    <!--        </rotate>-->
+    <!--    </item>-->
+    <!--    <item android:id="@android:id/background">-->
+    <!--        <shape-->
+    <!--            android:shape="ring"-->
+    <!--            android:innerRadius="30dp"-->
+    <!--            android:thickness="20dp"-->
+    <!--            android:useLevel="false">-->
+    <!--            <gradient-->
+    <!--                android:type="radial"-->
+    <!--                android:gradientRadius="100"-->
+    <!--                android:startColor="#FFFFFF"-->
+    <!--                android:endColor="#dc1b1b" />-->
+    <!--            <stroke-->
+    <!--                android:width="1dp"-->
+    <!--                android:color="#AAA" />-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <!--</layer-list>-->
 
