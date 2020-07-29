@@ -7,18 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.NotificationModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationModel, NotificationAdapter.MyViewHolder> {
     /**
@@ -38,7 +34,7 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
 //        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
 //        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(
 //                "qAeielILTRnO7hAIeiS7");
-        String currentTime=model.getDateTime().substring(14,20);
+        String currentTime = model.getDateTime().substring(11, 16);
 
         holder.name.setText(model.getUserName());
         holder.address.setText(model.getUserAddress());

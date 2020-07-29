@@ -16,7 +16,6 @@
     //nav
     <string name="openNavDrawer">Navigation Drawer Open</string>
     <string name="closeNavDrawer">Navigation Drawer Close</string>
-    <string name="order_details"><u>Order details</u></string>
     <string name="aboutus">We are the one for your all kind of daily needs like groceries, vegetables, medicines, stationary etc at your doorstep by your chosen shop within an hour.\n\nBasically, in our app all your nearby shops are shown and you can view and order the items from the shops and it will be deliver within an hour to your doorstep.</string>
     <string name="mission">Our mission is to provide solution to your every possible daily needs and other goods at your door step safely.</string>
     <string name="vision">To be India\'s most recognized platform in order to fullfill every kind of daily needs and other goods.</string>
