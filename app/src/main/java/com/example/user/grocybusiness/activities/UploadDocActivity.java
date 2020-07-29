@@ -274,7 +274,22 @@ public class UploadDocActivity extends AppCompatActivity {
                                                                                                                 hm.put("shopAddress", sAddress + ", " + sCity + ", " + sState);
                                                                                                                 hm.put("shopArrange", "z");
                                                                                                                 hm.put("shopFeatured", false);
-                                                                                                                hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fgrocery3.jpg?alt=media&token=d1220711-4749-435b-adfa-cafd24339d65");
+                                                                                                                if (sCategory.equals("Grocery")) {
+                                                                                                                    hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fgrocery3.jpg?alt=media&token=d1220711-4749-435b-adfa-cafd24339d65");
+                                                                                                                }
+                                                                                                                if (sCategory.equals("Hardware")) {
+                                                                                                                    hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fhardware5.jpg?alt=media&token=8b7aa6e3-1c30-4ac9-8a5e-0ec792c4b05d");
+                                                                                                                }
+                                                                                                                if (sCategory.equals("Pharmacy")) {
+                                                                                                                    hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fpharmacy8.jpg?alt=media&token=7371e876-2e69-41c5-98eb-f245213a8c03");
+                                                                                                                }
+                                                                                                                if (sCategory.equals("Stationary")) {
+                                                                                                                    hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fstat6.jpg?alt=media&token=6f75b15b-5cff-4d6b-9715-306bc1e2f74a");
+                                                                                                                }
+                                                                                                                if (sCategory.equals("Fruits and Veg")) {
+                                                                                                                    hm.put("shopImage", "https://firebasestorage.googleapis.com/v0/b/grocy-6c5b5.appspot.com/o/shopsAllImagesNew%2Fgrocery_new.jpg?alt=media&token=70bf1254-5aa4-4128-926f-0fd94cecf5f9");
+                                                                                                                }
+
                                                                                                                 hm.put("shopLimits", "200 per Order | 30 mins");
                                                                                                                 hm.put("shopOff", "40% off");
                                                                                                                 hm.put("shopRating", 5);

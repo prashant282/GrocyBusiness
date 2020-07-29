@@ -11,13 +11,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.adapters.ShopCategoryAdapter;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddShopActivity extends AppCompatActivity {
 
@@ -396,6 +396,7 @@ public class AddShopActivity extends AppCompatActivity {
         mcategoryList.add(new ShopCategoryModel("Grocery", R.drawable.supermarket));
         mcategoryList.add(new ShopCategoryModel("Hardware", R.drawable.hardware));
         mcategoryList.add(new ShopCategoryModel("Stationary", R.drawable.stationary));
-        mcategoryList.add(new ShopCategoryModel("Medical Store", R.drawable.medical));
+        mcategoryList.add(new ShopCategoryModel("Pharmacy", R.drawable.medical));
+        mcategoryList.add(new ShopCategoryModel("Fruits and Veg", R.drawable.supermarket));
     }
 }
