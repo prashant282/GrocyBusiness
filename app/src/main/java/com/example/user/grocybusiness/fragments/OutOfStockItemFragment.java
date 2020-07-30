@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.OutOfStockItemAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -89,10 +91,11 @@ public class OutOfStockItemFragment extends Fragment {
 
 
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
 
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
 //        documentReference.collection("Items").whereEqualTo("inStock",false);
         Query query = documentReference.collection("Items").whereEqualTo("inStock",false);
                 FirestoreRecyclerOptions<ItemModel> options= new FirestoreRecyclerOptions.Builder<ItemModel>()

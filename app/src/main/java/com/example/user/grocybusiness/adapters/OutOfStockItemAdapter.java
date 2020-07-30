@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -42,8 +43,7 @@ public class OutOfStockItemAdapter extends FirestoreRecyclerAdapter<ItemModel, O
 
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(
-                "qAeielILTRnO7hAIeiS7");
+        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
 
 
         holder.itemName.setText(model.getItemsProductName());

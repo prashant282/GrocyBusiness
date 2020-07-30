@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.AllItemAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -93,10 +94,11 @@ public class AllItemFragment extends Fragment {
         RecyclerView recyclerView=view.findViewById(R.id.all_item_recycler);
 
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
 
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
         Query query = documentReference.collection("Items");
         FirestoreRecyclerOptions<ItemModel> options= new FirestoreRecyclerOptions.Builder<ItemModel>()
                 .setQuery(query, ItemModel.class).build();
