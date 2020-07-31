@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="10dp">
+
+    <TextView
+        android:id="@+id/tv_variant_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="Item weight " />
+
+    <TextView
+        android:id="@+id/variant_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_toRightOf="@id/tv_variant_weight"
+        android:text="200 g" />
+
+    <TextView
+        android:id="@+id/tv_variant_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_variant_weight"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:text="Item Price" />
+
+    <TextView
+        android:id="@+id/variant_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/variant_weight"
+        android:layout_alignStart="@+id/variant_weight"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:text="Rs. 250" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/variant_btn_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/variant_btn_switch"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary" />
+
+</RelativeLayout>
