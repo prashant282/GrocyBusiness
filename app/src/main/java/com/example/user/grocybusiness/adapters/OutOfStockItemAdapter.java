@@ -48,7 +48,6 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
         ItemModel itemModel = items_list.get(position);
 
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
 
         holder.itemName.setText(itemModel.getItemsProductName());
@@ -64,11 +63,6 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
 
 
         Glide.with(holder.itemImage.getContext()).load(itemModel.getItemsImage()).into(holder.itemImage);
-
-
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(
-                "qAeielILTRnO7hAIeiS7");
 
 
         holder.switchMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
