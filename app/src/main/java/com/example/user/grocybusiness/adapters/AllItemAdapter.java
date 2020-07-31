@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,10 +48,9 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
         ItemModel itemModel = items_list.get(position);
 
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(
-                "qAeielILTRnO7hAIeiS7");
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
 
 
         holder.itemName.setText(itemModel.getItemsProductName());

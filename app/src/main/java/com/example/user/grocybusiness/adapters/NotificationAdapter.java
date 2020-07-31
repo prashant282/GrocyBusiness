@@ -1,20 +1,34 @@
 package com.example.user.grocybusiness.adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.models.NotificationModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationModel, NotificationAdapter.MyViewHolder> {
     /**
@@ -27,13 +41,19 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
         super(options);
     }
 
+    @NonNull
+    @Override
+    public NotificationModel getItem(int position) {
+        return super.getItem(position);
+    }
+
     @Override
     protected void onBindViewHolder(@NonNull NotificationAdapter.MyViewHolder holder, int position, @NonNull NotificationModel model) {
 
-        //        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
-//        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-//        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(
-//                "qAeielILTRnO7hAIeiS7");
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+//        DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
+        DocumentReference documentReference1=firebaseFirestore.collection("ShopKeeper").document(Objects.requireNonNull(firebaseAuth.getUid()));
         String currentTime = model.getDateTime().substring(11, 16);
 
         holder.name.setText(model.getUserName());
@@ -48,9 +68,93 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
 
         holder.acceptButton.setOnClickListener(view -> {
 
+
+
+
+
+            documentReference1.collection("Notifications").whereEqualTo("orderNumberId", model.getOrderNumberId())
+                    .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+
+                    documentReference1.collection("Notifications").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                            .update("freshNotification",false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    documentReference1.collection("Notifications").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                            documentReference1.collection("MyOrders").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                                    .set(documentSnapshot).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(holder.acceptButton.getContext(), "Order Accepted Successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
         });
 
-        holder.rejectButton.setOnClickListener(view -> {
+        holder.rejectButton.setOnClickListener(view ->
+        {
+
+            documentReference1.collection("Notifications").whereEqualTo("orderNumberId", model.getOrderNumberId())
+                    .get().addOnSuccessListener(queryDocumentSnapshots -> {
+                        documentReference1.collection("Notifications").document(queryDocumentSnapshots.getDocuments().get(0).getId())
+                                .update("freshNotification",false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(holder.rejectButton.getContext(), "Order Rejected Succesfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    Toast.makeText(holder.acceptButton.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
         });
 

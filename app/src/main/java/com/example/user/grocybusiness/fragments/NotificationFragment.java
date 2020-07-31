@@ -11,6 +11,7 @@ import com.example.user.grocybusiness.adapters.OutOfStockItemAdapter;
 import com.example.user.grocybusiness.models.NotificationModel;
 import com.example.user.grocybusiness.models.NotificationModel;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -90,12 +91,13 @@ public class NotificationFragment extends Fragment {
 
 
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
 
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("ShopKeeper").document("NGZcrGwBQ2WuZaOdqg3hSyNfJ7G3");
+        DocumentReference documentReference = firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid());
 //        documentReference.collection("Items").whereEqualTo("inStock",false);
-        Query query = documentReference.collection("Notifications");
+        Query query = documentReference.collection("Notifications").whereEqualTo("freshNotification", true);
         FirestoreRecyclerOptions<NotificationModel> options= new FirestoreRecyclerOptions.Builder<NotificationModel>()
                 .setQuery(query, NotificationModel.class).build();
         notificationAdapter=new NotificationAdapter(options);

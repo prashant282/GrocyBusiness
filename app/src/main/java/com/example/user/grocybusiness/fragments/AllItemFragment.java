@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.AllItemAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.google.firebase.firestore.DocumentReference;
@@ -51,7 +52,8 @@ public class AllItemFragment extends Fragment {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+
+        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
         Query query = documentReference.collection("Items");
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
