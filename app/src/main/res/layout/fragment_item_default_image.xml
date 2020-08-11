@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ItemDefaultImageFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                    <ImageButton
+                        android:id="@+id/img_1"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/apple"
+                        android:background="#ffffff"
+                        android:layout_gravity="center"
+                        android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginStart="30dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                <ImageButton
+                    android:id="@+id/img_2"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/banana"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                    <ImageButton
+                        android:id="@+id/img_3"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/orange"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginStart="30dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                    <ImageButton
+                        android:id="@+id/img_4"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/mango"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                    <ImageButton
+                        android:id="@+id/img_5"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/pineapple"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:strokeWidth="0.5dp"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginStart="30dp"
+                    app:strokeColor="@color/colorPrimary">
+
+                    <ImageButton
+                        android:id="@+id/img_6"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/pomegranate"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:scaleType="centerInside"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reg_next"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Add image"
+                android:enabled="false"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="12dp"
+                app:cornerRadius="8dp"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>
