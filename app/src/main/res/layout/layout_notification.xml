@@ -60,9 +60,8 @@
                 android:layout_height="50dp"
                 app:cardCornerRadius="8dp"
                 app:strokeColor="@color/colorPrimaryDark"
-                android:layout_marginStart="10dp"
                 app:strokeWidth="0.2dp"
-                >
+                android:layout_marginStart="10dp">
 
                 <ImageView
                     android:id="@+id/user_img"
