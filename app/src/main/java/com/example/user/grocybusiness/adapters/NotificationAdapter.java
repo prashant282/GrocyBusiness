@@ -1,6 +1,5 @@
 package com.example.user.grocybusiness.adapters;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.models.NotificationModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -21,14 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.HashMap;
-import java.util.Objects;
 
 public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationModel, NotificationAdapter.MyViewHolder> {
     /**
@@ -98,7 +94,7 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                             documentReference1.collection("MyOrders").document(queryDocumentSnapshots.getDocuments().get(0).getId())
-                                    .set(documentSnapshot).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    .set(documentSnapshot.getData()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(holder.acceptButton.getContext(), "Order Accepted Successfully", Toast.LENGTH_SHORT).show();
