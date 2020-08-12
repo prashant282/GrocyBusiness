@@ -1,10 +1,14 @@
 package com.example.user.grocybusiness.models;
 
+import java.util.ArrayList;
+
 public class ItemModel {
     String itemsProductName, itemsProductDescription, itemsPrice, itemsImage, itemsQuantity;
     Boolean inStock;
 
     String itemId;
+
+    ArrayList<ItemVariantsModel> itemVariants;
 
 
     public ItemModel() {
@@ -73,5 +77,13 @@ public class ItemModel {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public ArrayList<ItemVariantsModel> getItemVariants() {
+        return itemVariants;
+    }
+
+    public void setItemVariants(ArrayList<ItemVariantsModel> itemVariants) {
+        this.itemVariants = itemVariants;
     }
 }

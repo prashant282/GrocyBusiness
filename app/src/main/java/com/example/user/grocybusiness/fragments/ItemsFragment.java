@@ -87,6 +87,7 @@ public class ItemsFragment extends Fragment {
         itemViewPagerAdapter.addFragment(allItemFragment,"All Items");
         itemViewPagerAdapter.addFragment(outOfStockItemFragment,"Out Of Stock");
         viewPager.setAdapter(itemViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(5);
 
 
 
