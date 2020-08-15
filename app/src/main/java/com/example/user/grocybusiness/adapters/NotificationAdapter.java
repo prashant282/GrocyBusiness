@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -93,8 +94,11 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
 
+                            HashMap<String, Object> hm = new HashMap();
+                            hm = (HashMap<String, Object>) documentSnapshot.getData();
+                            hm.put("orderStatus", "Under Packaging");
                             documentReference1.collection("MyOrders").document(queryDocumentSnapshots.getDocuments().get(0).getId())
-                                    .set(documentSnapshot.getData()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    .set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(holder.acceptButton.getContext(), "Order Accepted Successfully", Toast.LENGTH_SHORT).show();

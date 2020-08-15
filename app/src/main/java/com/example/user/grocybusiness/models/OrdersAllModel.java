@@ -16,6 +16,7 @@ public class OrdersAllModel {
     String deliveryBoyRemainingTime;
     String deliveryOTP;
     String changeOrderState;
+    String orderDocumentId;
 
     public OrdersAllModel() {
 
@@ -148,5 +149,13 @@ public class OrdersAllModel {
 
     public void setChangeOrderState(String changeOrderState) {
         this.changeOrderState = changeOrderState;
+    }
+
+    public String getOrderDocumentId() {
+        return orderDocumentId;
+    }
+
+    public void setOrderDocumentId(String orderDocumentId) {
+        this.orderDocumentId = orderDocumentId;
     }
 }

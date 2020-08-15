@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.adapters.OrdersAllAdapter;
+import com.example.user.grocybusiness.adapters.OrdersPickedAdapter;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderPickedFragment extends Fragment {
 
     RecyclerView ordersPickedRecycler;
-    OrdersAllAdapter ordersAllAdapter;
+    public static OrdersPickedAdapter ordersPickedAdapter;
 
     ArrayList<OrdersAllModel> arrayList;
 
@@ -40,24 +40,23 @@ public class OrderPickedFragment extends Fragment {
     }
 
     private void setAdapter(View view) {
-        arrayList = new ArrayList();
         ordersPickedRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 
         ordersPickedRecycler.setHasFixedSize(false);
 
-        ordersAllAdapter = new OrdersAllAdapter(view.getContext(), arrayList);
+        ordersPickedAdapter = new OrdersPickedAdapter(view.getContext(), OrdersFragment.arrayList);
 
-        ordersPickedRecycler.setAdapter(ordersAllAdapter);
+        ordersPickedRecycler.setAdapter(ordersPickedAdapter);
 
-        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
-            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
-            if (ordersAllModel.getOrderStatus().equals("Picked")) {
-                arrayList.add(ordersAllModel);
-            }
-        }
+//        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
+//            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
+//            if (ordersAllModel.getOrderStatus().equals("Picked")) {
+//                arrayList.add(ordersAllModel);
+//            }
+//        }
 
 
-        ordersAllAdapter.notifyDataSetChanged();
+        ordersPickedAdapter.notifyDataSetChanged();
 
     }
 

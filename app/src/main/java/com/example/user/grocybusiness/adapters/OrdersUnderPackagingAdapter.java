@@ -6,14 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.fragments.OrderAllFragment;
 import com.example.user.grocybusiness.fragments.OrderDeliveredFragment;
 import com.example.user.grocybusiness.fragments.OrderPickedFragment;
 import com.example.user.grocybusiness.fragments.OrderReadyFragment;
-import com.example.user.grocybusiness.fragments.OrderUnderPackagingFragment;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,90 +26,81 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.OrdersAllViewHolder> {
+public class OrdersUnderPackagingAdapter extends RecyclerView.Adapter<OrdersUnderPackagingAdapter.OrdersUnderPackagingViewHolder> {
 
     Context context;
     ArrayList<OrdersAllModel> orders_list;
 
-    public OrdersAllAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
+    public OrdersUnderPackagingAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;
         this.orders_list = orders_list;
     }
 
     @NonNull
     @Override
-    public OrdersAllViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrdersUnderPackagingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_detail, parent, false);
-        return new OrdersAllViewHolder(view);
+        return new OrdersUnderPackagingViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrdersUnderPackagingViewHolder holder, int position) {
 
         OrdersAllModel ordersAllModel = orders_list.get(position);
+
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        holder.orderId.setText(ordersAllModel.getOrderId());
-        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
-        String orderDate = orderDateTime[0];
-        String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
-        holder.orderTime.setText(orderTime);
-        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
-        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+        if (ordersAllModel.getOrderStatus().equals("Under Packaging")) {
+            holder.orderId.setText(ordersAllModel.getOrderId());
+            String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+            String orderDate = orderDateTime[0];
+            String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
+            holder.orderTime.setText(orderTime);
+            holder.orderStatus.setText(ordersAllModel.getOrderStatus());
+            holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
 //        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
 //        holder.orderDetails.setText(ordersAllModel.getOrderId());
-        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+            holder.orderPrice.setText(ordersAllModel.getOrderPrice());
 //        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
-        holder.deliveryImage.setImageResource(R.drawable.user_profile);
+            holder.deliveryImage.setImageResource(R.drawable.user_profile);
 //        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
 //        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
-        String order_status = ordersAllModel.getOrderStatus();
-        if (order_status.equals("Delivered")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Already Delivered");
-        } else if (order_status.equals("Picked")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Order will delivered Soon");
-        } else if (order_status.equals("Ready")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Waiting for Pickup");
-        } else if (order_status.equals("Under Packaging")) {
+            String order_status = ordersAllModel.getOrderStatus();
             holder.changeOrderState.setText("Mark Order Ready");
+        } else {
+            holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         }
 
         holder.changeOrderState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (order_status.equals("Under Packaging")) {
-                    holder.changeOrderState.setEnabled(false);
-                    holder.changeOrderState.setText("Waiting for Pickup");
-                    firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
-                            .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ordersAllModel.setOrderStatus("Ready");
-                            notifyItemChanged(position);
-                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
-                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
-                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                            holder.changeOrderState.setEnabled(true);
-                            holder.changeOrderState.setText("Mark Order Ready");
-                        }
-                    });
-                }
+                holder.changeOrderState.setEnabled(false);
+                holder.changeOrderState.setText("Ready");
+                firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
+                        .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        ordersAllModel.setOrderStatus("Waiting for Pickup");
+                        notifyItemChanged(position);
+                        OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
+                        OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
+                        OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
+                        OrderAllFragment.ordersAllAdapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                        holder.changeOrderState.setEnabled(true);
+                        holder.changeOrderState.setText("Mark Order Ready");
+                    }
+                });
             }
         });
-
 
     }
 
@@ -117,7 +109,7 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
         return orders_list.size();
     }
 
-    public class OrdersAllViewHolder extends RecyclerView.ViewHolder {
+    public class OrdersUnderPackagingViewHolder extends RecyclerView.ViewHolder {
         TextView orderId;
         TextView orderTime;
         TextView orderStatus;
@@ -133,7 +125,7 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
         TextView deliveryOTP;
         Button changeOrderState;
 
-        public OrdersAllViewHolder(@NonNull View itemView) {
+        public OrdersUnderPackagingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             orderId = itemView.findViewById(R.id.order_id);

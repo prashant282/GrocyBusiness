@@ -6,10 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.adapters.OrdersAllAdapter;
-import com.example.user.grocybusiness.models.OrdersAllModel;
-
-import java.util.ArrayList;
+import com.example.user.grocybusiness.adapters.OrdersDeliveredAdapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,9 +16,9 @@ public class OrderDeliveredFragment extends Fragment {
 
 
     RecyclerView ordersDeliveredRecycler;
-    OrdersAllAdapter ordersAllAdapter;
+    public static OrdersDeliveredAdapter ordersDeliveredAdapter;
 
-    ArrayList<OrdersAllModel> arrayList;
+//    ArrayList<OrdersAllModel> arrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,24 +38,23 @@ public class OrderDeliveredFragment extends Fragment {
     }
 
     private void setAdapter(View view) {
-        arrayList = new ArrayList();
         ordersDeliveredRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 
         ordersDeliveredRecycler.setHasFixedSize(false);
 
-        ordersAllAdapter = new OrdersAllAdapter(view.getContext(), arrayList);
+        ordersDeliveredAdapter = new OrdersDeliveredAdapter(view.getContext(), OrdersFragment.arrayList);
 
-        ordersDeliveredRecycler.setAdapter(ordersAllAdapter);
+        ordersDeliveredRecycler.setAdapter(ordersDeliveredAdapter);
 
-        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
-            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
-            if (ordersAllModel.getOrderStatus().equals("Delivered")) {
-                arrayList.add(ordersAllModel);
-            }
-        }
+//        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
+//            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
+//            if (ordersAllModel.getOrderStatus().equals("Delivered")) {
+//                OrdersFragment.arrayList.add(ordersAllModel);
+//            }
+//        }
 
 
-        ordersAllAdapter.notifyDataSetChanged();
+        ordersDeliveredAdapter.notifyDataSetChanged();
 
     }
 

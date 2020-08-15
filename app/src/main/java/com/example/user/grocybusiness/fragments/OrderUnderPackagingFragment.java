@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.adapters.OrdersAllAdapter;
+import com.example.user.grocybusiness.adapters.OrdersUnderPackagingAdapter;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderUnderPackagingFragment extends Fragment {
 
     RecyclerView ordersUnderPackagingRecycler;
-    OrdersAllAdapter ordersAllAdapter;
+    public static OrdersUnderPackagingAdapter ordersUnderPackagingAdapter;
 
     ArrayList<OrdersAllModel> arrayList;
 
@@ -43,25 +43,24 @@ public class OrderUnderPackagingFragment extends Fragment {
 
 
     private void setAdapter(View view) {
-        arrayList = new ArrayList();
 
         ordersUnderPackagingRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 
         ordersUnderPackagingRecycler.setHasFixedSize(false);
 
-        ordersAllAdapter = new OrdersAllAdapter(view.getContext(), arrayList);
+        ordersUnderPackagingAdapter = new OrdersUnderPackagingAdapter(view.getContext(), OrdersFragment.arrayList);
 
-        ordersUnderPackagingRecycler.setAdapter(ordersAllAdapter);
+        ordersUnderPackagingRecycler.setAdapter(ordersUnderPackagingAdapter);
 
-        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
-            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
-            if (ordersAllModel.getOrderStatus().equals("Under Packaging")) {
-                arrayList.add(ordersAllModel);
-            }
-        }
+//        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
+//            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
+//            if (ordersAllModel.getOrderStatus().equals("Under Packaging")) {
+//                arrayList.add(ordersAllModel);
+//            }
+//        }
 
 
-        ordersAllAdapter.notifyDataSetChanged();
+        ordersUnderPackagingAdapter.notifyDataSetChanged();
 
     }
 

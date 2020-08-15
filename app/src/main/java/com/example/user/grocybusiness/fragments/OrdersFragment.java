@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 public class OrdersFragment extends Fragment {
-    public static ArrayList<OrdersAllModel> arrayList;
+    public static ArrayList<OrdersAllModel> arrayList = new ArrayList();
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ArrayList<Fragment> orderTypeFragments = new ArrayList();
@@ -65,23 +65,11 @@ public class OrdersFragment extends Fragment {
             orderViewPagerAdapter.addFragment(orderTypeFragments.get(i), titles.get(i));
         }
         viewPager.setAdapter(orderViewPagerAdapter);
-
-        getData();
+        viewPager.setOffscreenPageLimit(6);
 
         return view;
     }
 
-    private void getData() {
-
-        arrayList = new ArrayList();
-        OrdersAllModel ordersAllModel = new OrdersAllModel("92716388376", "8:46 PM", "Ready", "Prashant's 3rd Order", "18:27", "Order Details", "485.74", "Paid", "Image url", "Nikhil", " is arriving in ", "16 mins", "627848", "Mark order Picked");
-        arrayList.add(ordersAllModel);
-        ordersAllModel = new OrdersAllModel("72638827368", "4:23 PM", "Under Packaging", "Utkarsh's 1st Order", "26:64", "Order Details", "247.82", "Unpaid", "Image url", "Raghu", " is arriving in ", "6 mins", "277268", "Mark order Ready");
-        arrayList.add(ordersAllModel);
-        ordersAllModel = new OrdersAllModel("4787863872", "10:28 PM", "Delivered", "Tapan's 8th Order", "08:06", "Order Details", "72.85", "Paid", "Image url", "Shivam", " is arriving in ", "2 mins", "276372", "Already Delivered");
-        arrayList.add(ordersAllModel);
-
-    }
 
 
 }
