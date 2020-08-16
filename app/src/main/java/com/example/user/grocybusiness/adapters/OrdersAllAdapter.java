@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.OrdersAllViewHolder> {
 
     Context context;
-    ArrayList<OrdersAllModel> orders_list;
+    public static ArrayList<OrdersAllModel> orders_list;
 
     public OrdersAllAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;

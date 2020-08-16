@@ -55,7 +55,7 @@ public class OrderReadyFragment extends Fragment {
 //        }
 
 
-        ordersReadyAdapter.notifyDataSetChanged();
+//        ordersReadyAdapter.notifyDataSetChanged();
 
     }
 

@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersReadyAdapter extends RecyclerView.Adapter<OrdersReadyAdapter.OrdersReadyViewHolder> {
 
     Context context;
-    ArrayList<OrdersAllModel> orders_list;
+    public static ArrayList<OrdersAllModel> orders_list;
 
     public OrdersReadyAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;

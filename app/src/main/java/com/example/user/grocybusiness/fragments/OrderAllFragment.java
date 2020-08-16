@@ -97,12 +97,16 @@ public class OrderAllFragment extends Fragment {
             OrdersFragment.arrayList.add(ordersAllModel);
 
         }
+        OrderUnderPackagingFragment.ordersUnderPackagingAdapter.orders_list = OrdersFragment.arrayList;
+        OrderDeliveredFragment.ordersDeliveredAdapter.orders_list = OrdersFragment.arrayList;
+        OrderPickedFragment.ordersPickedAdapter.orders_list = OrdersFragment.arrayList;
+        OrderReadyFragment.ordersReadyAdapter.orders_list = OrdersFragment.arrayList;
 
 
         ordersAllAdapter.notifyDataSetChanged();
+        OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
         OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
         OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
         OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-        OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
     }
 }

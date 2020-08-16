@@ -54,7 +54,7 @@ public class OrderDeliveredFragment extends Fragment {
 //        }
 
 
-        ordersDeliveredAdapter.notifyDataSetChanged();
+//        ordersDeliveredAdapter.notifyDataSetChanged();
 
     }
 

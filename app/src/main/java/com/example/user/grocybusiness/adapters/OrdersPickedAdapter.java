@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersPickedAdapter extends RecyclerView.Adapter<OrdersPickedAdapter.OrdersPickedViewHolder> {
 
     Context context;
-    ArrayList<OrdersAllModel> orders_list;
+    public static ArrayList<OrdersAllModel> orders_list;
 
     public OrdersPickedAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;

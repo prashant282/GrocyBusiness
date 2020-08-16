@@ -29,7 +29,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersUnderPackagingAdapter extends RecyclerView.Adapter<OrdersUnderPackagingAdapter.OrdersUnderPackagingViewHolder> {
 
     Context context;
-    ArrayList<OrdersAllModel> orders_list;
+    public static ArrayList<OrdersAllModel> orders_list = new ArrayList();
+
+    public OrdersUnderPackagingAdapter(Context context) {
+        this.context = context;
+    }
 
     public OrdersUnderPackagingAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;

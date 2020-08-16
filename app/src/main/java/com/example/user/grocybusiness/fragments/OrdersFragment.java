@@ -65,7 +65,7 @@ public class OrdersFragment extends Fragment {
             orderViewPagerAdapter.addFragment(orderTypeFragments.get(i), titles.get(i));
         }
         viewPager.setAdapter(orderViewPagerAdapter);
-        viewPager.setOffscreenPageLimit(6);
+        viewPager.setOffscreenPageLimit(5);
 
         return view;
     }

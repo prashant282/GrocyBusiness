@@ -60,7 +60,7 @@ public class OrderUnderPackagingFragment extends Fragment {
 //        }
 
 
-        ordersUnderPackagingAdapter.notifyDataSetChanged();
+//        ordersUnderPackagingAdapter.notifyDataSetChanged();
 
     }
 
