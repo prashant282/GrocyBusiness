@@ -4,13 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.OrdersPickedAdapter;
 import com.example.user.grocybusiness.models.OrdersAllModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +31,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrderPickedFragment extends Fragment {
 
     RecyclerView ordersPickedRecycler;
-    public static OrdersPickedAdapter ordersPickedAdapter;
+    OrdersPickedAdapter ordersPickedAdapter;
+    HashMap<String, Object> order_data = new HashMap();
 
-    ArrayList<OrdersAllModel> arrayList;
+    ArrayList<OrdersAllModel> arrayList = new ArrayList();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,29 +48,59 @@ public class OrderPickedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_picked, container, false);
 
         ordersPickedRecycler = view.findViewById(R.id.recyclerview_orders_picked);
-        setAdapter(view);
+
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        CollectionReference collectionReference = firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders");
+
+        Query query = collectionReference.whereEqualTo("shopId", MainActivity.selectedShop)
+                .whereEqualTo("orderStatus", "Picked");
+        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    for (DocumentSnapshot document : value.getDocuments()) {
+                        order_data.put(document.getId(), document.getData());
+                    }
+                    setAdapter(view);
+                }
+            }
+        });
+
 
         return view;
     }
 
     private void setAdapter(View view) {
+        arrayList = new ArrayList();
         ordersPickedRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 
         ordersPickedRecycler.setHasFixedSize(false);
 
-        ordersPickedAdapter = new OrdersPickedAdapter(view.getContext(), OrdersFragment.arrayList);
+        ordersPickedAdapter = new OrdersPickedAdapter(view.getContext(), arrayList);
 
         ordersPickedRecycler.setAdapter(ordersPickedAdapter);
 
-//        for (int i = 0; i < OrdersFragment.arrayList.size(); i++) {
-//            OrdersAllModel ordersAllModel = OrdersFragment.arrayList.get(i);
-//            if (ordersAllModel.getOrderStatus().equals("Picked")) {
-//                arrayList.add(ordersAllModel);
-//            }
-//        }
+        for (Map.Entry mapElement : order_data.entrySet()) {
+            String key = (String) mapElement.getKey();
+            HashMap<String, Object> value = (HashMap<String, Object>) mapElement.getValue();
+
+            OrdersAllModel ordersAllModel = new OrdersAllModel();
+            ordersAllModel.setOrderId((String) value.get("orderNumberId"));
+            ordersAllModel.setOrderTime((String) value.get("dateTime"));
+            ordersAllModel.setOrderStatus((String) value.get("orderStatus"));
+            ordersAllModel.setUserDetails((String) value.get("userName"));
+            ordersAllModel.setOrderPrice("" + value.get("orderAmount"));
+            ordersAllModel.setOrderDocumentId(key);
+            arrayList.add(ordersAllModel);
+
+        }
 
 
-//        ordersPickedAdapter.notifyDataSetChanged();
+        ordersPickedAdapter.notifyDataSetChanged();
 
     }
 

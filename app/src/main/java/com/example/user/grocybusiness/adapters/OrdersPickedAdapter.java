@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.grocybusiness.R;
@@ -20,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersPickedAdapter extends RecyclerView.Adapter<OrdersPickedAdapter.OrdersPickedViewHolder> {
 
     Context context;
-    public static ArrayList<OrdersAllModel> orders_list;
+    ArrayList<OrdersAllModel> orders_list;
 
     public OrdersPickedAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;
@@ -40,30 +39,25 @@ public class OrdersPickedAdapter extends RecyclerView.Adapter<OrdersPickedAdapte
 
         OrdersAllModel ordersAllModel = orders_list.get(position);
 
-        if (ordersAllModel.getOrderStatus().equals("Picked")) {
-            holder.orderId.setText(ordersAllModel.getOrderId());
-            String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
-            String orderDate = orderDateTime[0];
-            String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
-            holder.orderTime.setText(orderTime);
-            holder.orderStatus.setText(ordersAllModel.getOrderStatus());
-            holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+        holder.orderId.setText(ordersAllModel.getOrderId());
+        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+        String orderDate = orderDateTime[0];
+        String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
+        holder.orderTime.setText(orderTime);
+        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
+        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
 //        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
 //        holder.orderDetails.setText(ordersAllModel.getOrderId());
-            holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
 //        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
-            holder.deliveryImage.setImageResource(R.drawable.user_profile);
+        holder.deliveryImage.setImageResource(R.drawable.user_profile);
 //        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
 //        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
-            String order_status = ordersAllModel.getOrderStatus();
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Order will delivered Soon");
-        } else {
-            holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-        }
-
+        String order_status = ordersAllModel.getOrderStatus();
+        holder.changeOrderState.setEnabled(false);
+        holder.changeOrderState.setText("Order will delivered Soon");
 
     }
 

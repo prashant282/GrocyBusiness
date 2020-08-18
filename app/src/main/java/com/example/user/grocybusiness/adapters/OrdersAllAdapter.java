@@ -10,10 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.fragments.OrderDeliveredFragment;
-import com.example.user.grocybusiness.fragments.OrderPickedFragment;
-import com.example.user.grocybusiness.fragments.OrderReadyFragment;
-import com.example.user.grocybusiness.fragments.OrderUnderPackagingFragment;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.OrdersAllViewHolder> {
 
     Context context;
-    public static ArrayList<OrdersAllModel> orders_list;
+    ArrayList<OrdersAllModel> orders_list;
 
     public OrdersAllAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
         this.context = context;
@@ -92,10 +88,10 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
                         public void onSuccess(Void aVoid) {
                             ordersAllModel.setOrderStatus("Ready");
                             notifyItemChanged(position);
-                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
-                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
-                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
+//                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
+//                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
+//                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
+//                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

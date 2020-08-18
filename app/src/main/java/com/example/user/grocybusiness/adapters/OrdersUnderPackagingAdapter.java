@@ -11,10 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.fragments.OrderAllFragment;
-import com.example.user.grocybusiness.fragments.OrderDeliveredFragment;
-import com.example.user.grocybusiness.fragments.OrderPickedFragment;
-import com.example.user.grocybusiness.fragments.OrderReadyFragment;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OrdersUnderPackagingAdapter extends RecyclerView.Adapter<OrdersUnderPackagingAdapter.OrdersUnderPackagingViewHolder> {
 
     Context context;
-    public static ArrayList<OrdersAllModel> orders_list = new ArrayList();
+    ArrayList<OrdersAllModel> orders_list = new ArrayList();
 
     public OrdersUnderPackagingAdapter(Context context) {
         this.context = context;
@@ -73,7 +69,6 @@ public class OrdersUnderPackagingAdapter extends RecyclerView.Adapter<OrdersUnde
 //        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
-            String order_status = ordersAllModel.getOrderStatus();
             holder.changeOrderState.setText("Mark Order Ready");
         } else {
             holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
@@ -83,17 +78,13 @@ public class OrdersUnderPackagingAdapter extends RecyclerView.Adapter<OrdersUnde
             @Override
             public void onClick(View v) {
                 holder.changeOrderState.setEnabled(false);
-                holder.changeOrderState.setText("Ready");
+                holder.changeOrderState.setText("Waiting for Pickup");
                 firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
                         .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        ordersAllModel.setOrderStatus("Waiting for Pickup");
+                        ordersAllModel.setOrderStatus("Ready");
                         notifyItemChanged(position);
-                        OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
-                        OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
-                        OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-                        OrderAllFragment.ordersAllAdapter.notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
