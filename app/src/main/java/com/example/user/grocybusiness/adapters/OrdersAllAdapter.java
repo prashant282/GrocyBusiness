@@ -1,6 +1,5 @@
 package com.example.user.grocybusiness.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +10,28 @@ import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.models.OrdersAllModel;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.OrdersAllViewHolder> {
+public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, OrdersAllAdapter.OrdersAllViewHolder> {
 
-    Context context;
-    ArrayList<OrdersAllModel> orders_list;
-
-    public OrdersAllAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
-        this.context = context;
-        this.orders_list = orders_list;
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public OrdersAllAdapter(@NonNull FirestoreRecyclerOptions<OrdersAllModel> options) {
+        super(options);
     }
+
 
     @NonNull
     @Override
@@ -38,31 +40,99 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_detail, parent, false);
         return new OrdersAllViewHolder(view);
     }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position) {
+//
+//        OrdersAllModel ordersAllModel = orders_list.get(position);
+//        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//
+//        holder.orderId.setText(ordersAllModel.getOrderId());
+//        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+//        String orderDate = orderDateTime[0];
+//        String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
+//        holder.orderTime.setText(orderTime);
+//        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
+//        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+////        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
+////        holder.orderDetails.setText(ordersAllModel.getOrderId());
+//        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+////        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
+//        holder.deliveryImage.setImageResource(R.drawable.user_profile);
+////        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
+////        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
+////        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
+////        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
+//        String order_status = ordersAllModel.getOrderStatus();
+//        if (order_status.equals("Delivered")) {
+//            holder.changeOrderState.setEnabled(false);
+//            holder.changeOrderState.setText("Already Delivered");
+//        } else if (order_status.equals("Picked")) {
+//            holder.changeOrderState.setEnabled(false);
+//            holder.changeOrderState.setText("Order will delivered Soon");
+//        } else if (order_status.equals("Ready")) {
+//            holder.changeOrderState.setEnabled(false);
+//            holder.changeOrderState.setText("Waiting for Pickup");
+//        } else if (order_status.equals("Under Packaging")) {
+//            holder.changeOrderState.setText("Mark Order Ready");
+//        }
+//
+//        holder.changeOrderState.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (order_status.equals("Under Packaging")) {
+//                    holder.changeOrderState.setEnabled(false);
+//                    holder.changeOrderState.setText("Waiting for Pickup");
+//                    firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
+//                            .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            ordersAllModel.setOrderStatus("Ready");
+//                            notifyItemChanged(position);
+////                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
+////                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
+////                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
+////                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+//                            holder.changeOrderState.setEnabled(true);
+//                            holder.changeOrderState.setText("Mark Order Ready");
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//
+//
+//    }
 
     @Override
-    public void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position) {
+    protected void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position, @NonNull OrdersAllModel model) {
 
-        OrdersAllModel ordersAllModel = orders_list.get(position);
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        holder.orderId.setText(ordersAllModel.getOrderId());
-        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+        holder.orderId.setText(model.getOrderNumberId());
+        String[] orderDateTime = model.getDateTime().split(" ");
         String orderDate = orderDateTime[0];
         String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
         holder.orderTime.setText(orderTime);
-        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
-        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+        holder.orderStatus.setText(model.getOrderStatus());
+        holder.userDetails.setText(model.getUserName().split(" ")[0] + "'s Order");
 //        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
 //        holder.orderDetails.setText(ordersAllModel.getOrderId());
-        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+        holder.orderPrice.setText("" + model.getOrderAmount());
 //        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
         holder.deliveryImage.setImageResource(R.drawable.user_profile);
 //        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
 //        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
-        String order_status = ordersAllModel.getOrderStatus();
+        String order_status = model.getOrderStatus();
         if (order_status.equals("Delivered")) {
             holder.changeOrderState.setEnabled(false);
             holder.changeOrderState.setText("Already Delivered");
@@ -73,6 +143,7 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
             holder.changeOrderState.setEnabled(false);
             holder.changeOrderState.setText("Waiting for Pickup");
         } else if (order_status.equals("Under Packaging")) {
+            holder.changeOrderState.setEnabled(true);
             holder.changeOrderState.setText("Mark Order Ready");
         }
 
@@ -83,20 +154,16 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
                     holder.changeOrderState.setEnabled(false);
                     holder.changeOrderState.setText("Waiting for Pickup");
                     firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
-                            .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
+                            .document(model.getOrderId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            ordersAllModel.setOrderStatus("Ready");
+                            model.setOrderStatus("Ready");
                             notifyItemChanged(position);
-//                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
-//                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
-//                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-//                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(holder.changeOrderState.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             holder.changeOrderState.setEnabled(true);
                             holder.changeOrderState.setText("Mark Order Ready");
                         }
@@ -108,9 +175,10 @@ public class OrdersAllAdapter extends RecyclerView.Adapter<OrdersAllAdapter.Orde
 
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return orders_list.size();
+    public OrdersAllModel getItem(int position) {
+        return super.getItem(position);
     }
 
     public class OrdersAllViewHolder extends RecyclerView.ViewHolder {

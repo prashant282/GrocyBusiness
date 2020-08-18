@@ -1,6 +1,5 @@
 package com.example.user.grocybusiness.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +9,23 @@ import android.widget.TextView;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.models.OrdersAllModel;
-
-import java.util.ArrayList;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OrdersDeliveredAdapter extends RecyclerView.Adapter<OrdersDeliveredAdapter.OrdersDeliveredViewHolder> {
+public class OrdersDeliveredAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, OrdersDeliveredAdapter.OrdersDeliveredViewHolder> {
 
-    Context context;
-    ArrayList<OrdersAllModel> orders_list;
 
-    public OrdersDeliveredAdapter(Context context, ArrayList<OrdersAllModel> orders_list) {
-        this.context = context;
-        this.orders_list = orders_list;
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public OrdersDeliveredAdapter(@NonNull FirestoreRecyclerOptions<OrdersAllModel> options) {
+        super(options);
     }
 
     @NonNull
@@ -34,36 +36,61 @@ public class OrdersDeliveredAdapter extends RecyclerView.Adapter<OrdersDelivered
         return new OrdersDeliveredViewHolder(view);
     }
 
+//    @Override
+//    public void onBindViewHolder(@NonNull OrdersDeliveredViewHolder holder, int position) {
+//
+//        OrdersAllModel ordersAllModel = orders_list.get(position);
+//
+//        holder.orderId.setText(ordersAllModel.getOrderId());
+//        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+//        String orderDate = orderDateTime[0];
+//        String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
+//        holder.orderTime.setText(orderTime);
+//        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
+//        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+////        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
+////        holder.orderDetails.setText(ordersAllModel.getOrderId());
+//        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+////        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
+//        holder.deliveryImage.setImageResource(R.drawable.user_profile);
+////        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
+////        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
+////        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
+////        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
+//        String order_status = ordersAllModel.getOrderStatus();
+//        holder.changeOrderState.setEnabled(false);
+//        holder.changeOrderState.setText("Already Delivered");
+//
+//    }
+
     @Override
-    public void onBindViewHolder(@NonNull OrdersDeliveredViewHolder holder, int position) {
+    protected void onBindViewHolder(@NonNull OrdersDeliveredViewHolder holder, int position, @NonNull OrdersAllModel model) {
 
-        OrdersAllModel ordersAllModel = orders_list.get(position);
-
-        holder.orderId.setText(ordersAllModel.getOrderId());
-        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
+        holder.orderId.setText(model.getOrderNumberId());
+        String[] orderDateTime = model.getDateTime().split(" ");
         String orderDate = orderDateTime[0];
         String orderTime = orderDateTime[1].substring(0, 5) + " " + orderDateTime[2];
         holder.orderTime.setText(orderTime);
-        holder.orderStatus.setText(ordersAllModel.getOrderStatus());
-        holder.userDetails.setText(ordersAllModel.getUserDetails().split(" ")[0] + "'s Order");
+        holder.orderStatus.setText(model.getOrderStatus());
+        holder.userDetails.setText(model.getUserName().split(" ")[0] + "'s Order");
 //        holder.deliveryRemainingTime.setText(ordersAllModel.getDeliveryRemainingTime());
 //        holder.orderDetails.setText(ordersAllModel.getOrderId());
-        holder.orderPrice.setText(ordersAllModel.getOrderPrice());
+        holder.orderPrice.setText("" + model.getOrderAmount());
 //        holder.orderPaymentStatus.setText(ordersAllModel.getOrderPaymentStatus());
         holder.deliveryImage.setImageResource(R.drawable.user_profile);
 //        holder.deliveryName.setText(ordersAllModel.getDeliveryName());
 //        holder.deliveryMsg.setText(ordersAllModel.getDeliveryMsg());
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
-        String order_status = ordersAllModel.getOrderStatus();
+        String order_status = model.getOrderStatus();
         holder.changeOrderState.setEnabled(false);
         holder.changeOrderState.setText("Already Delivered");
-
     }
 
+    @NonNull
     @Override
-    public int getItemCount() {
-        return orders_list.size();
+    public OrdersAllModel getItem(int position) {
+        return super.getItem(position);
     }
 
     public class OrdersDeliveredViewHolder extends RecyclerView.ViewHolder {

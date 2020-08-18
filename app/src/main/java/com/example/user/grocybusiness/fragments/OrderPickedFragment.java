@@ -4,26 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.OrdersPickedAdapter;
 import com.example.user.grocybusiness.models.OrdersAllModel;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,52 +50,58 @@ public class OrderPickedFragment extends Fragment {
 
         Query query = collectionReference.whereEqualTo("shopId", MainActivity.selectedShop)
                 .whereEqualTo("orderStatus", "Picked");
-        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                } else {
-                    for (DocumentSnapshot document : value.getDocuments()) {
-                        order_data.put(document.getId(), document.getData());
-                    }
-                    setAdapter(view);
-                }
-            }
-        });
+        FirestoreRecyclerOptions<OrdersAllModel> options = new FirestoreRecyclerOptions.Builder<OrdersAllModel>()
+                .setQuery(query, OrdersAllModel.class).build();
+        ordersPickedRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        ordersPickedRecycler.setHasFixedSize(false);
+        ordersPickedAdapter = new OrdersPickedAdapter(options);
+        ordersPickedAdapter.notifyDataSetChanged();
+        ordersPickedRecycler.setAdapter(ordersPickedAdapter);
 
 
         return view;
     }
+//
+//    private void setAdapter(View view) {
+//        arrayList = new ArrayList();
+//        ordersPickedRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+//
+//        ordersPickedRecycler.setHasFixedSize(false);
+//
+//        ordersPickedAdapter = new OrdersPickedAdapter(view.getContext(), arrayList);
+//
+//        ordersPickedRecycler.setAdapter(ordersPickedAdapter);
+//
+//        for (Map.Entry mapElement : order_data.entrySet()) {
+//            String key = (String) mapElement.getKey();
+//            HashMap<String, Object> value = (HashMap<String, Object>) mapElement.getValue();
+//
+//            OrdersAllModel ordersAllModel = new OrdersAllModel();
+//            ordersAllModel.setOrderId((String) value.get("orderNumberId"));
+//            ordersAllModel.setOrderTime((String) value.get("dateTime"));
+//            ordersAllModel.setOrderStatus((String) value.get("orderStatus"));
+//            ordersAllModel.setUserDetails((String) value.get("userName"));
+//            ordersAllModel.setOrderPrice("" + value.get("orderAmount"));
+//            ordersAllModel.setOrderDocumentId(key);
+//            arrayList.add(ordersAllModel);
+//
+//        }
+//
+//
+//        ordersPickedAdapter.notifyDataSetChanged();
+//
+//    }
 
-    private void setAdapter(View view) {
-        arrayList = new ArrayList();
-        ordersPickedRecycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+    @Override
+    public void onStart() {
+        super.onStart();
+        ordersPickedAdapter.startListening();
+    }
 
-        ordersPickedRecycler.setHasFixedSize(false);
-
-        ordersPickedAdapter = new OrdersPickedAdapter(view.getContext(), arrayList);
-
-        ordersPickedRecycler.setAdapter(ordersPickedAdapter);
-
-        for (Map.Entry mapElement : order_data.entrySet()) {
-            String key = (String) mapElement.getKey();
-            HashMap<String, Object> value = (HashMap<String, Object>) mapElement.getValue();
-
-            OrdersAllModel ordersAllModel = new OrdersAllModel();
-            ordersAllModel.setOrderId((String) value.get("orderNumberId"));
-            ordersAllModel.setOrderTime((String) value.get("dateTime"));
-            ordersAllModel.setOrderStatus((String) value.get("orderStatus"));
-            ordersAllModel.setUserDetails((String) value.get("userName"));
-            ordersAllModel.setOrderPrice("" + value.get("orderAmount"));
-            ordersAllModel.setOrderDocumentId(key);
-            arrayList.add(ordersAllModel);
-
-        }
-
-
-        ordersPickedAdapter.notifyDataSetChanged();
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        ordersPickedAdapter.stopListening();
     }
 
 }

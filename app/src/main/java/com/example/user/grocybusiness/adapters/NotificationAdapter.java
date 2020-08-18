@@ -97,6 +97,7 @@ public class NotificationAdapter extends FirestoreRecyclerAdapter<NotificationMo
                             HashMap<String, Object> hm = new HashMap();
                             hm = (HashMap<String, Object>) documentSnapshot.getData();
                             hm.put("orderStatus", "Under Packaging");
+                            hm.put("orderId", documentSnapshot.getId());
                             documentReference1.collection("MyOrders").document(queryDocumentSnapshots.getDocuments().get(0).getId())
                                     .set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
