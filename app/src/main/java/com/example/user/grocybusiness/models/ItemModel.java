@@ -1,7 +1,21 @@
 package com.example.user.grocybusiness.models;
 
 public class ItemModel {
-    String itemsProductName, itemsProductDescription, itemsPrice, itemsImage, itemsQuantity;
+    String itemsProductName;
+    String itemsProductDescription;
+    String itemsPrice;
+    String itemsImage;
+    String itemsQuantity;
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
+    }
+
+    String itemCategory;
     Boolean inStock;
 
     String itemId;
@@ -10,13 +24,14 @@ public class ItemModel {
     public ItemModel() {
     }
 
-    public ItemModel(String itemsProductName, String itemsProductDescription, String itemsQuantity, String itemsPrice, String itemsImage, Boolean inStock) {
+    public ItemModel(String itemsProductName, String itemsProductDescription, String itemsQuantity, String itemsPrice, String itemsImage, Boolean inStock, String itemCategory) {
         this.itemsProductName = itemsProductName;
         this.itemsProductDescription = itemsProductDescription;
         this.itemsPrice = itemsPrice;
         this.itemsImage = itemsImage;
         this.itemsQuantity = itemsQuantity;
         this.inStock = inStock;
+        this.itemCategory=itemCategory;
     }
 
     public String getItemsProductName() {

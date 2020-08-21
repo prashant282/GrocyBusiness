@@ -1,4 +1,6 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_all_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,31 +9,47 @@
     android:background="@drawable/round_corner"
     android:layout_marginEnd="10dp"
     android:layout_marginStart="20dp"
+    app:strokeWidth="0.5dp"
+    app:strokeColor="@color/colorPrimary"
     style="@style/Base.CardView"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/item_img"
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="40dp"
             android:layout_height="80dp"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/bhujia"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            app:cardCornerRadius="10dp"
+            app:strokeColor="@color/colorPrimary"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:elevation="10dp"
+            app:strokeWidth="0.2dp">
+
+            <ImageView
+                android:id="@+id/item_img"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:src="@drawable/bhujia"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:contentDescription="@string/item_image" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -40,16 +58,16 @@
                 android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Item Name"
+                android:textSize="17sp"
+                android:text="@string/item_name"
                 android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/item_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Item Description"
+                android:textSize="12sp"
+                android:text="@string/item_description"
                 android:layout_marginTop="2dp"
                 android:maxLines="1"/>
 
@@ -63,16 +81,16 @@
                     android:id="@+id/item_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text="Item Quantity"
+                    android:textSize="12sp"
+                    android:text="@string/item_quantity"
                     android:maxLines="1"/>
 
                 <TextView
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text="gm"
+                    android:textSize="12sp"
+                    android:text="@string/gm"
                     android:maxLines="1"/>
 
             </LinearLayout>
@@ -86,17 +104,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text="₹" />
+                    android:textSize="12sp"
+                    android:text="@string/rupee_symbol" />
 
                 <TextView
                     android:id="@+id/item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:text=" Item Price" />
+                    android:textSize="12sp"
+                    android:text="@string/item_price" />
 
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_variant"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:text="@string/add_variant"
+                app:cornerRadius="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
 
         </LinearLayout>
@@ -104,7 +133,7 @@
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/btn_switch"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"/>
