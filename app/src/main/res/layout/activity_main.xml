@@ -58,6 +58,29 @@
                         android:gravity="center"
                         android:textSize="30sp"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/tool_shop_letter_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/shop_change_back" />
+
+                    <TextView
+                        android:id="@+id/tool_shop_letter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@+id/tool_shop_letter_back"
+                        android:layout_alignTop="@+id/tool_shop_letter_back"
+                        android:layout_alignEnd="@+id/tool_shop_letter_back"
+                        android:layout_alignBottom="@+id/tool_shop_letter_back"
+                        android:paddingStart="10dp"
+                        android:text="A"
+                        android:textAllCaps="true"
+                        android:textColor="#ffffff"
+                        android:textSize="25sp" />
                 </RelativeLayout>
 
             </androidx.appcompat.widget.Toolbar>

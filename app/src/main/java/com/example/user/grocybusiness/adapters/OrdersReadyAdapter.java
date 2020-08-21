@@ -9,17 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.models.OrderItemModel;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, OrdersAllAdapter.OrdersAllViewHolder> {
+public class OrdersReadyAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, OrdersReadyAdapter.OrdersReadyViewHolder> {
+
 
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
@@ -36,25 +32,22 @@ public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, O
      *
      * @param options
      */
-    public OrdersAllAdapter(@NonNull FirestoreRecyclerOptions<OrdersAllModel> options) {
+    public OrdersReadyAdapter(@NonNull FirestoreRecyclerOptions<OrdersAllModel> options) {
         super(options);
     }
 
-
     @NonNull
     @Override
-    public OrdersAllViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrdersReadyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_detail, parent, false);
-        return new OrdersAllViewHolder(view);
+        return new OrdersReadyViewHolder(view);
     }
-//
+
 //    @Override
-//    public void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position) {
+//    public void onBindViewHolder(@NonNull OrdersReadyViewHolder holder, int position) {
 //
 //        OrdersAllModel ordersAllModel = orders_list.get(position);
-//        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-//        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 //
 //        holder.orderId.setText(ordersAllModel.getOrderId());
 //        String[] orderDateTime = ordersAllModel.getOrderTime().split(" ");
@@ -73,56 +66,15 @@ public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, O
 ////        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 ////        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
 //        String order_status = ordersAllModel.getOrderStatus();
-//        if (order_status.equals("Delivered")) {
-//            holder.changeOrderState.setEnabled(false);
-//            holder.changeOrderState.setText("Already Delivered");
-//        } else if (order_status.equals("Picked")) {
-//            holder.changeOrderState.setEnabled(false);
-//            holder.changeOrderState.setText("Order will delivered Soon");
-//        } else if (order_status.equals("Ready")) {
-//            holder.changeOrderState.setEnabled(false);
-//            holder.changeOrderState.setText("Waiting for Pickup");
-//        } else if (order_status.equals("Under Packaging")) {
-//            holder.changeOrderState.setText("Mark Order Ready");
-//        }
-//
-//        holder.changeOrderState.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (order_status.equals("Under Packaging")) {
-//                    holder.changeOrderState.setEnabled(false);
-//                    holder.changeOrderState.setText("Waiting for Pickup");
-//                    firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
-//                            .document(ordersAllModel.getOrderDocumentId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            ordersAllModel.setOrderStatus("Ready");
-//                            notifyItemChanged(position);
-////                            OrderDeliveredFragment.ordersDeliveredAdapter.notifyDataSetChanged();
-////                            OrderPickedFragment.ordersPickedAdapter.notifyDataSetChanged();
-////                            OrderReadyFragment.ordersReadyAdapter.notifyDataSetChanged();
-////                            OrderUnderPackagingFragment.ordersUnderPackagingAdapter.notifyDataSetChanged();
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-//                            holder.changeOrderState.setEnabled(true);
-//                            holder.changeOrderState.setText("Mark Order Ready");
-//                        }
-//                    });
-//                }
-//            }
-//        });
+//        holder.changeOrderState.setEnabled(false);
+//        holder.changeOrderState.setText("Waiting for Pickup");
 //
 //
 //    }
 
     @Override
-    protected void onBindViewHolder(@NonNull OrdersAllViewHolder holder, int position, @NonNull OrdersAllModel model) {
+    protected void onBindViewHolder(@NonNull OrdersReadyViewHolder holder, int position, @NonNull OrdersAllModel model) {
 
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         holder.orderId.setText(model.getOrderNumberId());
         String[] orderDateTime = model.getDateTime().split(" ");
@@ -141,44 +93,8 @@ public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, O
 //        holder.deliveryBoyRemainingTime.setText(ordersAllModel.getDeliveryBoyRemainingTime());
 //        holder.deliveryOTP.setText(ordersAllModel.getDeliveryOTP());
         String order_status = model.getOrderStatus();
-        if (order_status.equals("Delivered")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Already Delivered");
-        } else if (order_status.equals("Picked")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Order will delivered Soon");
-        } else if (order_status.equals("Ready")) {
-            holder.changeOrderState.setEnabled(false);
-            holder.changeOrderState.setText("Waiting for Pickup");
-        } else if (order_status.equals("Under Packaging")) {
-            holder.changeOrderState.setEnabled(true);
-            holder.changeOrderState.setText("Mark Order Ready");
-        }
-
-        holder.changeOrderState.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (order_status.equals("Under Packaging")) {
-                    holder.changeOrderState.setEnabled(false);
-                    holder.changeOrderState.setText("Waiting for Pickup");
-                    firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyOrders")
-                            .document(model.getOrderId()).update("orderStatus", "Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            model.setOrderStatus("Ready");
-                            notifyItemChanged(position);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(holder.changeOrderState.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            holder.changeOrderState.setEnabled(true);
-                            holder.changeOrderState.setText("Mark Order Ready");
-                        }
-                    });
-                }
-            }
-        });
+        holder.changeOrderState.setEnabled(false);
+        holder.changeOrderState.setText("Waiting for Pickup");
 
         holder.orderDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,13 +147,14 @@ public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, O
 
     }
 
+
     @NonNull
     @Override
     public OrdersAllModel getItem(int position) {
         return super.getItem(position);
     }
 
-    public class OrdersAllViewHolder extends RecyclerView.ViewHolder {
+    public class OrdersReadyViewHolder extends RecyclerView.ViewHolder {
         TextView orderId;
         TextView orderTime;
         TextView orderStatus;
@@ -254,7 +171,7 @@ public class OrdersAllAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, O
         Button changeOrderState;
         ViewGroup viewGroup;
 
-        public OrdersAllViewHolder(@NonNull View itemView) {
+        public OrdersReadyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             orderId = itemView.findViewById(R.id.order_id);

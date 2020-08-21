@@ -30,51 +30,49 @@
 <!--    </shape>-->
 <!--</rotate>-->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@android:id/background">
-        <shape
-            android:innerRadius="30dp"
-            android:shape="ring"
-            android:thickness="20dp"
-            android:useLevel="false">
-            <solid android:color="#000000" />
-        </shape>
-    </item>
-    <item android:id="@android:id/progress">
-        <rotate android:toDegrees="360">
-            <shape
-                android:innerRadius="35dp"
-                android:shape="ring"
-                android:thickness="10dp"
-                android:useLevel="false">
-                <gradient
-                    android:endColor="#fffb03"
-                    android:startColor="#00000000"
-                    android:type="sweep" />
-            </shape>
-        </rotate>
-    </item>
-</layer-list>
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item android:id="@android:id/background">-->
+<!--        <shape-->
+<!--            android:innerRadius="80dp"-->
+<!--            android:shape="ring"-->
+<!--            android:thickness="30dp"-->
+<!--            android:useLevel="false">-->
+<!--            <solid android:color="#E9F5FF" />-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item android:id="@android:id/progress">-->
+<!--            <shape-->
+<!--                android:innerRadius="90dp"-->
+<!--                android:shape="ring"-->
+<!--                android:thickness="10dp"-->
+<!--                android:useLevel="false">-->
+<!--                <gradient-->
+<!--                    android:endColor="@color/colorPrimary"-->
+<!--                    android:startColor="@color/colorPrimary"-->
+<!--                    android:type="sweep" />-->
+<!--            </shape>-->
+<!--    </item>-->
+<!--</layer-list>-->
 
-    <!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
-    <!--    <item android:id="@android:id/progress">-->
-    <!--        <rotate android:toDegrees="360">-->
-    <!--            <shape-->
-    <!--                android:shape="ring"-->
-    <!--                android:innerRadius="35dp"-->
-    <!--                android:thickness="10dp">-->
-    <!--                <gradient-->
-    <!--                    android:type="radial"-->
-    <!--                    android:gradientRadius="100"-->
-    <!--                    android:startColor="#dcdc0b"-->
-    <!--                    android:endColor="#00d4ff" />-->
-    <!--            </shape>-->
-    <!--        </rotate>-->
-    <!--    </item>-->
-    <!--    <item android:id="@android:id/background">-->
-    <!--        <shape-->
-    <!--            android:shape="ring"-->
-    <!--            android:innerRadius="30dp"-->
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item android:id="@android:id/progress">-->
+<!--        <rotate android:toDegrees="360">-->
+<!--            <shape-->
+<!--                android:shape="ring"-->
+<!--                android:innerRadius="35dp"-->
+<!--                android:thickness="10dp">-->
+<!--                <gradient-->
+<!--                    android:type="radial"-->
+<!--                    android:gradientRadius="100"-->
+<!--                    android:startColor="#dcdc0b"-->
+<!--                    android:endColor="#00d4ff" />-->
+<!--            </shape>-->
+<!--        </rotate>-->
+<!--    </item>-->
+<!--    <item android:id="@android:id/background">-->
+<!--        <shape-->
+<!--            android:shape="ring"-->
+<!--            android:innerRadius="30dp"-->
     <!--            android:thickness="20dp"-->
     <!--            android:useLevel="false">-->
     <!--            <gradient-->
@@ -89,3 +87,32 @@
     <!--    </item>-->
     <!--</layer-list>-->
 
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="ring"
+            android:thicknessRatio="16"
+            android:useLevel="false">
+
+            <solid android:color="#DDDDDD">
+
+            </solid>
+
+        </shape>
+    </item>
+
+    <item>
+        <rotate
+            android:fromDegrees="270"
+            android:toDegrees="270">
+            <shape
+                android:shape="ring"
+                android:thicknessRatio="16"
+                android:useLevel="true">
+                <solid android:color="@color/colorPrimary">
+
+                </solid>
+            </shape>
+        </rotate>
+    </item>
+</layer-list>
