@@ -160,6 +160,9 @@ package com.example.user.grocybusiness.models;
 //    }
 //}
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class OrdersAllModel {
     String orderId;
     String orderNumberId;
@@ -175,11 +178,12 @@ public class OrdersAllModel {
     String userAddress;
     String userImage;
     String userName;
+    ArrayList<HashMap<String, Object>> items;
 
     public OrdersAllModel() {
     }
 
-    public OrdersAllModel(String orderId, String orderNumberId, String dateTime, double itemAmount, double orderAmount, String orderStatus, String shopId, String shopImage, String shopKeeperId, String shopName, double taxAmount, String userAddress, String userImage, String userName) {
+    public OrdersAllModel(String orderId, String orderNumberId, String dateTime, double itemAmount, double orderAmount, String orderStatus, String shopId, String shopImage, String shopKeeperId, String shopName, double taxAmount, String userAddress, String userImage, String userName, ArrayList<HashMap<String, Object>> items) {
         this.orderId = orderId;
         this.orderNumberId = orderNumberId;
         this.dateTime = dateTime;
@@ -194,6 +198,7 @@ public class OrdersAllModel {
         this.userAddress = userAddress;
         this.userImage = userImage;
         this.userName = userName;
+        this.items = items;
     }
 
     public String getOrderId() {
@@ -308,4 +313,11 @@ public class OrdersAllModel {
         this.userName = userName;
     }
 
+    public ArrayList<HashMap<String, Object>> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<HashMap<String, Object>> items) {
+        this.items = items;
+    }
 }

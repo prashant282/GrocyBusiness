@@ -3,21 +3,29 @@ package com.example.user.grocybusiness.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.adapters.ShopsAdapter;
 import com.example.user.grocybusiness.fragments.AccountFragment;
 import com.example.user.grocybusiness.fragments.ItemsFragment;
 import com.example.user.grocybusiness.fragments.NotificationFragment;
 import com.example.user.grocybusiness.fragments.OrdersFragment;
 import com.example.user.grocybusiness.fragments.SettingFragment;
+import com.example.user.grocybusiness.models.ShopsModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +44,7 @@ import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -43,6 +52,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -62,8 +73,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private OrdersFragment ordersFragment;
     private SettingFragment settingFragment;
     private AccountFragment accountFragment;
+    public static ArrayList<HashMap<String, Object>> shops = new ArrayList();
+    TextView shopLetter;
+    ViewGroup viewGroup;
+    RecyclerView shops_recycler;
+    ShopsAdapter shopsAdapter;
 
     public static ArrayList<String> shopIds = new ArrayList<>();
+    ArrayList<ShopsModel> arrayList = new ArrayList();
     public static String selectedShop = "";
 
     @Override
@@ -90,7 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ordersFragment = new OrdersFragment();
         settingFragment = new SettingFragment();
         accountFragment = new AccountFragment();
-
+        shopLetter = findViewById(R.id.tool_shop_letter);
+        viewGroup = findViewById(R.id.content);
+        shops_recycler = findViewById(R.id.shops_recycler);
 
         View view = navigationView.getHeaderView(0);
         setSupportActionBar(toolbar);
@@ -139,10 +158,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     documentReference.collection("MyShop").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            shopIds = new ArrayList();
+                            shops = new ArrayList();
                             for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                                 shopIds.add(documentSnapshot.getId());
+                                shops.add((HashMap<String, Object>) documentSnapshot.getData());
                             }
-                            selectedShop = shopIds.get(0);
+                            if (selectedShop == "") {
+                                selectedShop = shopIds.get(0);
+                            }
+                            shopLetter.setText("" + shops.get(0).get("shopName").toString());
                             shimmerAnimation.stopShimmer();
                             shimmerAnimation.setVisibility(View.GONE);
                             coordinatorLayout.setVisibility(View.VISIBLE);
@@ -168,6 +193,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 coordinatorLayout.setVisibility(View.VISIBLE);
             }
         });
+
+        shopLetter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View changeShop = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_change_shop_dialog, viewGroup, false);
+
+                shops_recycler = changeShop.findViewById(R.id.shops_recycler);
+                Button add_new_shop = changeShop.findViewById(R.id.add_new_shop);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(changeShop);
+                AlertDialog alertDialog = builder.create();
+                ImageView close_dialog = changeShop.findViewById(R.id.close_dialog);
+                arrayList = new ArrayList();
+
+                for (int i = 0; i < shops.size(); i++) {
+                    HashMap<String, Object> hm = shops.get(i);
+
+                    ShopsModel shopsModel = new ShopsModel();
+                    shopsModel.setShopName((String) hm.get("shopName"));
+                    shopsModel.setShopCategory((String) hm.get("shopCategory"));
+                    shopsModel.setShopCity((String) hm.get("shopCity"));
+                    shopsModel.setShopId((String) shopIds.get(i));
+
+                    arrayList.add(shopsModel);
+
+                }
+
+                shops_recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
+                shops_recycler.setHasFixedSize(false);
+
+                shopsAdapter = new ShopsAdapter(MainActivity.this, arrayList);
+
+                shops_recycler.setAdapter(shopsAdapter);
+
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+
+                close_dialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                add_new_shop.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, AddShopActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+            }
+        });
+
 
         setFragment(ordersFragment);
         bottomNavigationView.setSelectedItemId(R.id.nav_order);

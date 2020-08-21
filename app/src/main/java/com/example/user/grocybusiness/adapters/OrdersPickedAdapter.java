@@ -1,5 +1,8 @@
 package com.example.user.grocybusiness.adapters;
 
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.models.OrderItemModel;
 import com.example.user.grocybusiness.models.OrdersAllModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OrdersPickedAdapter extends FirestoreRecyclerAdapter<OrdersAllModel, OrdersPickedAdapter.OrdersPickedViewHolder> {
@@ -86,6 +94,56 @@ public class OrdersPickedAdapter extends FirestoreRecyclerAdapter<OrdersAllModel
         holder.changeOrderState.setEnabled(false);
         holder.changeOrderState.setText("Order will delivered Soon");
 
+
+        holder.orderDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View orderDetails = LayoutInflater.from(holder.orderDetails.getContext()).inflate(R.layout.layout_order_details_dialog, holder.viewGroup, false);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.orderDetails.getContext());
+
+                builder.setView(orderDetails);
+                AlertDialog alertDialog = builder.create();
+                TextView order_id = orderDetails.findViewById(R.id.order_id);
+                order_id.setText("Order Id: " + model.getOrderNumberId());
+                ImageView close_dialog = orderDetails.findViewById(R.id.close_dialog);
+                close_dialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                RecyclerView orderItemsRecycler = orderDetails.findViewById(R.id.order_items_recycler);
+
+                ArrayList<HashMap<String, Object>> order_items = model.getItems();
+                ArrayList<OrderItemModel> arrayList = new ArrayList();
+                for (int i = 0; i < order_items.size(); i++) {
+                    OrderItemModel orderItemModel = new OrderItemModel();
+                    HashMap<String, Object> hm = order_items.get(i);
+                    orderItemModel.setItemCount((Long) hm.get("itemCount"));
+                    orderItemModel.setItemID((String) hm.get("itemID"));
+                    orderItemModel.setItemsName((String) hm.get("itemsName"));
+                    orderItemModel.setItemsImage((String) hm.get("itemsImage"));
+                    orderItemModel.setItemsPrice((String) hm.get("itemsPrice"));
+                    orderItemModel.setItemsQuantity((String) hm.get("itemsQuantity"));
+                    orderItemModel.setShopId((String) hm.get("shopId"));
+                    orderItemModel.setVariantId((String) hm.get("variantID"));
+                    arrayList.add(orderItemModel);
+                }
+                OrderItemsAdapter orderItemsAdapter = new OrderItemsAdapter(holder.orderDetails.getContext(), arrayList);
+                orderItemsRecycler.setLayoutManager(new LinearLayoutManager(holder.orderDetails.getContext(), LinearLayoutManager.VERTICAL, false));
+                orderItemsRecycler.setHasFixedSize(false);
+                orderItemsRecycler.setAdapter(orderItemsAdapter);
+                orderItemsAdapter.notifyDataSetChanged();
+
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                alertDialog.show();
+
+            }
+        });
+
+
     }
 
     @NonNull
@@ -109,6 +167,7 @@ public class OrdersPickedAdapter extends FirestoreRecyclerAdapter<OrdersAllModel
         TextView deliveryBoyRemainingTime;
         TextView deliveryOTP;
         Button changeOrderState;
+        ViewGroup viewGroup;
 
         public OrdersPickedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -127,6 +186,9 @@ public class OrdersPickedAdapter extends FirestoreRecyclerAdapter<OrdersAllModel
             deliveryBoyRemainingTime = itemView.findViewById(R.id.tv_delivery_boy_time);
             deliveryOTP = itemView.findViewById(R.id.delivery_otp);
             changeOrderState = itemView.findViewById(R.id.change_order_state);
+
+            viewGroup = itemView.findViewById(android.R.id.content);
+
         }
     }
 }
