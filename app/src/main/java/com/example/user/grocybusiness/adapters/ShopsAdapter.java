@@ -43,7 +43,10 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
             @Override
             public void onClick(View v) {
                 MainActivity.selectedShop = shopsModel.getShopId();
+                MainActivity.selectedIndex = position;
                 Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("shopId", shopsModel.getShopId());
+                intent.putExtra("shopIndex", position);
                 context.startActivity(intent);
             }
         });

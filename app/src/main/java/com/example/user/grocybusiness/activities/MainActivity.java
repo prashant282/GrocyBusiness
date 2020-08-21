@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static ArrayList<String> shopIds = new ArrayList<>();
     ArrayList<ShopsModel> arrayList = new ArrayList();
     public static String selectedShop = "";
+    public static int selectedIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
+        if (getIntent().getStringExtra("shopId") != null) {
+            selectedShop = getIntent().getStringExtra("shopId");
+            selectedIndex = getIntent().getIntExtra("shopIndex", 0);
+        }
+
         Query query = db.collection("ShopKeeper").whereEqualTo("pNumber", currentUser.getPhoneNumber());
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -164,10 +170,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 shopIds.add(documentSnapshot.getId());
                                 shops.add((HashMap<String, Object>) documentSnapshot.getData());
                             }
-                            if (selectedShop == "") {
+                            if (selectedShop.equals("") || selectedShop == null) {
                                 selectedShop = shopIds.get(0);
+                                selectedIndex = 0;
                             }
-                            shopLetter.setText("" + shops.get(0).get("shopName").toString());
+                            shopLetter.setText("" + shops.get(selectedIndex).get("shopName").toString());
                             shimmerAnimation.stopShimmer();
                             shimmerAnimation.setVisibility(View.GONE);
                             coordinatorLayout.setVisibility(View.VISIBLE);
