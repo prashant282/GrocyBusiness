@@ -20,11 +20,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.fragments.AllItemFragment;
 import com.example.user.grocybusiness.fragments.ItemCustomImageFragment;
 import com.example.user.grocybusiness.fragments.ItemsFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -51,6 +53,7 @@ public class EditItemActivity extends AppCompatActivity {
     StorageReference storageReference;
     static Map shop=new HashMap<>();
 
+
     ItemsFragment itemsFragment;
 
     @Override
@@ -68,7 +71,10 @@ public class EditItemActivity extends AppCompatActivity {
 
         itemsFragment=new ItemsFragment();
 
+        firebaseStorage=FirebaseStorage.getInstance();
+        storageReference=firebaseStorage.getReference();
         firebaseFirestore=FirebaseFirestore.getInstance();
+
 
         bundle=getIntent().getExtras();
 
@@ -86,6 +92,7 @@ public class EditItemActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             imageView.setImageBitmap(bitmap);
+
 
 
         }
@@ -109,7 +116,11 @@ public class EditItemActivity extends AppCompatActivity {
                 shop.put("itemsProductDescription",itemDes.getText().toString());
                 shop.put("itemsPrice",itemPrice.getText().toString());
                 shop.put("itemsQuantity",itemWeight.getText().toString());
-                startActivity(new Intent(EditItemActivity.this,AddItemPhotoActivity.class));
+
+                Intent intent=new Intent(EditItemActivity.this,AddItemPhotoActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+//                startActivity(new Intent(EditItemActivity.this,AddItemPhotoActivity.class));
                 finish();
             }
         });
@@ -236,65 +247,70 @@ public class EditItemActivity extends AppCompatActivity {
             progressDialog = new ProgressDialog(view.getContext());
             progressDialog.show();
             progressDialog.setContentView(R.layout.process_dialog);
+            progressDialog.setCanceledOnTouchOutside(false);
             Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
                     android.R.color.transparent);
 
 
-            String uiid=UUID.randomUUID().toString();
-            StorageReference reference=storageReference.child("Item images/"+uiid );
-            reference.putFile(AddItemPhotoActivity.filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
-                    task.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            shop.put("itemsImage",uri.toString());
+            if (!shop.isEmpty()){
+                String uiid=UUID.randomUUID().toString();
+                StorageReference reference=storageReference.child("Item images/"+uiid );
+                reference.putFile(AddItemPhotoActivity.filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Task<Uri> task = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                        task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                shop.put("itemsImage",uri.toString());
+                                String itemId=bundle.getString("itemId");
 
-                            documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
-                            documentReference.collection("Items").whereEqualTo("itemsImage",bundle.getString("itemImage"))
-                                    .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    documentReference.collection("Items").document(queryDocumentSnapshots.getDocuments().get(0).getId())
-                                            .update(shop).addOnSuccessListener(new OnSuccessListener() {
-                                        @Override
-                                        public void onSuccess(Object o) {
-                                            Toast.makeText(EditItemActivity.this, "Item Updated!!", Toast.LENGTH_SHORT).show();
-//                                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                                            fragmentTransaction.replace(android.R.id.content, itemsFragment);
-//                                            fragmentTransaction.commit();
-                                            finish();
-                                            progressDialog.dismiss();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
+            }
+            else{
+
+                shop.put("itemsProductName",itemName.getText().toString());
+                shop.put("itemCategory",itemCategory.getText().toString());
+                shop.put("itemsProductDescription",itemDes.getText().toString());
+                shop.put("itemsPrice",itemPrice.getText().toString());
+                shop.put("itemsQuantity",itemWeight.getText().toString());
+
+
+                documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
+                documentReference.collection("Items").document(bundle.getString("itemId"))
+                        .update(shop).addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        Toast.makeText(EditItemActivity.this, "Item Updated!!", Toast.LENGTH_SHORT).show();
+                                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(android.R.id.content, itemsFragment);
+                                            fragmentTransaction.commit();
+//                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                        finish();
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String err= e.getMessage();
+                        Toast.makeText(EditItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
 

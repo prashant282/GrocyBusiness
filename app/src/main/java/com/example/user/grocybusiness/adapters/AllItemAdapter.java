@@ -228,6 +228,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
             bundle.putString("itemImage", itemModel.getItemsImage());
             bundle.putString("itemDes", itemModel.getItemsProductDescription());
             bundle.putString("itemQuantity", itemModel.getItemsQuantity());
+            bundle.putString("itemId",itemModel.getItemId());
 
             Intent intent =new Intent(holder.cardView.getContext(), EditItemActivity.class);
             intent.putExtras(bundle);

@@ -1,5 +1,6 @@
 package com.example.user.grocybusiness.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
                 intent.putExtra("shopId", shopsModel.getShopId());
                 intent.putExtra("shopIndex", position);
                 context.startActivity(intent);
+               ((Activity) holder.shop_name.getContext()).finish();
             }
         });
 

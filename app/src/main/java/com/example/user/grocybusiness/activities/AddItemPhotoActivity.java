@@ -25,6 +25,7 @@ public class AddItemPhotoActivity extends AppCompatActivity {
     ImageView itemImageView;
     static Uri filePath;
     Button btnAddPhoto;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class AddItemPhotoActivity extends AppCompatActivity {
         itemImageView=findViewById(R.id.img_item_preview);
         btnAddPhoto=findViewById(R.id.btn_add_image);
 
+        bundle=getIntent().getExtras();
 
 
         imgItem.setOnClickListener(view1 -> {
@@ -42,7 +44,10 @@ public class AddItemPhotoActivity extends AppCompatActivity {
         });
 
         btnAddPhoto.setOnClickListener(view12 -> {
-            startActivity(new Intent(AddItemPhotoActivity.this,EditItemActivity.class));
+//            startActivity(new Intent(AddItemPhotoActivity.this,EditItemActivity.class));
+            Intent intent=new Intent(this,EditItemActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
             finish();
         });
 
@@ -53,7 +58,7 @@ public class AddItemPhotoActivity extends AppCompatActivity {
 
         Intent intent=new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent,"Select item image"),1);
     }
 

@@ -127,6 +127,8 @@ public class AddItemFragment extends Fragment {
         firebaseFirestore=FirebaseFirestore.getInstance();
 
 
+
+
         if (!shop.isEmpty()){
             itemCategory.setText(shop.get("itemCategory").toString());
             itemName.setText(shop.get("itemsProductName").toString());
