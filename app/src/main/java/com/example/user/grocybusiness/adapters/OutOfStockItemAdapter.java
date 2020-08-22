@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.fragments.AllItemFragment;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
@@ -56,7 +57,7 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
         if (itemModel.getInStock() == false) {
             holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+            DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
 
             holder.itemName.setText(itemModel.getItemsProductName());
             holder.itemDes.setText(itemModel.getItemsProductDescription());

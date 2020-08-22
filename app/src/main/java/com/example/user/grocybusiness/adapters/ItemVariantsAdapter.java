@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.fragments.AllItemFragment;
 import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
@@ -47,7 +48,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
         ItemVariantsModel itemVariantsModel = variants_list.get(position);
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7").collection("Items")
+        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop).collection("Items")
                 .document(itemVariantsModel.getItemID());
         holder.variant_weight.setText(itemVariantsModel.getItemQuantity() + "g");
         holder.variant_price.setText("Rs. " + itemVariantsModel.getItemPrice());
