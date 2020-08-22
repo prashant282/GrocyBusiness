@@ -30,6 +30,7 @@ import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -67,7 +68,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
         FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
         DocumentReference documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+//        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
 
 
         holder.itemName.setText(itemModel.getItemsProductName());

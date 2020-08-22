@@ -73,11 +73,11 @@ public class EditItemActivity extends AppCompatActivity {
         bundle=getIntent().getExtras();
 
         if (!shop.isEmpty()){
-            itemCategory.setText(shop.get("itemCategory").toString());
-            itemName.setText(shop.get("itemsProductName").toString());
-            itemDes.setText(shop.get("itemsProductDescription").toString());
-            itemPrice.setText(shop.get("itemsPrice").toString());
-            itemWeight.setText(shop.get("itemsQuantity").toString());
+            itemCategory.setText(Objects.requireNonNull(shop.get("itemCategory")).toString());
+            itemName.setText(Objects.requireNonNull(shop.get("itemsProductName")).toString());
+            itemDes.setText(Objects.requireNonNull(shop.get("itemsProductDescription")).toString());
+            itemPrice.setText(Objects.requireNonNull(shop.get("itemsPrice")).toString());
+            itemWeight.setText(Objects.requireNonNull(shop.get("itemsQuantity")).toString());
             btnEditItem.setEnabled(true);
             Bitmap bitmap = null;
             try {
@@ -240,8 +240,8 @@ public class EditItemActivity extends AppCompatActivity {
                     android.R.color.transparent);
 
 
-
-            StorageReference reference=storageReference.child("Item images/"+ UUID.randomUUID().toString());
+            String uiid=UUID.randomUUID().toString();
+            StorageReference reference=storageReference.child("Item images/"+uiid );
             reference.putFile(AddItemPhotoActivity.filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -250,7 +250,6 @@ public class EditItemActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             shop.put("itemsImage",uri.toString());
-                            shop.put("inStock",true);
 
                             documentReference=firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
                             documentReference.collection("Items").whereEqualTo("itemsImage",bundle.getString("itemImage"))
@@ -262,9 +261,9 @@ public class EditItemActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Object o) {
                                             Toast.makeText(EditItemActivity.this, "Item Updated!!", Toast.LENGTH_SHORT).show();
-                                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                                            fragmentTransaction.replace(android.R.id.content, itemsFragment);
-                                            fragmentTransaction.commit();
+//                                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                                            fragmentTransaction.replace(android.R.id.content, itemsFragment);
+//                                            fragmentTransaction.commit();
                                             finish();
                                             progressDialog.dismiss();
                                         }

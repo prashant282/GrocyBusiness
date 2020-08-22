@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.AllItemAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
@@ -53,7 +54,7 @@ public class AllItemFragment extends Fragment {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
-        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document("qAeielILTRnO7hAIeiS7");
+        DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
         Query query = documentReference.collection("Items");
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -94,9 +95,7 @@ public class AllItemFragment extends Fragment {
                                     hm.put("Variants", null);
                                 }
                                 setAdapter(view);
-                                System.out.println("----------------------------");
-                                System.out.println(all_items.toString());
-                                System.out.println("----------------------------");
+
                             }
                         }
                     });
@@ -127,6 +126,7 @@ public class AllItemFragment extends Fragment {
             itemModel.setItemsProductDescription((String) item.get("itemsProductDescription"));
             itemModel.setItemsProductName((String) item.get("itemsProductName"));
             itemModel.setItemsQuantity((String) item.get("itemsQuantity"));
+            itemModel.setItemCategory((String) item.get("itemCategory"));
             itemModel.setItemId(key);
             itemModel.setItemVariants((ArrayList<ItemVariantsModel>) item.get("Variants"));
             arrayList.add(itemModel);
