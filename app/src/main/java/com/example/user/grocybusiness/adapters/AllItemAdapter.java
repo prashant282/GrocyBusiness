@@ -8,10 +8,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,10 +37,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemViewHolder> {
@@ -46,6 +47,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
     Context context;
 
     Bundle bundle;
+    AlertDialog alertDialog;
     static ArrayList<ItemModel> items_list = new ArrayList();
 
     public AllItemAdapter(Context context, ArrayList<ItemModel> items_list) {
@@ -212,12 +214,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                 }
             }
         });
-        holder.btnAddVariant.setOnClickListener(view -> {
 
-            Intent intent=new Intent(holder.btnAddVariant.getContext(),AddItemVariant.class);
-            intent.putExtra("itemImage",itemModel.getItemsImage());
-            holder.btnAddVariant.getContext().startActivity(intent);
-        });
 
 
         holder.cardView.setOnLongClickListener(view -> {
@@ -230,10 +227,78 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
             bundle.putString("itemQuantity", itemModel.getItemsQuantity());
             bundle.putString("itemId",itemModel.getItemId());
 
-            Intent intent =new Intent(holder.cardView.getContext(), EditItemActivity.class);
-            intent.putExtras(bundle);
-            holder.cardView.getContext().startActivity(intent);
+//
 
+            PopupMenu popupMenu=new PopupMenu(holder.cardView.getContext(),view);
+            popupMenu.inflate(R.menu.popup_item_feature);
+            popupMenu.show();
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()){
+                        case R.id.edit_item:
+                            Intent intentEditItem =new Intent(holder.cardView.getContext(), EditItemActivity.class);
+                            intentEditItem.putExtras(bundle);
+                            holder.cardView.getContext().startActivity(intentEditItem);
+                            return true;
+
+                        case R.id.add_variant:
+                            Intent intentAddVariant =new Intent(holder.cardView.getContext(), AddItemVariant.class);
+                            intentAddVariant.putExtras(bundle);
+                            holder.cardView.getContext().startActivity(intentAddVariant);
+                            return true;
+
+
+                        case R.id.delete_item:
+
+
+
+                            LayoutInflater layoutInflater=LayoutInflater.from(holder.cardView.getContext());
+                            View view1=layoutInflater.inflate(R.layout.layout_logout_alert_dialog,null);
+
+                            Button yesButton=view1.findViewById(R.id.btn_yes);
+                            Button cancelButton=view1.findViewById(R.id.btn_cancel);
+
+                            final androidx.appcompat.app.AlertDialog alertDialog=new androidx.appcompat.app.AlertDialog.Builder(holder.cardView.getContext())
+                                    .setView(view1)
+                                    .create();
+                            alertDialog.show();
+                            yesButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                    documentReference.collection("Items").document(itemModel.getItemId())
+                                            .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(context, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                            alertDialog.dismiss();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+
+                                }
+                            });
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+
+                            return true;
+
+                        default:
+                            return false;
+                    }
+                }
+            });
 
             return false;
         });
@@ -252,7 +317,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
         SwitchMaterial btnSwitch;
         ViewGroup viewGroup;
 //        RecyclerView itemVariantsRecycler;
-        Button btnAddVariant;
+
         CardView cardView;
 
         public AllItemViewHolder(@NonNull View itemView) {
@@ -264,7 +329,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
             itemImage = itemView.findViewById(R.id.item_img);
             itemQuantity = itemView.findViewById(R.id.item_quantity);
             btnSwitch = itemView.findViewById(R.id.btn_switch);
-            btnAddVariant=itemView.findViewById(R.id.btn_add_variant);
+
             cardView=itemView.findViewById(R.id.layout_all_item);
 
             viewGroup = itemView.findViewById(android.R.id.content);

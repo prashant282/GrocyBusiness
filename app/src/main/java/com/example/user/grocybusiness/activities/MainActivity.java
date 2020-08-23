@@ -1,5 +1,6 @@
 package com.example.user.grocybusiness.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewGroup viewGroup;
     RecyclerView shops_recycler;
     ShopsAdapter shopsAdapter;
+    AlertDialog alertDialog;
 
     public static ArrayList<String> shopIds = new ArrayList<>();
     ArrayList<ShopsModel> arrayList = new ArrayList();
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Button add_new_shop = changeShop.findViewById(R.id.add_new_shop);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setView(changeShop);
-                AlertDialog alertDialog = builder.create();
+                alertDialog = builder.create();
                 ImageView close_dialog = changeShop.findViewById(R.id.close_dialog);
                 arrayList = new ArrayList();
 
@@ -476,4 +478,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (alertDialog.isShowing()){
+            alertDialog.cancel();
+        }
+    }
 }

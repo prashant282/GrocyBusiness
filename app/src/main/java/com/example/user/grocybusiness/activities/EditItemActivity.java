@@ -106,6 +106,8 @@ public class EditItemActivity extends AppCompatActivity {
 
             Glide.with(imageView.getContext()).load(bundle.getString("itemImage")).into(imageView);
 
+
+
         }
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -300,8 +302,10 @@ public class EditItemActivity extends AppCompatActivity {
                                             fragmentTransaction.replace(android.R.id.content, itemsFragment);
                                             fragmentTransaction.commit();
 //                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                        shop=new HashMap<>();
                         finish();
                         progressDialog.dismiss();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

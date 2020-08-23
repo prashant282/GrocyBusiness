@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:elevation="10dp"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:layout_gravity="center"
+
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete this item??"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:cornerRadius="5dp"
+                android:textColor="@color/white"
+                android:text="YES"
+                android:id="@+id/btn_yes"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_height="40dp"
+                app:cornerRadius="5dp"
+                android:textColor="@color/white"
+                android:text="Cancel"
+                android:id="@+id/btn_cancel"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
