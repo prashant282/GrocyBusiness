@@ -170,9 +170,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 shopIds.add(documentSnapshot.getId());
                                 shops.add((HashMap<String, Object>) documentSnapshot.getData());
                             }
+                            for (int i = 0; i < shops.size(); i++) {
+                                if (((boolean) shops.get(i).get("shopActive")) == true) {
+                                    selectedIndex = i;
+                                    selectedShop = shopIds.get(i);
+                                }
+                            }
                             if (selectedShop.equals("") || selectedShop == null) {
                                 selectedShop = shopIds.get(0);
                                 selectedIndex = 0;
+                                db.collection("ShopKeeper").document(mAuth.getUid()).collection("MyShop")
+                                        .document(selectedShop).update("shopActive", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                             shopLetter.setText("" + shops.get(selectedIndex).get("shopName").toString());
                             shimmerAnimation.stopShimmer();

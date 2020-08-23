@@ -87,6 +87,7 @@ public class UploadDocActivity extends AppCompatActivity {
         shop.put("shopState", sState);
         shop.put("shopPinCode", sPinCode);
         shop.put("shopGst", sGst);
+        shop.put("currentlyActive", false);
 
 
         imgGst.setOnClickListener(new View.OnClickListener() {

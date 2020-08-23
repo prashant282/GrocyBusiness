@@ -35,6 +35,7 @@ public class AllItemFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<ItemModel> arrayList;
     static HashMap<String, Object> all_items = new HashMap();
+    View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,13 +49,20 @@ public class AllItemFragment extends Fragment {
         // Inflate the layout for this fragment
 //        ArrayList<ItemModel> arrayList=new ArrayList();
 
-        View view = inflater.inflate(R.layout.fragment_all_item, container, false);
+        view = inflater.inflate(R.layout.fragment_all_item, container, false);
         recyclerView = view.findViewById(R.id.all_item_recycler);
+
+        dataBaseCall(view);
+        return view;
+    }
+
+    private void dataBaseCall(View view) {
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
         DocumentReference documentReference = firebaseFirestore.collection("ShopsMain").document(MainActivity.selectedShop);
+
         Query query = documentReference.collection("Items");
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -103,7 +111,6 @@ public class AllItemFragment extends Fragment {
                 }
             }
         });
-        return view;
     }
 
     private void setAdapter(View view) {
@@ -135,5 +142,11 @@ public class AllItemFragment extends Fragment {
         allItemAdapter.notifyDataSetChanged();
         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dataBaseCall(view);
     }
 }
