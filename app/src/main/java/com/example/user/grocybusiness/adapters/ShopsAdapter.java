@@ -7,10 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.models.ShopsModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -43,13 +48,41 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsViewHol
         holder.shop_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+                firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyShop")
+                        .document(MainActivity.selectedShop).update("shopActive", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid()).collection("MyShop")
+                                .document(shopsModel.getShopId()).update("shopActive", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show();
+                    }
+                });
+
                 MainActivity.selectedShop = shopsModel.getShopId();
                 MainActivity.selectedIndex = position;
+
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("shopId", shopsModel.getShopId());
                 intent.putExtra("shopIndex", position);
                 context.startActivity(intent);
-               ((Activity) holder.shop_name.getContext()).finish();
+                ((Activity) holder.shop_name.getContext()).finish();
             }
         });
 
