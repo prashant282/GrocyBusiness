@@ -121,6 +121,7 @@ public class AllItemFragment extends Fragment {
         allItemAdapter = new AllItemAdapter(view.getContext(), arrayList);
 
         recyclerView.setAdapter(allItemAdapter);
+        recyclerView.setViewCacheExtension(null);
 
         for (Map.Entry mapElement : all_items.entrySet()) {
             String key = (String) mapElement.getKey();
