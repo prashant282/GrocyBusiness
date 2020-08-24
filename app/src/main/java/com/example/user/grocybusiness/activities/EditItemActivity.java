@@ -249,7 +249,8 @@ public class EditItemActivity extends AppCompatActivity {
             progressDialog = new ProgressDialog(view.getContext());
             progressDialog.show();
             progressDialog.setContentView(R.layout.process_dialog);
-            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.dismiss();
             Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(
                     android.R.color.transparent);
 
