@@ -3,9 +3,9 @@ package com.example.user.grocybusiness.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,16 +17,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.activities.AddItemVariant;
 import com.example.user.grocybusiness.activities.EditItemActivity;
 import com.example.user.grocybusiness.activities.MainActivity;
+import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,9 +33,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemViewHolder> {
@@ -272,6 +270,9 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(context, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                            items_list.remove(position);
+                                            notifyDataSetChanged();
+                                            OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                             alertDialog.dismiss();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
