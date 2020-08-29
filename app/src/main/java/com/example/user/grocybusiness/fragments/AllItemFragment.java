@@ -32,7 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AllItemFragment extends Fragment {
 
     public static AllItemAdapter allItemAdapter;
-    RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     ArrayList<ItemModel> arrayList;
     static HashMap<String, Object> all_items = new HashMap();
     View view;
@@ -122,6 +122,9 @@ public class AllItemFragment extends Fragment {
 
         recyclerView.setAdapter(allItemAdapter);
         recyclerView.setViewCacheExtension(null);
+
+        allItemAdapter.notifyDataSetChanged();
+        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
 
         for (Map.Entry mapElement : all_items.entrySet()) {
             String key = (String) mapElement.getKey();

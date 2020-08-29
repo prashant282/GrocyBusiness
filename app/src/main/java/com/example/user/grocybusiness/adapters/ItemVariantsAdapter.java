@@ -71,11 +71,11 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                             notifyItemChanged(position);
                             int onCount = 0;
                             for (int i = 0; i < variants_list.size(); i++) {
-                                if (variants_list.get(i).isInStock()) {
+                                if (variants_list.get(i).isInStock() == false) {
                                     onCount++;
                                 }
                             }
-                            if (onCount > 0) {
+                            if (onCount <= 0) {
                                 documentReference.update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {

@@ -46,7 +46,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
     Bundle bundle;
     AlertDialog alertDialog;
-    static ArrayList<ItemModel> items_list = new ArrayList();
+    public static ArrayList<ItemModel> items_list = new ArrayList();
 
     public AllItemAdapter(Context context, ArrayList<ItemModel> items_list) {
         this.context = context;
@@ -120,30 +120,11 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                         public void onDismiss(DialogInterface dialog) {
                             int onCount = 0;
                             for (int i = 0; i < arrayList.size(); i++) {
-                                if (arrayList.get(i).isInStock()) {
+                                if (arrayList.get(i).isInStock() == false) {
                                     onCount++;
                                 }
                             }
                             if (onCount > 0) {
-                                holder.btnSwitch.setChecked(true);
-                                documentReference.collection("Items").document(itemModel.getItemId())
-                                        .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        itemModel.setInStock(true);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        itemModel.setInStock(false);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
-                                    }
-                                });
-                            } else {
                                 holder.btnSwitch.setChecked(false);
                                 documentReference.collection("Items").document(itemModel.getItemId())
                                         .update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -158,6 +139,25 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         itemModel.setInStock(true);
+                                        notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                    }
+                                });
+                            } else {
+                                holder.btnSwitch.setChecked(true);
+                                documentReference.collection("Items").document(itemModel.getItemId())
+                                        .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        itemModel.setInStock(true);
+                                        notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                                        itemModel.setInStock(false);
                                         notifyDataSetChanged();
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }

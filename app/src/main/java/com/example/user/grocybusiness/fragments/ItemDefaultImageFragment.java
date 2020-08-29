@@ -1,14 +1,24 @@
 package com.example.user.grocybusiness.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.adapters.ItemDefaultImageAdapter;
+import com.example.user.grocybusiness.models.ItemDefaultImageModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +35,13 @@ public class ItemDefaultImageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    static String category;
+    RecyclerView item_default_image_recycler;
+    ItemDefaultImageAdapter itemDefaultImageAdapter;
+    ArrayList<ItemDefaultImageModel> arrayList;
+    HashMap<String, Object> item_default_images = new HashMap();
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    View view;
 
     public ItemDefaultImageFragment() {
         // Required empty public constructor
@@ -60,7 +77,43 @@ public class ItemDefaultImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_default_image, container, false);
+        view = inflater.inflate(R.layout.fragment_item_default_image, container, false);
+        item_default_image_recycler = view.findViewById(R.id.item_default_image_recycler);
+
+        DocumentReference documentReference = firebaseFirestore.collection("DefaultImages").document("DefaultItemImages");
+
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                item_default_images = (HashMap<String, Object>) documentSnapshot.getData();
+                setAdapter();
+            }
+        });
+
+        return view;
+    }
+
+    private void setAdapter() {
+        arrayList = new ArrayList();
+        item_default_image_recycler.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
+        item_default_image_recycler.setHasFixedSize(false);
+        item_default_image_recycler.setViewCacheExtension(null);
+
+        itemDefaultImageAdapter = new ItemDefaultImageAdapter(view.getContext(), arrayList);
+
+        item_default_image_recycler.setAdapter(itemDefaultImageAdapter);
+
+        ArrayList<String> itemImg = (ArrayList<String>) item_default_images.get(AddItemFragment.shop.get("itemCategory"));
+
+        for (int i = 0; i < itemImg.size(); i++) {
+            ItemDefaultImageModel itemDefaultImageModel = new ItemDefaultImageModel();
+            itemDefaultImageModel.setItemImage(itemImg.get(i));
+            itemDefaultImageModel.setSelected(false);
+            arrayList.add(itemDefaultImageModel);
+        }
+
+        itemDefaultImageAdapter.notifyDataSetChanged();
+
     }
 }
