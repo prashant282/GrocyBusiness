@@ -38,6 +38,7 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
     FirebaseFirestore firebaseFirestore;
 
     public OutOfStockItemAdapter(Context context) {
+        super();
         this.context = context;
 //        this.items_list = items_list;
     }

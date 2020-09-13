@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
-import com.example.user.grocybusiness.fragments.AllItemFragment;
 import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -80,7 +79,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         AllItemAdapter.items_list.get(parent_position).setInStock(true);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -88,7 +87,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
@@ -97,7 +96,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -105,7 +104,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
@@ -137,7 +136,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         AllItemAdapter.items_list.get(parent_position).setInStock(true);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -145,7 +144,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
@@ -154,7 +153,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyDataSetChanged();
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -162,7 +161,7 @@ public class ItemVariantsAdapter extends RecyclerView.Adapter<ItemVariantsAdapte
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         AllItemAdapter.items_list.get(parent_position).setInStock(false);
-                                        AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
                                         OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
