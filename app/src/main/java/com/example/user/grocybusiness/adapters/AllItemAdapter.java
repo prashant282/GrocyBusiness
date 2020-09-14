@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,19 +30,22 @@ import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
-import com.example.user.grocybusiness.models.NotificationModel;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.Query;
 import com.google.gson.internal.$Gson$Preconditions;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemViewHolder> {
@@ -51,12 +53,26 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
     Context context;
 
     Bundle bundle;
+    AlertDialog alertDialog;
+    public static ArrayList<ItemModel> items_list = new ArrayList();
+    ArrayList<ItemCategoryModel> category_wise_items_list = new ArrayList();
+    int parent_position;
 
     static ArrayList<ItemModel> items_list = new ArrayList();
 
     public AllItemAdapter(Context context, ArrayList<ItemModel> items_list) {
+        super();
         this.context = context;
         this.items_list = items_list;
+    }
+
+
+    public AllItemAdapter(Context context, ArrayList<ItemModel> items_list, ArrayList<ItemCategoryModel> category_wise_items_list, int parent_position) {
+        super();
+        this.context = context;
+        this.items_list = items_list;
+        this.category_wise_items_list = category_wise_items_list;
+        this.parent_position = parent_position;
     }
 
     @NonNull
@@ -65,7 +81,6 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_all_items, parent, false);
         return new AllItemAdapter.AllItemViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull AllItemViewHolder holder, int position) {
@@ -127,46 +142,48 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                         public void onDismiss(DialogInterface dialog) {
                             int onCount = 0;
                             for (int i = 0; i < arrayList.size(); i++) {
-                                if (arrayList.get(i).isInStock()) {
+                                if (arrayList.get(i).isInStock() == false) {
                                     onCount++;
                                 }
                             }
                             if (onCount > 0) {
-                                holder.btnSwitch.setChecked(true);
-                                documentReference.collection("Items").document(itemModel.getItemId())
-                                        .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        itemModel.setInStock(true);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        itemModel.setInStock(false);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
-                                    }
-                                });
-                            } else {
                                 holder.btnSwitch.setChecked(false);
                                 documentReference.collection("Items").document(itemModel.getItemId())
                                         .update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         itemModel.setInStock(false);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//                                        notifyDataSetChanged();
+//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                         itemModel.setInStock(true);
-                                        notifyDataSetChanged();
-                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                        holder.btnSwitch.setChecked(true);
+//                                        notifyDataSetChanged();
+//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                    }
+                                });
+                            } else {
+                                holder.btnSwitch.setChecked(true);
+                                documentReference.collection("Items").document(itemModel.getItemId())
+                                        .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        itemModel.setInStock(true);
+//                                        notifyDataSetChanged();
+//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                                        itemModel.setInStock(false);
+                                        holder.btnSwitch.setChecked(false);
+//                                        notifyDataSetChanged();
+//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
                             }
@@ -185,16 +202,17 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                             @Override
                             public void onSuccess(Void aVoid) {
                                 itemModel.setInStock(true);
-                                notifyDataSetChanged();
-                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//                                notifyDataSetChanged();
+//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                 itemModel.setInStock(false);
-                                notifyDataSetChanged();
-                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                holder.btnSwitch.setChecked(false);
+//                                notifyDataSetChanged();
+//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         });
                     } else {
@@ -203,16 +221,17 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                             @Override
                             public void onSuccess(Void aVoid) {
                                 itemModel.setInStock(false);
-                                notifyDataSetChanged();
-                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//                                notifyDataSetChanged();
+//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                 itemModel.setInStock(true);
-                                notifyDataSetChanged();
-                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                holder.btnSwitch.setChecked(true);
+//                                notifyDataSetChanged();
+//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         });
                     }
@@ -358,6 +377,9 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(context, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                            items_list.remove(position);
+                                            notifyDataSetChanged();
+                                            OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                             alertDialog.dismiss();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
@@ -388,7 +410,6 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
             return false;
         });
-
     }
 
     @Override
@@ -424,9 +445,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
 
         }
-
     }
-
 }
 
 

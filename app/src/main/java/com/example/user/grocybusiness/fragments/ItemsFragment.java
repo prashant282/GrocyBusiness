@@ -1,20 +1,30 @@
 package com.example.user.grocybusiness.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.user.grocybusiness.R;
+import com.example.user.grocybusiness.adapters.AllItemAdapter;
+import com.example.user.grocybusiness.adapters.ItemSearchAdapter;
 import com.example.user.grocybusiness.adapters.ItemViewPagerAdapter;
+import com.example.user.grocybusiness.models.ItemModel;
 import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 
@@ -40,6 +50,11 @@ public class ItemsFragment extends Fragment {
     private AllItemFragment allItemFragment;
     private OutOfStockItemFragment outOfStockItemFragment;
     private AddItemFragment addItemFragment;
+    public static BottomSheetDialog bottomSheetDialog;
+    RecyclerView item_search_recycler;
+    ItemSearchAdapter itemSearchAdapter;
+    ArrayList<ItemModel> search_list;
+    private ImageView search_image;
 
     public ItemsFragment() {
         // Required empty public constructor
@@ -81,20 +96,21 @@ public class ItemsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view;
-        view=inflater.inflate(R.layout.fragment_items, container, false);
-        viewPager= view.findViewById(R.id.view_pager);
-        tabLayout= view.findViewById(R.id.tab_layout);
-        addItem=view.findViewById(R.id.fab);
+        view = inflater.inflate(R.layout.fragment_items, container, false);
+        viewPager = view.findViewById(R.id.view_pager);
+        tabLayout = view.findViewById(R.id.tab_layout);
+        addItem = view.findViewById(R.id.fab);
+        search_image = view.findViewById(R.id.search_image);
 
-        allItemFragment=new AllItemFragment();
-        outOfStockItemFragment=new OutOfStockItemFragment();
-        addItemFragment=new AddItemFragment();
+        allItemFragment = new AllItemFragment();
+        outOfStockItemFragment = new OutOfStockItemFragment();
+        addItemFragment = new AddItemFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
-        ItemViewPagerAdapter itemViewPagerAdapter=new ItemViewPagerAdapter(getChildFragmentManager(),0);
-        itemViewPagerAdapter.addFragment(allItemFragment,"All Items");
-        itemViewPagerAdapter.addFragment(outOfStockItemFragment,"Out Of Stock");
+        ItemViewPagerAdapter itemViewPagerAdapter = new ItemViewPagerAdapter(getChildFragmentManager(), 0);
+        itemViewPagerAdapter.addFragment(allItemFragment, "All Items");
+        itemViewPagerAdapter.addFragment(outOfStockItemFragment, "Out Of Stock");
         viewPager.setAdapter(itemViewPagerAdapter);
         viewPager.setOffscreenPageLimit(5);
 
@@ -117,9 +133,62 @@ public class ItemsFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
+        search_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_list = (ArrayList<ItemModel>) AllItemAdapter.items_list.clone();
+                bottomSheetDialog = new BottomSheetDialog(view.getContext());
+                bottomSheetDialog.setContentView(R.layout.bottomsheet_item_search);
+                EditText etSearch = bottomSheetDialog.findViewById(R.id.search_edit_text);
+                item_search_recycler = bottomSheetDialog.findViewById(R.id.item_search_recycler);
+
+                item_search_recycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+                item_search_recycler.setHasFixedSize(false);
+
+                itemSearchAdapter = new ItemSearchAdapter(view.getContext(), search_list);
+
+                item_search_recycler.setAdapter(itemSearchAdapter);
+//                CoordinatorLayout coordinatorLayout= bottomSheetDialog.findViewById(R.id.bottomsheet_frame_layout);
+//                BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(coordinatorLayout);
+//                bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                bottomSheetDialog.show();
+
+                etSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        filter(s.toString());
+                    }
+                });
+
+            }
+        });
+
         return view;
     }
 
+    private void filter(String search_text) {
+        ArrayList<ItemModel> filteredList = new ArrayList();
+
+        for (ItemModel item : search_list) {
+            if (item.getItemsProductName().toLowerCase().contains(search_text)) {
+                filteredList.add(item);
+            }
+        }
+
+        itemSearchAdapter
+                .filteredList(filteredList);
+    }
 
 
 }
