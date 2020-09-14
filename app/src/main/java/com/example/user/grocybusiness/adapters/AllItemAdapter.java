@@ -3,9 +3,9 @@ package com.example.user.grocybusiness.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,28 +18,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.activities.AddItemVariant;
 import com.example.user.grocybusiness.activities.EditItemActivity;
 import com.example.user.grocybusiness.activities.MainActivity;
+import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
+import com.example.user.grocybusiness.models.NotificationModel;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemViewHolder> {
@@ -47,7 +51,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
     Context context;
 
     Bundle bundle;
-    AlertDialog alertDialog;
+
     static ArrayList<ItemModel> items_list = new ArrayList();
 
     public AllItemAdapter(Context context, ArrayList<ItemModel> items_list) {
@@ -61,6 +65,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_all_items, parent, false);
         return new AllItemAdapter.AllItemViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull AllItemViewHolder holder, int position) {
@@ -217,6 +222,87 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
 
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                VariantAdapter variantAdapter;
+                RecyclerView recyclerView;
+                TextView addVariant;
+
+                BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(holder.cardView.getContext());
+                bottomSheetDialog.setContentView(R.layout.layout_bottom_sheet_item_variant);
+//                bottomSheetDialog.setCanceledOnTouchOutside(false);
+
+
+                recyclerView=bottomSheetDialog.findViewById(R.id.item_variants);
+                addVariant=bottomSheetDialog.findViewById(R.id.add_variant_txt);
+
+
+
+
+
+//                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+//                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+
+
+
+//                DocumentReference documentReference = firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid());
+//        documentReference.collection("Items").whereEqualTo("inStock",false);
+//                DocumentReference documentReference1=documentReference.collection("Items").document(itemModel.getItemId());
+//                Query query = documentReference1.collection("Variants");
+//                FirestoreRecyclerOptions<ItemVariantsModel> options= new FirestoreRecyclerOptions.Builder<ItemVariantsModel>()
+//                        .setQuery(query, ItemVariantsModel.class).build();
+//                variantAdapter=new VariantAdapter(options);
+//                variantAdapter.notifyDataSetChanged();
+//                recyclerView.setHasFixedSize(true);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+//                recyclerView.setAdapter(variantAdapter);
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+                variantAdapter=new VariantAdapter(view.getContext(),itemModel.getItemVariants());
+
+                recyclerView.setHasFixedSize(false);
+
+
+                recyclerView.setAdapter(variantAdapter);
+                variantAdapter.notifyDataSetChanged();
+
+                addVariant.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intentAddVariant =new Intent(holder.cardView.getContext(), AddItemVariant.class);
+                        intentAddVariant.putExtras(bundle);
+                        holder.cardView.getContext().startActivity(intentAddVariant);
+
+                    }
+                });
+
+
+
+
+
+
+
+//                TextView editVariant=bottomSheetDialog.findViewById(R.id.edit_item_variant);
+//                TextView deleteVariant=bottomSheetDialog.findViewById(R.id.delete_item_variant);
+
+//                editVariant.set
+//                OnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        holder.cardView.getContext().startActivity(new Intent(holder.cardView.getContext(),AddItemVariant.class));
+//                    }
+//                });
+                bottomSheetDialog.show();
+            }
+        });
+
+
+
+
         holder.cardView.setOnLongClickListener(view -> {
 
             bundle.putString("itemCategory",itemModel.getItemCategory());
@@ -302,6 +388,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
             return false;
         });
+
     }
 
     @Override
@@ -337,7 +424,9 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 
 
         }
+
     }
+
 }
 
 

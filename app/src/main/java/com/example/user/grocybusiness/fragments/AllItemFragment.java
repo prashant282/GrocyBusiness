@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.adapters.AllItemAdapter;
+import com.example.user.grocybusiness.adapters.VariantAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -112,6 +113,8 @@ public class AllItemFragment extends Fragment {
             }
         });
     }
+
+
 
     private void setAdapter(View view) {
         arrayList = new ArrayList();

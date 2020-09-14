@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.EditVariantActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/final_back_img" />
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:elevation="40dp"
+        app:strokeWidth="0.5dp"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        app:strokeColor="@color/colorPrimary">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Edit Variant"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/item_variant_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_corner"
+                android:drawablePadding="14dp"
+                android:gravity="center_vertical"
+                android:hint="Variant Quantity*"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:textColor="#659BF6"
+                android:textColorHint="#9DC0F9"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/item_variant_price"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_corner"
+                android:drawablePadding="14dp"
+                android:gravity="center_vertical"
+                android:hint="Variant Price*"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:textColor="#659BF6"
+                android:textColorHint="#9DC0F9"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_item_variant"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Update Variant"
+                android:textSize="18sp"
+                android:enabled="false"
+                android:textAllCaps="false"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="12dp"
+                app:cornerRadius="8dp"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/white" />
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="start|bottom"
+            android:src="@drawable/leaves" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
