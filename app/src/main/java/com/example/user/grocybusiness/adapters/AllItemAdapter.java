@@ -28,6 +28,7 @@ import com.example.user.grocybusiness.activities.AddItemVariant;
 import com.example.user.grocybusiness.activities.EditItemActivity;
 import com.example.user.grocybusiness.activities.MainActivity;
 import com.example.user.grocybusiness.fragments.OutOfStockItemFragment;
+import com.example.user.grocybusiness.models.ItemCategoryModel;
 import com.example.user.grocybusiness.models.ItemModel;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,7 +59,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
     ArrayList<ItemCategoryModel> category_wise_items_list = new ArrayList();
     int parent_position;
 
-    static ArrayList<ItemModel> items_list = new ArrayList();
+//    static ArrayList<ItemModel> items_list = new ArrayList();
 
     public AllItemAdapter(Context context, ArrayList<ItemModel> items_list) {
         super();
@@ -245,25 +246,23 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
             @Override
             public void onClick(View view) {
 
-                VariantAdapter variantAdapter;
-                RecyclerView recyclerView;
-                TextView addVariant;
+                if (itemModel.getItemVariants() != null) {
 
-                BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(holder.cardView.getContext());
-                bottomSheetDialog.setContentView(R.layout.layout_bottom_sheet_item_variant);
+                    VariantAdapter variantAdapter;
+                    RecyclerView recyclerView;
+                    TextView addVariant;
+
+                    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(holder.cardView.getContext());
+                    bottomSheetDialog.setContentView(R.layout.layout_bottom_sheet_item_variant);
 //                bottomSheetDialog.setCanceledOnTouchOutside(false);
 
 
-                recyclerView=bottomSheetDialog.findViewById(R.id.item_variants);
-                addVariant=bottomSheetDialog.findViewById(R.id.add_variant_txt);
-
-
-
+                    recyclerView = bottomSheetDialog.findViewById(R.id.item_variants);
+                    addVariant = bottomSheetDialog.findViewById(R.id.add_variant_txt);
 
 
 //                FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
 //                FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-
 
 
 //                DocumentReference documentReference = firebaseFirestore.collection("ShopKeeper").document(firebaseAuth.getUid());
@@ -278,31 +277,27 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 //                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 //                recyclerView.setAdapter(variantAdapter);
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-                variantAdapter=new VariantAdapter(view.getContext(),itemModel.getItemVariants());
-
-                recyclerView.setHasFixedSize(false);
+                    variantAdapter = new VariantAdapter(view.getContext(), itemModel.getItemVariants());
 
 
-                recyclerView.setAdapter(variantAdapter);
-                variantAdapter.notifyDataSetChanged();
-
-                addVariant.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intentAddVariant =new Intent(holder.cardView.getContext(), AddItemVariant.class);
-                        intentAddVariant.putExtras(bundle);
-                        holder.cardView.getContext().startActivity(intentAddVariant);
-
-                    }
-                });
+                    recyclerView.setHasFixedSize(false);
 
 
+                    recyclerView.setAdapter(variantAdapter);
+                    variantAdapter.notifyDataSetChanged();
 
+                    addVariant.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
+                            Intent intentAddVariant = new Intent(holder.cardView.getContext(), AddItemVariant.class);
+                            intentAddVariant.putExtras(bundle);
+                            holder.cardView.getContext().startActivity(intentAddVariant);
 
+                        }
+                    });
 
 
 //                TextView editVariant=bottomSheetDialog.findViewById(R.id.edit_item_variant);
@@ -315,8 +310,16 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
 //                        holder.cardView.getContext().startActivity(new Intent(holder.cardView.getContext(),AddItemVariant.class));
 //                    }
 //                });
-                bottomSheetDialog.show();
+                    bottomSheetDialog.show();
+                } else {
+
+                    Toast.makeText(context, "No Variants Added Till Now", Toast.LENGTH_SHORT).show();
+                }
             }
+
+
+
+
         });
 
 

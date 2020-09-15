@@ -102,6 +102,7 @@ public class NotificationFragment extends Fragment {
                 .setQuery(query, NotificationModel.class).build();
         notificationAdapter=new NotificationAdapter(options);
         notificationAdapter.notifyDataSetChanged();
+        
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(notificationAdapter);

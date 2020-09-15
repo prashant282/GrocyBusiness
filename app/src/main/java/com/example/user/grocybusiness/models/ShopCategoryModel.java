@@ -3,9 +3,9 @@ package com.example.user.grocybusiness.models;
 public class ShopCategoryModel {
 
     private String shopCategory;
-    private int shopImage;
+    private String shopImage;
 
-    public ShopCategoryModel(String shopCategory, int shopImage) {
+    public ShopCategoryModel(String shopCategory, String shopImage) {
         this.shopCategory = shopCategory;
         this.shopImage = shopImage;
     }
@@ -14,7 +14,7 @@ public class ShopCategoryModel {
         return shopCategory;
     }
 
-    public int getShopImage() {
+    public String getShopImage() {
         return shopImage;
     }
 }

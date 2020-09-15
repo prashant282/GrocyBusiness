@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
 
@@ -49,7 +50,7 @@ public class ShopCategoryAdapter extends ArrayAdapter<ShopCategoryModel> {
         ShopCategoryModel currentItem = getItem(position);
 
         if (currentItem != null) {
-            imageViewFlag.setImageResource(currentItem.getShopImage());
+            Glide.with(convertView.getContext()).load(currentItem.getShopCategory()).into(imageViewFlag);
             textViewName.setText(currentItem.getShopCategory());
         }
 

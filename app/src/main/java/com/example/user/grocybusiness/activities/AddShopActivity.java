@@ -10,13 +10,19 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.adapters.ShopCategoryAdapter;
 import com.example.user.grocybusiness.models.ShopCategoryModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddShopActivity extends AppCompatActivity {
@@ -392,11 +398,25 @@ public class AddShopActivity extends AppCompatActivity {
 
     private void initList() {
         mcategoryList = new ArrayList<>();
-        mcategoryList.add(new ShopCategoryModel("Shop Category", R.drawable.icon_category));
-        mcategoryList.add(new ShopCategoryModel("Grocery", R.drawable.supermarket));
-        mcategoryList.add(new ShopCategoryModel("Hardware", R.drawable.hardware));
-        mcategoryList.add(new ShopCategoryModel("Stationary", R.drawable.stationary));
-        mcategoryList.add(new ShopCategoryModel("Pharmacy", R.drawable.medical));
-        mcategoryList.add(new ShopCategoryModel("Fruits and Veg", R.drawable.supermarket));
+        FirebaseFirestore firebaseFirestore=FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("ShopCategories").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (int index=0;index<queryDocumentSnapshots.size();index++){
+                    mcategoryList.add(new ShopCategoryModel(queryDocumentSnapshots.getDocuments().get(index).get("shopCategory").toString(),queryDocumentSnapshots.getDocuments().get(index).get("shopImage").toString()));
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AddShopActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+//        mcategoryList.add(new ShopCategoryModel("Shop Category", R.drawable.icon_category));
+//        mcategoryList.add(new ShopCategoryModel("Grocery", R.drawable.supermarket));
+//        mcategoryList.add(new ShopCategoryModel("Hardware", R.drawable.hardware));
+//        mcategoryList.add(new ShopCategoryModel("Stationary", R.drawable.stationary));
+//        mcategoryList.add(new ShopCategoryModel("Pharmacy", R.drawable.medical));
+//        mcategoryList.add(new ShopCategoryModel("Fruits and Veg", R.drawable.supermarket));
     }
 }
