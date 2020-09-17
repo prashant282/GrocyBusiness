@@ -37,13 +37,13 @@ public class AllItemFragment extends Fragment {
 
     public static AllItemAdapter allItemAdapter;
     public static RecyclerView recyclerView;
-    ArrayList<ItemModel> arrayList;
+    public static ArrayList<ItemModel> arrayList = new ArrayList();
     static HashMap<String, Object> all_items = new HashMap();
     View view;
     SortedSet<String> item_categories_name = new TreeSet();
     ArrayList<ItemCategoryModel> arrayList1;
 
-    ItemCategoryAdapter itemCategoryAdapter;
+    public static ItemCategoryAdapter itemCategoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,6 +124,7 @@ public class AllItemFragment extends Fragment {
 
     private void setAdapter(View view) {
         arrayList1 = new ArrayList();
+        arrayList = new ArrayList();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setHasFixedSize(false);
 
@@ -134,7 +135,7 @@ public class AllItemFragment extends Fragment {
 //        recyclerView.setViewCacheExtension(null);
 
         itemCategoryAdapter.notifyDataSetChanged();
-        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
 
         for (String category : item_categories_name) {
             ItemCategoryModel shopItemsCategoryModel = new ItemCategoryModel();
@@ -154,7 +155,7 @@ public class AllItemFragment extends Fragment {
                     itemModel.setItemCategory((String) item.get("itemCategory"));
                     itemModel.setItemId(key);
                     itemModel.setItemVariants((ArrayList<ItemVariantsModel>) item.get("Variants"));
-//                        arrayList.add(itemModel);
+                    arrayList.add(itemModel);
                     items.add(itemModel);
                 }
             }
@@ -164,7 +165,8 @@ public class AllItemFragment extends Fragment {
 
         itemCategoryAdapter.notifyDataSetChanged();
 //        allItemAdapter.notifyDataSetChanged();
-//        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//        OutOfStockItemFragment.outOfStockItemAdapter = new OutOfStockItemAdapter(arrayList);
+        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
 
     }
 

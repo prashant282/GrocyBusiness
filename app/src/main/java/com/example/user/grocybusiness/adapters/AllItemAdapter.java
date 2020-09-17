@@ -146,7 +146,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                     public void onSuccess(Void aVoid) {
                                         itemModel.setInStock(false);
 //                                        notifyDataSetChanged();
-//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -155,7 +155,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                         itemModel.setInStock(true);
                                         holder.btnSwitch.setChecked(true);
 //                                        notifyDataSetChanged();
-//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
                             } else {
@@ -166,7 +166,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                     public void onSuccess(Void aVoid) {
                                         itemModel.setInStock(true);
 //                                        notifyDataSetChanged();
-//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -175,7 +175,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                         itemModel.setInStock(false);
                                         holder.btnSwitch.setChecked(false);
 //                                        notifyDataSetChanged();
-//                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
                                 });
                             }
@@ -195,7 +195,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                             public void onSuccess(Void aVoid) {
                                 itemModel.setInStock(true);
 //                                notifyDataSetChanged();
-//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -204,7 +204,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                 itemModel.setInStock(false);
                                 holder.btnSwitch.setChecked(false);
 //                                notifyDataSetChanged();
-//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         });
                     } else {
@@ -214,7 +214,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                             public void onSuccess(Void aVoid) {
                                 itemModel.setInStock(false);
 //                                notifyDataSetChanged();
-//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -223,7 +223,7 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                                 itemModel.setInStock(true);
                                 holder.btnSwitch.setChecked(true);
 //                                notifyDataSetChanged();
-//                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+                                OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                             }
                         });
                     }

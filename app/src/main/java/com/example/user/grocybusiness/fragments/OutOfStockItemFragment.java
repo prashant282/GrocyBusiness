@@ -83,7 +83,7 @@ public class OutOfStockItemFragment extends Fragment {
 //            }
 //        }
 
-        outOfStockItemAdapter.notifyDataSetChanged();
+//        outOfStockItemAdapter.notifyDataSetChanged();
 
     }
 

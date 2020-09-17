@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAdapter.OutofStockViewHolder> {
 
     Context context;
-    //    ArrayList<ItemModel> items_list;
+    static ArrayList<ItemModel> items_list;
     FirebaseFirestore firebaseFirestore;
 
     public OutOfStockItemAdapter(Context context) {
@@ -43,6 +43,17 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
 //        this.items_list = items_list;
     }
 
+
+    public OutOfStockItemAdapter(ArrayList<ItemModel> items_list) {
+        this.items_list = items_list;
+    }
+
+
+    public OutOfStockItemAdapter(Context context, ArrayList<ItemModel> items_list) {
+        super();
+        this.context = context;
+        this.items_list = items_list;
+    }
 
     @NonNull
     @Override
@@ -53,7 +64,7 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
 
     @Override
     public void onBindViewHolder(@NonNull OutOfStockItemAdapter.OutofStockViewHolder holder, int position) {
-        ItemModel itemModel = AllItemAdapter.items_list.get(position);
+        ItemModel itemModel = AllItemFragment.arrayList.get(position);
 
         if (itemModel.getInStock() == false) {
             holder.itemView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -100,7 +111,7 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
 //                        itemVariantsModel.setInStock((Boolean) item.get("inStock"));
 //                        arrayList.add(itemVariantsModel);
 //                    }
-                        ItemVariantsAdapter itemVariantsAdapter = new ItemVariantsAdapter(context, arrayList, position);
+                        OutOfStockItemVariantsAdapter itemVariantsAdapter = new OutOfStockItemVariantsAdapter(context, arrayList, position);
                         itemVariantsRecycler.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
                         itemVariantsRecycler.setHasFixedSize(false);
                         itemVariantsRecycler.setAdapter(itemVariantsAdapter);
@@ -112,30 +123,11 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
                             public void onDismiss(DialogInterface dialog) {
                                 int onCount = 0;
                                 for (int i = 0; i < arrayList.size(); i++) {
-                                    if (arrayList.get(i).isInStock()) {
+                                    if (arrayList.get(i).isInStock() == false) {
                                         onCount++;
                                     }
                                 }
                                 if (onCount > 0) {
-                                    holder.btnSwitch.setChecked(true);
-                                    documentReference.collection("Items").document(itemModel.getItemId())
-                                            .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            itemModel.setInStock(true);
-                                            notifyDataSetChanged();
-                                            AllItemFragment.allItemAdapter.notifyDataSetChanged();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                            itemModel.setInStock(false);
-                                            notifyDataSetChanged();
-                                            AllItemFragment.allItemAdapter.notifyDataSetChanged();
-                                        }
-                                    });
-                                } else {
                                     holder.btnSwitch.setChecked(false);
                                     documentReference.collection("Items").document(itemModel.getItemId())
                                             .update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -143,15 +135,36 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
                                         public void onSuccess(Void aVoid) {
                                             itemModel.setInStock(false);
                                             notifyDataSetChanged();
-                                            AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                            AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                             itemModel.setInStock(true);
+                                            holder.btnSwitch.setChecked(true);
+//                                            notifyDataSetChanged();
+                                            AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                                } else {
+                                    holder.btnSwitch.setChecked(true);
+                                    documentReference.collection("Items").document(itemModel.getItemId())
+                                            .update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            itemModel.setInStock(true);
                                             notifyDataSetChanged();
-                                            AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                            AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                                            itemModel.setInStock(false);
+                                            holder.btnSwitch.setChecked(false);
+                                            notifyDataSetChanged();
+                                            AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                         }
                                     });
                                 }
@@ -171,15 +184,16 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
                                 public void onSuccess(Void aVoid) {
                                     itemModel.setInStock(true);
                                     notifyDataSetChanged();
-                                    AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                    AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                     itemModel.setInStock(false);
+                                    holder.btnSwitch.setChecked(false);
                                     notifyDataSetChanged();
-                                    AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                    AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                 }
                             });
                         } else {
@@ -189,15 +203,16 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
                                 public void onSuccess(Void aVoid) {
                                     itemModel.setInStock(false);
                                     notifyDataSetChanged();
-                                    AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                    AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                                     itemModel.setInStock(true);
+                                    holder.btnSwitch.setChecked(true);
                                     notifyDataSetChanged();
-                                    AllItemFragment.allItemAdapter.notifyDataSetChanged();
+                                    AllItemFragment.itemCategoryAdapter.notifyDataSetChanged();
                                 }
                             });
                         }
@@ -211,7 +226,7 @@ public class OutOfStockItemAdapter extends RecyclerView.Adapter<OutOfStockItemAd
 
     @Override
     public int getItemCount() {
-        return AllItemAdapter.items_list.size();
+        return AllItemFragment.arrayList.size();
     }
 
 

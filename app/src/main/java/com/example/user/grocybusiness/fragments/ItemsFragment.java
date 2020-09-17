@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -130,6 +131,7 @@ public class ItemsFragment extends Fragment {
 
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_frame_layout, addItemFragment);
+            AddItemFragment.shop = new HashMap();
             fragmentTransaction.commit();
         });
 
