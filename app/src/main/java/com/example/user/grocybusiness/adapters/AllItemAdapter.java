@@ -134,11 +134,11 @@ public class AllItemAdapter extends RecyclerView.Adapter<AllItemAdapter.AllItemV
                         public void onDismiss(DialogInterface dialog) {
                             int onCount = 0;
                             for (int i = 0; i < arrayList.size(); i++) {
-                                if (arrayList.get(i).isInStock() == false) {
+                                if (arrayList.get(i).isInStock() == true) {
                                     onCount++;
                                 }
                             }
-                            if (onCount > 0) {
+                            if (onCount <= 0) {
                                 holder.btnSwitch.setChecked(false);
                                 documentReference.collection("Items").document(itemModel.getItemId())
                                         .update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
