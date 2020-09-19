@@ -8,6 +8,7 @@ public class ItemModel {
     String itemsPrice;
     String itemsImage;
     String itemsQuantity;
+    boolean variants;
 
     public String getItemCategory() {
         return itemCategory;
@@ -100,5 +101,13 @@ public class ItemModel {
 
     public void setItemVariants(ArrayList<ItemVariantsModel> itemVariants) {
         this.itemVariants = itemVariants;
+    }
+
+    public boolean isVariants() {
+        return variants;
+    }
+
+    public void setVariants(boolean variants) {
+        this.variants = variants;
     }
 }

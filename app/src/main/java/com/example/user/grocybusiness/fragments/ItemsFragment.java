@@ -1,16 +1,12 @@
 package com.example.user.grocybusiness.fragments;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.adapters.AllItemAdapter;
 import com.example.user.grocybusiness.adapters.ItemSearchAdapter;
 import com.example.user.grocybusiness.adapters.ItemViewPagerAdapter;
 import com.example.user.grocybusiness.models.ItemModel;
@@ -24,7 +20,6 @@ import java.util.HashMap;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -135,46 +130,46 @@ public class ItemsFragment extends Fragment {
             fragmentTransaction.commit();
         });
 
-        search_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search_list = (ArrayList<ItemModel>) AllItemAdapter.items_list.clone();
-                bottomSheetDialog = new BottomSheetDialog(view.getContext());
-                bottomSheetDialog.setContentView(R.layout.bottomsheet_item_search);
-                EditText etSearch = bottomSheetDialog.findViewById(R.id.search_edit_text);
-                item_search_recycler = bottomSheetDialog.findViewById(R.id.item_search_recycler);
-
-                item_search_recycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-                item_search_recycler.setHasFixedSize(false);
-
-                itemSearchAdapter = new ItemSearchAdapter(view.getContext(), search_list);
-
-                item_search_recycler.setAdapter(itemSearchAdapter);
-//                CoordinatorLayout coordinatorLayout= bottomSheetDialog.findViewById(R.id.bottomsheet_frame_layout);
-//                BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(coordinatorLayout);
-//                bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
-//                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                bottomSheetDialog.show();
-
-                etSearch.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        filter(s.toString());
-                    }
-                });
-
-            }
-        });
+//        search_image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                search_list = (ArrayList<ItemModel>) AllItemAdapter.items_list.clone();
+//                bottomSheetDialog = new BottomSheetDialog(view.getContext());
+//                bottomSheetDialog.setContentView(R.layout.bottomsheet_item_search);
+//                EditText etSearch = bottomSheetDialog.findViewById(R.id.search_edit_text);
+//                item_search_recycler = bottomSheetDialog.findViewById(R.id.item_search_recycler);
+//
+//                item_search_recycler.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+//                item_search_recycler.setHasFixedSize(false);
+//
+//                itemSearchAdapter = new ItemSearchAdapter(view.getContext(), search_list);
+//
+//                item_search_recycler.setAdapter(itemSearchAdapter);
+////                CoordinatorLayout coordinatorLayout= bottomSheetDialog.findViewById(R.id.bottomsheet_frame_layout);
+////                BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(coordinatorLayout);
+////                bottomSheetBehavior.setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+////                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                bottomSheetDialog.show();
+//
+//                etSearch.addTextChangedListener(new TextWatcher() {
+//                    @Override
+//                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                    }
+//
+//                    @Override
+//                    public void afterTextChanged(Editable s) {
+//                        filter(s.toString());
+//                    }
+//                });
+//
+//            }
+//        });
 
         return view;
     }

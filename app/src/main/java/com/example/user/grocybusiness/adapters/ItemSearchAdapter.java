@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.grocybusiness.R;
-import com.example.user.grocybusiness.fragments.AllItemFragment;
-import com.example.user.grocybusiness.fragments.ItemsFragment;
 import com.example.user.grocybusiness.models.ItemModel;
 
 import java.util.ArrayList;
@@ -49,21 +47,21 @@ public class ItemSearchAdapter extends RecyclerView.Adapter<ItemSearchAdapter.It
 
         Glide.with(holder.itemImage.getContext()).load(itemModel.getItemsImage()).into(holder.itemImage);
 
-
-        holder.layout_search_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int parent_position = 0;
-                for (int i = 0; i < AllItemAdapter.items_list.size(); i++) {
-                    if (itemModel.getItemId().equals(AllItemAdapter.items_list.get(i).getItemId())) {
-                        parent_position = i;
-                    }
-                }
-                AllItemFragment.recyclerView.scrollToPosition(parent_position);
-                ItemsFragment.bottomSheetDialog.dismiss();
-
-            }
-        });
+//
+//        holder.layout_search_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int parent_position = 0;
+//                for (int i = 0; i < AllItemAdapter.items_list.size(); i++) {
+//                    if (itemModel.getItemId().equals(AllItemAdapter.items_list.get(i).getItemId())) {
+//                        parent_position = i;
+//                    }
+//                }
+//                AllItemFragment.recyclerView.scrollToPosition(parent_position);
+//                ItemsFragment.bottomSheetDialog.dismiss();
+//
+//            }
+//        });
 
     }
 

@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
-import com.example.user.grocybusiness.fragments.AllItemFragment;
 import com.example.user.grocybusiness.models.ItemVariantsModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -78,7 +77,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                 documentReference.update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(true);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(true);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -86,7 +85,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -95,7 +94,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                 documentReference.update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -103,7 +102,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -136,7 +135,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                 documentReference.update("inStock", true).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(true);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(true);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -144,7 +143,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -153,7 +152,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                 documentReference.update("inStock", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyDataSetChanged();
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }
@@ -161,7 +160,7 @@ public class OutOfStockItemVariantsAdapter extends RecyclerView.Adapter<OutOfSto
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
+//                                        AllItemFragment.arrayList.get(parent_position).setInStock(false);
 //                                        ItemCategoryAdapter.allItemAdapter.notifyItemChanged(parent_position);
 //                                        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
                                     }

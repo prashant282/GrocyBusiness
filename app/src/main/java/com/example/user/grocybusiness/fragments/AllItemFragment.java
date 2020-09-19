@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.example.user.grocybusiness.R;
 import com.example.user.grocybusiness.activities.MainActivity;
-import com.example.user.grocybusiness.adapters.AllItemAdapter;
 import com.example.user.grocybusiness.adapters.ItemCategoryAdapter;
 import com.example.user.grocybusiness.models.ItemCategoryModel;
 import com.example.user.grocybusiness.models.ItemModel;
@@ -35,13 +34,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AllItemFragment extends Fragment {
 
-    public static AllItemAdapter allItemAdapter;
     public static RecyclerView recyclerView;
-    public static ArrayList<ItemModel> arrayList = new ArrayList();
-    static HashMap<String, Object> all_items = new HashMap();
+    public static ArrayList<ItemCategoryModel> arrayList1 = new ArrayList();
     View view;
     SortedSet<String> item_categories_name = new TreeSet();
-    ArrayList<ItemCategoryModel> arrayList1;
+    HashMap<String, Object> all_items = new HashMap();
 
     public static ItemCategoryAdapter itemCategoryAdapter;
 
@@ -124,23 +121,20 @@ public class AllItemFragment extends Fragment {
 
     private void setAdapter(View view) {
         arrayList1 = new ArrayList();
-        arrayList = new ArrayList();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
         recyclerView.setHasFixedSize(false);
 
-//        allItemAdapter = new AllItemAdapter(view.getContext(), arrayList1);
         itemCategoryAdapter = new ItemCategoryAdapter(view.getContext(), arrayList1);
 
         recyclerView.setAdapter(itemCategoryAdapter);
-//        recyclerView.setViewCacheExtension(null);
 
         itemCategoryAdapter.notifyDataSetChanged();
-//        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
-
+        arrayList1.clear();
         for (String category : item_categories_name) {
             ItemCategoryModel shopItemsCategoryModel = new ItemCategoryModel();
             shopItemsCategoryModel.setItem_category_name(category);
             ArrayList<ItemModel> items = new ArrayList();
+            items.clear();
             for (Map.Entry mapElement : all_items.entrySet()) {
                 String key = (String) mapElement.getKey();
                 HashMap item = (HashMap) mapElement.getValue();
@@ -155,7 +149,6 @@ public class AllItemFragment extends Fragment {
                     itemModel.setItemCategory((String) item.get("itemCategory"));
                     itemModel.setItemId(key);
                     itemModel.setItemVariants((ArrayList<ItemVariantsModel>) item.get("Variants"));
-                    arrayList.add(itemModel);
                     items.add(itemModel);
                 }
             }
@@ -164,9 +157,8 @@ public class AllItemFragment extends Fragment {
         }
 
         itemCategoryAdapter.notifyDataSetChanged();
-//        allItemAdapter.notifyDataSetChanged();
-//        OutOfStockItemFragment.outOfStockItemAdapter = new OutOfStockItemAdapter(arrayList);
-        OutOfStockItemFragment.outOfStockItemAdapter.notifyDataSetChanged();
+//        OutOfStockItemFragment.outOfStockItemCategoryAdapter.category_wise_items_list=arrayList1;
+//        OutOfStockItemFragment.outOfStockItemCategoryAdapter.notifyDataSetChanged();
 
     }
 

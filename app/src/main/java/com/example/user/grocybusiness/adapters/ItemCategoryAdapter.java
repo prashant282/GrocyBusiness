@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemCategoryAdapter extends RecyclerView.Adapter<ItemCategoryAdapter.ItemCategoryViewHolder> {
 
-    public static AllItemAdapter allItemAdapter;
+    AllItemAdapter allItemAdapter;
     Context context;
     ArrayList<ItemCategoryModel> category_wise_items_list = new ArrayList();
 
